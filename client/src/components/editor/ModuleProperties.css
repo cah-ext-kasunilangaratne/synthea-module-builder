@@ -1,0 +1,42 @@
+.Editor.hide-info .ModuleProperties {
+  left: -400px;
+}
+
+.ModuleProperties { 
+  padding-bottom: 10px;
+  height: 100%;
+  padding-right: 10px;
+}
+
+.ModuleProperties-remarks {
+  height: 100%;
+}
+
+.ModuleProperties-remarks > span {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.ModuleProperties-remarks > span:hover {
+  color: #cb7732;
+}
+
+.ModuleProperties input {
+  width: 100%;
+}
+
+.ModuleProperties textarea {
+  height: 100vw;
+  width: 100%;
+}
+
+.ModuleProperties-name {
+  font-size: 1.4em;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.ModuleProperties-remarks {
+  font-size: .8em;
+}

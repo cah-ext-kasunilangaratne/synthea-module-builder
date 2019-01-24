@@ -1,0 +1,93 @@
+.State {
+  /* padding-bottom: 150px; */
+}
+
+.State-Editor {
+  position: relative;
+  padding-left: 10px;
+  padding-top: 10px;
+  border: 1px solid #aaa;
+  border-radius: 5px;
+}
+
+.state-buttons {
+  position: absolute;
+  padding: 0;
+  list-style: none;
+  top: 0;
+  right: 10px;
+}
+
+.state-buttons li {
+  display:inline-block;
+  padding: 0 3px;
+}
+
+.state-buttons li a {
+  cursor: pointer;
+}
+
+
+.Transition {
+  position: relative;
+  padding-left: 10px;
+  padding-top: 10px;
+  border: 1px solid #aaa;
+  border-radius: 5px;
+  width: 100%
+}
+
+textarea {
+  height: 200px;
+  width: 100%;
+}
+
+.editable-text {
+  font-style: italic;
+  text-decoration: underline !important;
+  cursor: text;
+  color: #336699 !important;
+  padding-left: .2em;
+  padding-right: .2em;
+}
+
+.editable-error {
+  color: #ff3300 !important;
+}
+
+span.editable-text:empty {
+  color: #ff3300 !important;
+}
+
+span.editable-text:empty:after {
+  content: 'Enter value';
+}
+
+span.editable-text > :empty:after {
+  content: 'Enter value';
+}
+
+.section {
+  position: relative;
+  padding-left: 10px;
+  padding-top: 10px;
+  padding-right: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #aaa;
+  border-radius: 5px;
+  margin-right: 10px;
+}
+
+.add-button {
+  color: inherit;
+  cursor:pointer;
+}
+
+.delete-button {
+  color: inherit;
+  cursor:pointer;
+}
+
+.warning {
+  color: #ff3300;
+}
