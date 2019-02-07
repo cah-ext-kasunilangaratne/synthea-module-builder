@@ -299,16 +299,33 @@ class LoadModule extends Component {
 
   //Related to Mongo Option
   fetchMongoList(){
-    fetch(`http://localhost:5000/module` {'mode': 'no-cors'})
+    fetch(`http://localhost:5000/module`)
     .then(response => response.json())
     .then(data => {
       this.setState({
         mongoModules: data.map((branch, i) => (
-          <li key={i} id={branch.name}><button className='btn btn-link' onClick={() => {this.changeColor(branch.name, 'mongo')}}>{branch.name}</button></li>
+          <li key={i} id={branch._id}>
+          <button className='btn btn-link' onClick={() => {
+              this.fetchMongoModule(branch._id);}
+          }>
+          {branch.name}
+          </button>
+          </li>
         ))
       })
     })  
     .catch(error => console.log('error: ', error)); 
+  }
+
+  fetchMongoModule(name){
+    console.log("ARRIVED GERE")
+    fetch(`http://localhost:5000/module/`+ name)
+      .then(response => response.text())
+      .then(data => this.loadModule(data))
+      .then(this.setState({
+        Modules: null
+      }))
+      .catch(error => console.log('error: ', error));
   }
   
   componentDidMount(prevState){
