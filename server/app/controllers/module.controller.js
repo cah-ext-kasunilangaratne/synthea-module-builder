@@ -3,6 +3,7 @@ const Module_model = require('../models/module.model.js');
 // Create and Save a new Module_model
 exports.create = (req, res) => {
     // Validate request
+    res.setHeader('Access-Control-Allow-Origin', '*')
     if(!req.body.states) {
         return res.status(400).send({
             message: "Module_model states can not be empty"
@@ -28,6 +29,7 @@ exports.create = (req, res) => {
 
 // Retrieve and return all modules from the database.
 exports.findAll = (req, res) => {
+    res.setHeader('Access-Control-Allow-Origin','*')
     Module_model.find({}).select('name')
     .then(syn_modules => {
         res.send(syn_modules);
@@ -40,6 +42,7 @@ exports.findAll = (req, res) => {
 
 // Find a single syn_module with a moduleId
 exports.findOne = (req, res) => {
+    res.setHeader('Access-Control-Allow-Origin', '*')
     Module_model.findById(req.params.moduleId)
     .then(syn_module => {
         if(!syn_module) {
@@ -63,6 +66,7 @@ exports.findOne = (req, res) => {
 // Update a syn_module identified by the moduleId in the request
 exports.update = (req, res) => {
     // Validate Request
+    res.setHeader('Access-Control-Allow-Origin', '*')
     if(!req.body.states) {
         return res.status(400).send({
             message: "Module states can not be empty"
@@ -95,6 +99,7 @@ exports.update = (req, res) => {
 
 // Delete a syn_module with the specified moduleId in the request
 exports.delete = (req, res) => {
+    res.setHeader('Access-Control-Allow-Origin', '*')
     Module_model.findByIdAndRemove(req.params.moduleId)
     .then(syn_module => {
         if(!syn_module) {
