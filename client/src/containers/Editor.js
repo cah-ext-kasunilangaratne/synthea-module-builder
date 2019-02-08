@@ -12,6 +12,7 @@ import ModulePropertiesEditor from '../components/editor/ModuleProperties';
 import ModuleGraph from '../components/graph/ModuleGraph';
 import LoadModule from '../components/menu/LoadModule';
 import Download from '../components/menu/Download';
+import Save from '../components/menu/Save'
 import NavTabs from '../components/editor/NavTabs';
 import { extractStates } from '../transforms/Module';
 import {cleanString } from '../utils/stringUtils';
@@ -152,6 +153,8 @@ class Editor extends Component {
     }
   }
 
+  
+
   addNode = (selectedModuleKey, takenKeys, selectedState, selectedStateTransition) => {
     return () => {
       let key = findAvailableKey(createSafeKeyFromName('New State'), takenKeys);
@@ -243,10 +246,35 @@ class Editor extends Component {
 
   renderDownload = () => {
     if(this.props.module){
-      return <Download module={this.props.module}
+      return <Download 
+        module={this.props.module}
         visible={this.props.downloadVisible}
         onHide={this.props.hideDownload}/>
     }
+    return <div/>
+  }
+
+  prepareJSON = () => {
+    let module = _.cloneDeep(this.props.module);
+
+    // We currently save name in the state for convenience
+    // In lieu of a better solution, we will just remove it here
+    Object.keys(module.states).map(k => module.states[k]).forEach( s => {
+      if(s['name'] !== undefined){
+        delete s.name;
+      }
+    })
+
+    return JSON.stringify(module, null, 2)
+
+  }
+
+  saveModule = () => {
+    console.log("SAVE MODULE");
+    console.log(this.prepareJSON)
+    // if(this.props.module){
+    //   return <Save/>
+    // }
     return <div/>
   }
 
@@ -395,6 +423,7 @@ class Editor extends Component {
           <button className='button-clear' onClick={this.newModule(Object.keys(this.props.modules)).bind(this, undefined)}>New Module</button>
           <button className='button-clear' onClick={this.props.showLoadModule}>Open Module</button>
           <button className='button-clear Editor-top-download' onClick={this.props.showDownload}>Download</button>
+          <button className='button-clear' onClick={this.saveModule()}>Save Module</button>
         </div>
         <button className='button-clear Editor-top-help' onClick={this.startTutorial(BasicTutorial)}> ? </button>
         <NavTabs selectedModuleKey={this.props.selectedModuleKey}
