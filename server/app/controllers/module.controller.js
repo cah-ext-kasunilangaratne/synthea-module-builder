@@ -13,7 +13,9 @@ exports.create = (req, res) => {
     // Create a Module
     const syn_module = new Module_model({
         name: req.body.name || "Untitled Module", 
-        states: req.body.states
+        states: req.body.states,
+        active:req.body.active,
+        updatedTimestamp: req.body.updatedTimeStamp
     });
 
     // Save Module in the database
