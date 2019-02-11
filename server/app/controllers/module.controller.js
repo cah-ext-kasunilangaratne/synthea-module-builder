@@ -32,7 +32,7 @@ exports.create = (req, res) => {
 // Retrieve and return all modules from the database.
 exports.findAll = (req, res) => {
     res.setHeader('Access-Control-Allow-Origin','*')
-    Module_model.find({}).select('name')
+    Module_model.find({}).select('name').select('active')
     .then(syn_modules => {
         res.send(syn_modules);
     }).catch(err => {

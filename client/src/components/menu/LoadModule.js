@@ -7,7 +7,7 @@ import axios from 'axios'
 class LoadModule extends Component {
   constructor(props) {
     super(props)
-    this.state = {json: '', selectedOption: 'core'}
+    this.state = {json: '', selectedOption: 'core', stateList: []}
   }
 
   loadModule = (json) => {
@@ -300,20 +300,22 @@ class LoadModule extends Component {
   //Related to Mongo Option
   fetchMongoList(){
     fetch(`http://localhost:5000/module`)
-    .then(response => response.json())
-    .then(data => {
-      this.setState({
-        mongoModules: data.map((branch, i) => (
-          <li key={i} id={branch._id}>
-          <button className='btn btn-link' onClick={() => {
-              this.fetchMongoModule(branch._id);}
-          }>
-          {branch.name}
-          </button>
-          </li>
-        ))
-      })
-    })  
+      .then(response => response.json())
+        .then(data => {
+          data.forEach(function(current_value, index, data){
+            if (!data[index].active) { delete data[index]; }
+          })
+          this.setState({
+            mongoModules: 
+                data.map((branch, i) => (
+                  <li key={i} id={branch._id} >
+                    <button className='btn btn-link' onClick={() => {this.fetchMongoModule(branch._id);}}>
+                      {branch.name}
+                    </button>
+                  </li>
+                ))
+          })
+        })  
     .catch(error => console.log('error: ', error)); 
   }
 
