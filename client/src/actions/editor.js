@@ -179,6 +179,18 @@ export const hideDownload = () => {
   })
 }
 
+export const showSaveModule = () => {
+  return ({
+    type: 'SHOW_SAVE_MODULE'
+  })
+}
+
+export const hideSaveModule = () => {
+  return ({
+    type: 'HIDE_SAVE_MODULE'
+  })
+}
+
 
 export const changeModulePanel = (targetPanel) => {
   return ({

@@ -89,6 +89,10 @@ button {
   color: #cb7732;
 }
 
+.Editor-top-open button.Editor-top-save {
+  color: #c3173F;
+}
+
 .Editor-loading-logo{
 
   width: 300px;

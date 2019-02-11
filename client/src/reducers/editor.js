@@ -8,6 +8,7 @@ const initialState = {
     selectedModuleKey: null, 
     loadModuleVisible: false, 
     downloadVisible: false,
+    saveVisible: false,
     selectedModulePanel: 'info',
     modulePanelVisible: true,
     modules: {},
@@ -446,6 +447,12 @@ export default (state = initialState, action) => {
           
     case 'SHOW_DOWNLOAD':
       return { ...newState, downloadVisible: true};
+
+    case 'SHOW_SAVE_MODULE':
+        return { ...newState, saveVisible:true}
+    
+    case 'HIDE_SAVE_MODULE':
+        return { ...newState, saveVisible:false}
 
     case 'HIDE_DOWNLOAD':
       return { ...newState, downloadVisible: false};

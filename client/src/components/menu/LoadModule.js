@@ -303,12 +303,14 @@ class LoadModule extends Component {
       .then(response => response.json())
         .then(data => {
           data.forEach(function(current_value, index, data){
-            if (!data[index].active) { delete data[index]; }
+            if (!data[index].active) { 
+              delete data[index]; 
+            }
           })
           this.setState({
             mongoModules: 
                 data.map((branch, i) => (
-                  <li key={i} id={branch._id} >
+                    <li key={i} id={branch._id} >
                     <button className='btn btn-link' onClick={() => {this.fetchMongoModule(branch._id);}}>
                       {branch.name}
                     </button>

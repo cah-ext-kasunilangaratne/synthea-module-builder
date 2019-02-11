@@ -61,6 +61,8 @@ import {selectNode,
         hideLoadModule,
         showDownload,
         hideDownload,
+        showSaveModule,
+        hideSaveModule,
         refreshCode,
         changeStateType,
         editModuleName,
@@ -245,7 +247,8 @@ class Editor extends Component {
   }
 
   renderDownload = () => {
-    if(this.props.module){
+    if(this.props.module && this.props.downloadVisible){
+      console.log("DOWNLOADING MODULE")
       return <Download 
         module={this.props.module}
         visible={this.props.downloadVisible}
@@ -254,28 +257,39 @@ class Editor extends Component {
     return <div/>
   }
 
+  renderSave = () => {
+    if(this.props.module && this.props.saveVisible){
+      console.log("SAVING MODULE")
+      return <Save 
+        module={this.props.module}
+        visible={this.props.saveVisible}
+        onHide={this.props.hideSaveModule}/>
+    }
+    return <div/>
+  }
+
   prepareJSON = () => {
-    let module = _.cloneDeep(this.props.module);
-
-    // We currently save name in the state for convenience
-    // In lieu of a better solution, we will just remove it here
-    Object.keys(module.states).map(k => module.states[k]).forEach( s => {
-      if(s['name'] !== undefined){
-        delete s.name;
-      }
-    })
-
-    return JSON.stringify(module, null, 2)
+    
 
   }
 
   saveModule = () => {
     console.log("SAVE MODULE");
-    console.log(this.prepareJSON)
-    // if(this.props.module){
-    //   return <Save/>
-    // }
-    return <div/>
+    if(this.props.module){
+      let module = _.cloneDeep(this.props.module);
+
+      // We currently save name in the state for convenience
+      // In lieu of a better solution, we will just remove it here
+      Object.keys(module.states).map(k => module.states[k]).forEach( s => {
+        if(s['name'] !== undefined){
+          delete s.name;
+        }
+      })
+
+      console.log(JSON.stringify(module, null, 2))
+    }
+
+    console.log("Module SAVED");
   }
 
   renderLoadModule = () => {
@@ -423,7 +437,7 @@ class Editor extends Component {
           <button className='button-clear' onClick={this.newModule(Object.keys(this.props.modules)).bind(this, undefined)}>New Module</button>
           <button className='button-clear' onClick={this.props.showLoadModule}>Open Module</button>
           <button className='button-clear Editor-top-download' onClick={this.props.showDownload}>Download</button>
-          <button className='button-clear' onClick={this.saveModule()}>Save Module</button>
+          <button className='button-clear Editor-top-save' onClick={this.props.showSaveModule}>Save Module</button>
         </div>
         <button className='button-clear Editor-top-help' onClick={this.startTutorial(BasicTutorial)}> ? </button>
         <NavTabs selectedModuleKey={this.props.selectedModuleKey}
@@ -519,7 +533,7 @@ class Editor extends Component {
 
         { this.renderLoadModule() }
         { this.renderDownload() }
-
+        { this.renderSave() }
         { this.renderMainEditor() }
 
 
@@ -570,6 +584,7 @@ const mapStateToProps = state => {
     selectedStateTransition: state.editor.selectedStateTransition,
     loadModuleVisible: loadModuleVisible,
     downloadVisible: state.editor.downloadVisible,
+    saveVisible:state.editor.saveVisible,
     selectedModulePanel: state.editor.selectedModulePanel,
     modulePanelVisible: state.editor.modulePanelVisible,
     warnings: state.analysis.warnings,
@@ -597,6 +612,8 @@ const mapDispatchToProps = dispatch => bindActionCreators({
   hideLoadModule,
   showDownload,
   hideDownload,
+  showSaveModule,
+  hideSaveModule, 
   refreshCode,
   editModuleName,
   editModuleRemarks,
