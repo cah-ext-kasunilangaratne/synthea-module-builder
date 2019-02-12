@@ -14,30 +14,24 @@ class Save extends Component {
   }
 
   onSave(){
-    // console.log(JSON.stringify(this.props.module))
-
-    console.log("ATTempt FETCH")
-    fetch('http://localhost:5000/module/', {
-        
-        mode: "no-cors",
-        method: "POST",
+    
+    const post_options = {    
+        method: 'POST',
         body: JSON.stringify(this.props.module),
         headers: {
-            
-            "Accept": "application/json",
             "Content-Type": "application/json",
-   
         }
-        
+    };
+
+    fetch('http://localhost:5000/module', post_options)
+    .then(function(response) {
+        console.log("SUCCESS");
+        console.log(response);
     })
-    // .then((request) => request.text())
-    // .then((responseText) => {
-    //   alert(responseText);
-    // })
-    // .catch((error) => {
-    //     console.error(error);
-    // });
-    
+    .catch(function(error) {
+        console.log("ERROR");
+        console.log(error);
+    })
     console.log("WRITTEN TO MONGODB")
   }
 

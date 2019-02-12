@@ -2,7 +2,7 @@ var cors = require('cors')
 
 
 var corsOptions = {
-    origin: 'http://localhost:3000',
+    origin: 'http://localhost:5000',
     optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
 }
 
@@ -10,7 +10,7 @@ module.exports = (app) => {
     const module_controller = require('../controllers/module.controller.js');
 
     // Create a new Disease
-    app.post('/module', module_controller.create);
+    app.post('/module', cors(corsOptions), module_controller.create);
 
     // Retrieve all Diseases
     app.get('/module', module_controller.findAll);

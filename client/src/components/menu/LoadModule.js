@@ -321,9 +321,9 @@ class LoadModule extends Component {
     .catch(error => console.log('error: ', error)); 
   }
 
-  fetchMongoModule(name){
+  fetchMongoModule(id){
     console.log("ARRIVED GERE")
-    fetch(`http://localhost:5000/module/`+ name)
+    fetch(`http://localhost:5000/module/`+ id)
       .then(response => response.text())
       .then(data => this.loadModule(data))
       .then(this.setState({

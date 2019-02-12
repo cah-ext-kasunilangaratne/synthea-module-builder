@@ -5,9 +5,12 @@ exports.create = (req, res) => {
     // Validate request
     res.setHeader('Access-Control-Allow-Origin', '*')
     if(!req.body.states) {
+        console.log("Module states empty")
         return res.status(400).send({
             message: "Module_model states can not be empty"
         });
+    }else{
+        console.log("CREATED")
     }
 
     // Create a Module
@@ -31,7 +34,7 @@ exports.create = (req, res) => {
 
 // Retrieve and return all modules from the database.
 exports.findAll = (req, res) => {
-    res.setHeader('Access-Control-Allow-Origin','*')
+    // res.setHeader('Access-Control-Allow-Origin','*')
     Module_model.find({}).select('name').select('active')
     .then(syn_modules => {
         res.send(syn_modules);
