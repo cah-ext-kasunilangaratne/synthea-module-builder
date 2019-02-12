@@ -14,25 +14,52 @@ class Save extends Component {
   }
 
   onSave(){
-    
-    const post_options = {    
-        method: 'POST',
-        body: JSON.stringify(this.props.module),
-        headers: {
-            "Content-Type": "application/json",
-        }
-    };
 
-    fetch('http://localhost:5000/module', post_options)
-    .then(function(response) {
-        console.log("SUCCESS");
-        console.log(response);
-    })
-    .catch(function(error) {
-        console.log("ERROR");
-        console.log(error);
-    })
-    console.log("WRITTEN TO MONGODB")
+    let id = this.props.module._id
+    // const post_options = {    
+    //     method: 'POST',
+    //     body: JSON.stringify(this.props.module),
+    //     headers: {
+    //         "Content-Type": "application/json",
+    //     }
+    // };
+
+    // fetch('http://localhost:5000/module', post_options)
+    //   .then(function(response) {
+    //       console.log("SUCCESS");
+    //       console.log(response);
+    //   })
+    //   .catch(function(error) {
+    //       console.log("ERROR");
+    //       console.log(error);
+    //   })
+    //   console.log("WRITTEN TO MONGODB")
+
+    fetch(`http://localhost:5000/module/` + id)
+      .then(response => response.json())
+        .then(data => {
+            
+            const put_options = {    
+              method: 'PUT',
+              body: JSON.stringify(data.active = false),
+              headers: {
+                  "Content-Type": "application/json",
+              }
+            };
+
+            console.log(data)
+
+            fetch('http://localhost:5000/module/' + id, put_options)
+            .then(function(response) {
+                console.log("SUCCESS");
+                console.log(response);
+            })
+            .catch(function(error) {
+                console.log("ERROR");
+                console.log(error);
+            })
+            console.log("UPDATED IN MONGODB")
+      });
   }
 
   prepareJSON(){
