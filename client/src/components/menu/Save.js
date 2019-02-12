@@ -34,14 +34,17 @@ class Save extends Component {
     //       console.log(error);
     //   })
     //   console.log("WRITTEN TO MONGODB")
-
-    fetch(`http://localhost:5000/module/` + id)
+    
+    if(id){
+      fetch(`http://localhost:5000/module/` + id)
       .then(response => response.json())
         .then(data => {
             
+            data.active = false
+
             const put_options = {    
               method: 'PUT',
-              body: JSON.stringify(data.active = false),
+              body: JSON.stringify(data),
               headers: {
                   "Content-Type": "application/json",
               }
@@ -60,6 +63,7 @@ class Save extends Component {
             })
             console.log("UPDATED IN MONGODB")
       });
+    }
   }
 
   prepareJSON(){

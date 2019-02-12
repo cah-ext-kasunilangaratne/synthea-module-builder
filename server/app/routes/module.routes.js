@@ -19,7 +19,7 @@ module.exports = (app) => {
     app.get('/module/:moduleId', module_controller.findOne);
 
     // Update a Disease with diseaseId
-    app.put('/module/:moduleId', module_controller.update);
+    app.put('/module/:moduleId', cors(corsOptions), module_controller.update);
 
     // Delete a Disease with diseaseId
     app.delete('/module/:moduleId', module_controller.delete);
