@@ -11,6 +11,7 @@ exports.create = (req, res) => {
         });
     }else{
         console.log("CREATED")
+        console.log(req.body.updatedTimeStamp)
     }
 
     // Create a Module
@@ -18,7 +19,7 @@ exports.create = (req, res) => {
         name: req.body.name || "Untitled Module", 
         states: req.body.states,
         active:req.body.active,
-        updatedTimestamp: req.body.updatedTimeStamp
+        updatedTimeStamp: req.body.updatedTimeStamp
     });
 
     // Save Module in the database
@@ -35,7 +36,7 @@ exports.create = (req, res) => {
 // Retrieve and return all modules from the database.
 exports.findAll = (req, res) => {
     // res.setHeader('Access-Control-Allow-Origin','*')
-    Module_model.find({}).select('name').select('active')
+    Module_model.find({}).select('name').select('active').select('updatedTimeStamp')
     .then(syn_modules => {
         res.send(syn_modules);
     }).catch(err => {
@@ -81,7 +82,9 @@ exports.update = (req, res) => {
     // Find syn_module and update it with the request body
     Module_model.findByIdAndUpdate(req.params.moduleId, {
         name: req.body.name || "Untitled Module",
-        states: req.body.states
+        states: req.body.states,
+        active: req.body.active,
+        updatedTimeStamp: req.body.updatedTimeStamp
     }, {new: true})
     .then(syn_module => {
         if(!syn_module) {

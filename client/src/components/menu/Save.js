@@ -14,33 +14,35 @@ class Save extends Component {
   }
 
   onSave(){
+    console.log("BEFORE SETTING ", JSON.stringify(this.props.module.updatedTimeStamp))
+    this.props.module.updatedTimeStamp=new Date(Date.now()).toISOString(); 
+    let id = this.props.module._id;
+    console.log("AFTER SETTING ", JSON.stringify(this.props.module.updatedTimeStamp))
+    const post_options = {    
+        method: 'POST',
+        body: JSON.stringify(this.props.module),
+        headers: {
+            "Content-Type": "application/json",
+        }
+    };
+ 
+    fetch('http://localhost:5000/module', post_options)
+    .then(response => response.json())
+    .then(data => {
+        // console.log(post_options.body) 
+        this.props.module._id=data._id
+    })
+    .catch(function(error) {
+        console.log("ERROR");
+        console.log(error);
+    })
 
-    let id = this.props.module._id
-    // const post_options = {    
-    //     method: 'POST',
-    //     body: JSON.stringify(this.props.module),
-    //     headers: {
-    //         "Content-Type": "application/json",
-    //     }
-    // };
-
-    // fetch('http://localhost:5000/module', post_options)
-    //   .then(function(response) {
-    //       console.log("SUCCESS");
-    //       console.log(response);
-    //   })
-    //   .catch(function(error) {
-    //       console.log("ERROR");
-    //       console.log(error);
-    //   })
-    //   console.log("WRITTEN TO MONGODB")
-    
     if(id){
-      fetch(`http://localhost:5000/module/` + id)
-      .then(response => response.json())
-        .then(data => {
-            
+        fetch(`http://localhost:5000/module/` + id)
+        .then(response => response.json())
+        .then(data => { 
             data.active = false
+            data.updatedTimeStamp = new Date(Date.now()).toISOString();
 
             const put_options = {    
               method: 'PUT',
@@ -50,12 +52,9 @@ class Save extends Component {
               }
             };
 
-            console.log(data)
-
             fetch('http://localhost:5000/module/' + id, put_options)
             .then(function(response) {
-                console.log("SUCCESS");
-                console.log(response);
+                
             })
             .catch(function(error) {
                 console.log("ERROR");

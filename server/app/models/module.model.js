@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 
 const module_schema =  mongoose.Schema({
     name: String
+    ,remarks: String
     ,states: Object
     ,active: Boolean
     ,updatedTimeStamp: Date    
