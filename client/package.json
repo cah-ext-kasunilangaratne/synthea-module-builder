@@ -16,6 +16,7 @@
     "lodash": "^4.17.4",
     "react": "^16.1.0",
     "react-addons-test-utils": "^15.6.2",
+    "react-data-sort": "^1.2.0",
     "react-dom": "^16.1.0",
     "react-draggable": "^3.0.5",
     "react-dropzone": "^4.2.9",

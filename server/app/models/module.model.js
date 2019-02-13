@@ -4,6 +4,8 @@ const module_schema =  mongoose.Schema({
     name: String
     ,remarks: String
     ,states: Object
+    ,submodule: Boolean
+    ,relPath: String
     ,active: Boolean
     ,updatedTimeStamp: Date    
 },{

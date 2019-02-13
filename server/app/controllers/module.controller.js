@@ -17,7 +17,10 @@ exports.create = (req, res) => {
     // Create a Module
     const syn_module = new Module_model({
         name: req.body.name || "Untitled Module", 
+        remarks: req.body.remarks,
         states: req.body.states,
+        submodule: req.body.submodule,
+        relPath:req.body.relPath,
         active:req.body.active,
         updatedTimeStamp: req.body.updatedTimeStamp
     });
@@ -36,7 +39,8 @@ exports.create = (req, res) => {
 // Retrieve and return all modules from the database.
 exports.findAll = (req, res) => {
     // res.setHeader('Access-Control-Allow-Origin','*')
-    Module_model.find({}).select('name').select('active').select('updatedTimeStamp')
+    Module_model.find({})
+    .select('name').select('submodule').select('relPath').select('active').select('updatedTimeStamp')
     .then(syn_modules => {
         res.send(syn_modules);
     }).catch(err => {
@@ -82,8 +86,11 @@ exports.update = (req, res) => {
     // Find syn_module and update it with the request body
     Module_model.findByIdAndUpdate(req.params.moduleId, {
         name: req.body.name || "Untitled Module",
+        remarks: req.body.remarks,
         states: req.body.states,
-        active: req.body.active,
+        submodule: req.body.submodule,
+        relPath:req.body.relPath,
+        active:req.body.active,
         updatedTimeStamp: req.body.updatedTimeStamp
     }, {new: true})
     .then(syn_module => {
