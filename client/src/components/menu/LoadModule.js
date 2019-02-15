@@ -334,7 +334,7 @@ class LoadModule extends Component {
                     <li key={i} id={branch._id} >
                     <button className='btn btn-link' onClick={() => {
                       this.changeColor(branch._id, 'mongoModule');
-                      this.fetchMongoNameList(branch.name);}}>
+                      this.fetchMongoVersionsList(branch.name);}}>
                       {branch.name}
                     </button>
                   </li>
@@ -344,7 +344,7 @@ class LoadModule extends Component {
     .catch(error => console.log('error: ', error)); 
   }
 
-  fetchMongoNameList(name){
+  fetchMongoVersionsList(name){
     fetch(`http://localhost:5000/module/?name=`+name)
       .then(response => response.json())
         .then(data => {
@@ -356,6 +356,7 @@ class LoadModule extends Component {
                       this.changeColor(branch._id, 'mongoVersion');
                       this.fetchMongoModule(branch._id);}}>
                       {branch.name}
+                      {this.isActive(branch.active)}
                     </button>
                   </li>
                 ))
@@ -372,6 +373,12 @@ class LoadModule extends Component {
         Modules: null
       }))
       .catch(error => console.log('error: ', error));
+  }
+
+  isActive(active){
+    if(active){
+      return " -Active"
+    }
   }
 
   componentDidUpdate(prevProps, prevState) {
