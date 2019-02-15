@@ -114,17 +114,6 @@ class LoadModule extends Component {
           </ul>
         )
       
-
-      case 'mongo':
-        return (
-          <div className='row'>  
-          <ul className='LoadModule-list'>
-            {this.state.mongoModules}  
-          </ul>
-          {submoduleList}
-          </div>  
-        )
-
       case 'my':
         return (
           <ul className='LoadModule-list'>
@@ -142,6 +131,27 @@ class LoadModule extends Component {
         return (
           <textarea id='loadJSON' value={this.state.json} onChange={this.updateJson}></textarea>
         )
+
+
+      case 'mongo':
+      let mongoModuleVersionList = null;
+      if (this.state.mongoVersions){
+        mongoModuleVersionList = (
+          <div className='col-4 nopadding'>
+            <ul className='LoadModule-list'>
+              {this.state.mongoVersions}
+            </ul>
+          </div>
+        )
+      }
+      return (
+        <div className='row'>  
+        <ul className='LoadModule-list'>
+          {this.state.mongoActiveModules}  
+        </ul>
+        {mongoModuleVersionList}
+        </div>  
+      )
 
       case 'git':
         let moduleList = null;
@@ -196,7 +206,7 @@ class LoadModule extends Component {
   }
 
   changeColor(ID, type) {
-    document.getElementById(ID).style.backgroundColor = "#ddd";
+    // document.getElementById(ID).style.backgroundColor = "#ddd";
     let list = null
     switch(type) {
       case 'branch':
@@ -209,13 +219,15 @@ class LoadModule extends Component {
         list = this.state.Folders
         break;
       case 'mongoModule':
-        list = this.state.mongoModules  
+        list = this.state.mongoActiveModules
+      case 'mongoVersion':
+        list = this.state.mongoVersions
     }
-    list.forEach((i) => {
-      if (i.props.id !== ID) {
-        document.getElementById(i.props.id).style.backgroundColor = "#eee";
-      }
-    }) 
+    // list.forEach((i) => {
+    //   if (i.props.id !== ID) {
+    //     document.getElementById(i.props.id).style.backgroundColor = "#eee";
+    //   }
+    // }) 
   }
   
   //Related to Github Option
@@ -225,7 +237,13 @@ class LoadModule extends Component {
     .then(data => {
       this.setState({
         Branches: data.map((branch, i) => (
-          <li key={i} id={branch.name}><button className='btn btn-link' onClick={() => {this.changeColor(branch.name, 'branch');this.fetchModuleList(branch.name)}}>{branch.name}</button></li>
+          <li key={i} id={branch.name}>
+          <button className='btn btn-link' onClick={() => {
+            this.changeColor(branch.name, 'branch');
+            this.fetchModuleList(branch.name)}}>
+            {branch.name}
+          </button>
+          </li>
         ))
       })
     })  
@@ -243,10 +261,22 @@ class LoadModule extends Component {
         let modules = data.filter(name => name.name.includes(".json"))
         this.setState({
         Folders: folders.map((name, i) => (
-          <li key={i} id={name.name}><button className='btn btn-link' onClick={() => {this.changeColor(name.name, 'folder');this.fetchModule(name.name)}}>{name.name}/</button></li>
+          <li key={i} id={name.name}>
+          <button className='btn btn-link' onClick={() => {
+            this.changeColor(name.name, 'folder');
+            this.fetchModule(name.name)}}>
+            {name.name}/
+          </button>
+          </li>
         )),
         Modules: modules.map((name, i) => (
-          <li key={i} id={name.name}><button className='btn btn-link' onClick={() => {this.changeColor(name.name, 'module');this.fetchModule(name.name)}}>{name.name}</button></li>
+          <li key={i} id={name.name}>
+          <button className='btn btn-link' onClick={() => {
+            this.changeColor(name.name, 'module');
+            this.fetchModule(name.name)}}>
+            {name.name}
+          </button>
+          </li>
         ))
         })
       })  
@@ -288,15 +318,6 @@ class LoadModule extends Component {
       .catch(error => console.log('error: ', error));
   }    
     
-  componentDidUpdate(prevProps, prevState) {
-    if (this.state.selectedOption === 'git' && prevState.selectedOption !== 'git') {
-      this.fetchBranchList()
-    }
-    if (this.state.selectedOption === 'mongo' && prevState.selectedOption !== 'mongo'){
-      this.fetchMongoList()
-    }
-  }
-
   //Related to Mongo Option
   fetchMongoList(){
     fetch(`http://localhost:5000/module`)
@@ -308,10 +329,32 @@ class LoadModule extends Component {
             }
           })
           this.setState({
-            mongoModules: 
+            mongoActiveModules: 
                 data.map((branch, i) => (
                     <li key={i} id={branch._id} >
-                    <button className='btn btn-link' onClick={() => {this.fetchMongoModule(branch._id);}}>
+                    <button className='btn btn-link' onClick={() => {
+                      this.changeColor(branch._id, 'mongoModule');
+                      this.fetchMongoNameList(branch.name);}}>
+                      {branch.name}
+                    </button>
+                  </li>
+                ))
+          })
+        })  
+    .catch(error => console.log('error: ', error)); 
+  }
+
+  fetchMongoNameList(name){
+    fetch(`http://localhost:5000/module/?name=`+name)
+      .then(response => response.json())
+        .then(data => {
+          this.setState({
+            mongoVersions: 
+                data.map((branch, i) => (
+                    <li key={i} id={branch._id} >
+                    <button className='btn btn-link' onClick={() => {
+                      this.changeColor(branch._id, 'mongoVersion');
+                      this.fetchMongoModule(branch._id);}}>
                       {branch.name}
                     </button>
                   </li>
@@ -322,7 +365,6 @@ class LoadModule extends Component {
   }
 
   fetchMongoModule(id){
-    console.log("ARRIVED GERE")
     fetch(`http://localhost:5000/module/`+ id)
       .then(response => response.text())
       .then(data => this.loadModule(data))
@@ -331,9 +373,14 @@ class LoadModule extends Component {
       }))
       .catch(error => console.log('error: ', error));
   }
-  
-  componentDidMount(prevState){
 
+  componentDidUpdate(prevProps, prevState) {
+    if (this.state.selectedOption === 'git' && prevState.selectedOption !== 'git') {
+      this.fetchBranchList()
+    }
+    if (this.state.selectedOption === 'mongo' && prevState.selectedOption !== 'mongo'){
+      this.fetchMongoList()
+    }
   }
 
   renderWelcomeMessage = () => {

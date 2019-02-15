@@ -14,10 +14,9 @@ class Save extends Component {
   }
 
   onSave(){
-    console.log("BEFORE SETTING ", JSON.stringify(this.props.module.updatedTimeStamp))
     this.props.module.updatedTimeStamp=new Date(Date.now()).toISOString(); 
     let id = this.props.module._id;
-    console.log("AFTER SETTING ", JSON.stringify(this.props.module.updatedTimeStamp))
+    
     const post_options = {    
         method: 'POST',
         body: JSON.stringify(this.props.module),
