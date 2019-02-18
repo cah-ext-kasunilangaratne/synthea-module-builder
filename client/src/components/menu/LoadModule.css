@@ -73,3 +73,43 @@
   background-color: #dceaef;
   color: #336699;
 }
+
+.LoadModule-sublist{
+  height: 300px;
+  overflow-y: scroll;
+  list-style: none;
+  padding: 0;
+  background-color: #eee;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  width: max-content;
+  float: auto;
+  overflow-x: visible;
+}
+
+
+.LoadModule-li-elements{
+  display: inline-block !important;
+  width: 100%;
+  /* width: max-content; */
+  background-color: #ddd !important;
+  margin: 1px;
+  border-radius: 4px;
+}
+
+
+.btn-left{
+  float: left;
+  width: max-content !important;
+  display: block;
+}
+
+.btn-right{
+  float: right;
+  width: max-content !important;
+  display: block;
+  box-align: right;
+  background-color: #eee !important;
+  margin: 4px;
+  border-radius: 2px;
+}

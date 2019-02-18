@@ -2,12 +2,11 @@ import React, { Component } from 'react';
 import Dropzone from 'react-dropzone';
 import './LoadModule.css';
 import {generateDOT} from '../../utils/graphviz';
-import axios from 'axios'
 
 class LoadModule extends Component {
   constructor(props) {
     super(props)
-    this.state = {json: '', selectedOption: 'core', stateList: []}
+    this.state = {json: '', selectedOption: '', stateList: []}
   }
 
   loadModule = (json) => {
@@ -108,7 +107,11 @@ class LoadModule extends Component {
             { Object.keys(this.props.library).filter(n => (n.indexOf('/') > -1)).map( (key, index) => {
               let module = this.props.library[key]
               return (
-                <li key={key}><button className='btn btn-link' onClick={this.onClick(key)}>{key.split('/')[0] + ': ' + module.name}</button></li>
+                <li key={key}>
+                <button className='btn btn-link' onClick={this.onClick(key)}>
+                {key.split('/')[0] + ': ' + module.name}
+                </button>
+                </li>
               )
             })}
           </ul>
@@ -138,7 +141,7 @@ class LoadModule extends Component {
       if (this.state.mongoVersions){
         mongoModuleVersionList = (
           <div className='col-4 nopadding'>
-            <ul className='LoadModule-list'>
+            <ul className='LoadModule-sublist'>
               {this.state.mongoVersions}
             </ul>
           </div>
@@ -300,7 +303,12 @@ class LoadModule extends Component {
       .then(response => response.json())
       .then(data => this.setState({
         Submodules: data.map((name, i) => (
-          <li key={i} id={name.name}><button className='btn btn-link' onClick={() => {this.fetchSubmodule(name.name)}}>{name.name}</button></li>
+          <li key={i} id={name.name}>
+          <button className='btn btn-link' onClick={() => {
+            this.fetchSubmodule(name.name)}}>
+            {name.name}
+          </button>
+          </li>
         ))
       }))
       .catch(error => console.log('error: ', error));
@@ -351,13 +359,15 @@ class LoadModule extends Component {
           this.setState({
             mongoVersions: 
                 data.map((branch, i) => (
-                    <li key={i} id={branch._id} >
-                    <button className='btn btn-link' onClick={() => {
-                      this.changeColor(branch._id, 'mongoVersion');
-                      this.fetchMongoModule(branch._id);}}>
-                      {branch.name}
+                  <li key={i} id={branch._id}>
+                    <span className='LoadModule-li-elements'>
+                      <button className='btn btn-link btn-left' onClick={() => {
+                        this.changeColor(branch._id, 'mongoVersion');
+                        this.fetchMongoModule(branch._id);}}>
+                        {branch.updatedTimeStamp}
+                      </button>
                       {this.isActive(branch.active)}
-                    </button>
+                      </span>
                   </li>
                 ))
           })
@@ -376,9 +386,14 @@ class LoadModule extends Component {
   }
 
   isActive(active){
+    var button_act;
     if(active){
-      return " -Active"
+      button_act = 
+      <button className='btn btn-link btn-right'>Active</button>
+    }else{
+      button_act = <button className='btn btn-link btn-right'>Set as Active</button>
     }
+    return button_act
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -427,11 +442,11 @@ class LoadModule extends Component {
                   <div className='row'>
                     <div className='col-3 nopadding'>
                       <ul className='LoadModule-options'>
-                         <li className={(this.state.selectedOption === 'core') ? 'selected' : ''}><button className='btn btn-link' onClick={this.onOptionClick('core')}>Core Modules</button></li>
+                         {/* <li className={(this.state.selectedOption === 'core') ? 'selected' : ''}><button className='btn btn-link' onClick={this.onOptionClick('core')}>Core Modules</button></li>
                          <li className={(this.state.selectedOption === 'submodules') ? 'selected' : ''}><button className='btn btn-link' onClick={this.onOptionClick('submodules')}>Submodules</button></li>
                          {Object.keys(this.props.modules).length > 0 ? <li className={(this.state.selectedOption === 'my') ? 'selected' : ''}><button className='btn btn-link' onClick={this.onOptionClick('my')}>My Modules</button></li> : ''}
                          <li className={(this.state.selectedOption === 'json') ? 'selected' : ''}><button className='btn btn-link' onClick={this.onOptionClick('json')}>Paste JSON</button></li>
-                         <li className={(this.state.selectedOption === 'git') ? 'selected' : ''}><button className='btn btn-link' onClick={this.onOptionClick('git')}>GitHub Modules</button></li>
+                         <li className={(this.state.selectedOption === 'git') ? 'selected' : ''}><button className='btn btn-link' onClick={this.onOptionClick('git')}>GitHub Modules</button></li> */}
                          <li className={(this.state.selectedOption === 'mongo') ? 'selected' : ''}><button className='btn btn-link' onClick={this.onOptionClick('mongo')}>MongoDB Modules</button></li>
                       </ul>
                     </div>
