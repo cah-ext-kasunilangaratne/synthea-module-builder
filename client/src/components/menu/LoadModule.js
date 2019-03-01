@@ -6,7 +6,14 @@ import {generateDOT} from '../../utils/graphviz';
 class LoadModule extends Component {
   constructor(props) {
     super(props)
-    this.state = {json: '', selectedOption: '', stateList: []}
+    this.state = {json: '', 
+                  selectedOption: 'sum', 
+                  stateList: [], 
+                  activechange: false,
+                  inactivechange: false,
+                  name: '',
+                  id: ''
+                }
   }
 
   loadModule = (json) => {
@@ -209,7 +216,7 @@ class LoadModule extends Component {
   }
 
   changeColor(ID, type) {
-    // document.getElementById(ID).style.backgroundColor = "#ddd";
+    document.getElementById(ID).style.backgroundColor = "#ddd";
     let list = null
     switch(type) {
       case 'branch':
@@ -226,7 +233,9 @@ class LoadModule extends Component {
       case 'mongoVersion':
         list = this.state.mongoVersions
     }
+    // console.log(list)
     // list.forEach((i) => {
+      // console.log("list item")
     //   if (i.props.id !== ID) {
     //     document.getElementById(i.props.id).style.backgroundColor = "#eee";
     //   }
@@ -339,9 +348,10 @@ class LoadModule extends Component {
           this.setState({
             mongoActiveModules: 
                 data.map((branch, i) => (
-                    <li key={i} id={branch._id} >
+                    <li key={i} id={branch.name} >
                     <button className='btn btn-link' onClick={() => {
-                      this.changeColor(branch._id, 'mongoModule');
+                      // this.setState({...this.state, id: branch._id})
+                      this.changeColor(branch.name, 'mongoModule');
                       this.fetchMongoVersionsList(branch.name);}}>
                       {branch.name}
                     </button>
@@ -353,6 +363,8 @@ class LoadModule extends Component {
   }
 
   fetchMongoVersionsList(name){
+    this.state.name=name;
+    console.log("fetch version list")
     fetch(`http://localhost:5000/module/?name=`+name)
       .then(response => response.json())
         .then(data => {
@@ -366,11 +378,15 @@ class LoadModule extends Component {
                         this.fetchMongoModule(branch._id);}}>
                         {branch.updatedTimeStamp}
                       </button>
-                      {this.isActive(branch.active)}
+                      {this.isActive(branch)}
                       </span>
                   </li>
                 ))
           })
+        })
+        .then(res=>{
+          this.setState({...this.state, activechange: false})
+          this.setState({...this.state, inactivechange: false})
         })  
     .catch(error => console.log('error: ', error)); 
   }
@@ -385,23 +401,100 @@ class LoadModule extends Component {
       .catch(error => console.log('error: ', error));
   }
 
-  isActive(active){
+  setActive(branch){
+    console.log('Set Active')
+    let id = branch._id
+    fetch(`http://localhost:5000/module/` + id)
+        .then(response => response.json())
+        .then(data => { 
+            data.active = true
+            // data.updatedTimeStamp = new Date(Date.now()).toISOString();
+
+            const put_options = {    
+              method: 'PUT',
+              body: JSON.stringify(data),
+              headers: {
+                  "Content-Type": "application/json",
+              }
+            };
+
+            fetch('http://localhost:5000/module/' + id, put_options)
+            .then(function(response) {
+
+            })
+            .catch(function(error) {
+                console.log(error)
+            })
+        })
+        .then(res => {this.setState({...this.state, activechange: true})})
+        .catch(function(error){
+            console.log(error)
+        })
+
+    
+
+      // this.fetchMongoVersionsList(branch.name); 
+  }
+
+  setInactive(branch){
+    let id = branch._id
+    fetch(`http://localhost:5000/module/?name=`+branch.name)
+        .then(response => response.json())
+        .then(data => {
+            data.forEach(function(current_value, index, data){
+              
+              if (data[index].active && data[index]._id != id) { 
+                fetch(`http://localhost:5000/module/`+data[index]._id)
+                .then(get_response => get_response.json())
+                .then(module_data => {
+                  module_data.active = false;
+                
+                  const put_options = {    
+                    method: 'PUT',
+                    body: JSON.stringify(module_data),
+                    headers: {
+                      "Content-Type": "application/json",
+                    }
+                  };
+  
+                  fetch('http://localhost:5000/module/' + module_data._id, put_options)
+                  .then(get_response => get_response.json())
+                  .catch(function(error) {
+                    console.log(error)
+                  })
+                })              
+              }
+          })  
+        })
+        .then(res => {this.setState({...this.state, inactivechange: true})})
+        .catch(function(error){
+          console.log(error)
+        }) 
+  }
+
+  isActive(branch){
     var button_act;
-    if(active){
-      button_act = 
-      <button className='btn btn-link btn-right'>Active</button>
+    if(branch.active){
+      button_act = <button className='btn btn-link btn-right'>Active</button>
     }else{
-      button_act = <button className='btn btn-link btn-right'>Set as Active</button>
+      button_act = <button className='btn btn-link btn-right' onClick={() => {
+        this.setActive(branch)
+        this.setInactive(branch)
+      }}>Set as Active</button>
     }
     return button_act
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (this.state.selectedOption === 'git' && prevState.selectedOption !== 'git') {
-      this.fetchBranchList()
+
+
+    if (this.state.selectedOption === 'mongo' && prevState.selectedOption!=='mongo'){
+       this.fetchMongoList()
     }
-    if (this.state.selectedOption === 'mongo' && prevState.selectedOption !== 'mongo'){
-      this.fetchMongoList()
+
+    if (this.state.activechange && this.state.inactivechange){
+      this.fetchMongoVersionsList(this.state.name)
+      this.changeColor(this.state.id, 'mongoModule');   
     }
   }
 
@@ -445,8 +538,8 @@ class LoadModule extends Component {
                          {/* <li className={(this.state.selectedOption === 'core') ? 'selected' : ''}><button className='btn btn-link' onClick={this.onOptionClick('core')}>Core Modules</button></li>
                          <li className={(this.state.selectedOption === 'submodules') ? 'selected' : ''}><button className='btn btn-link' onClick={this.onOptionClick('submodules')}>Submodules</button></li>
                          {Object.keys(this.props.modules).length > 0 ? <li className={(this.state.selectedOption === 'my') ? 'selected' : ''}><button className='btn btn-link' onClick={this.onOptionClick('my')}>My Modules</button></li> : ''}
-                         <li className={(this.state.selectedOption === 'json') ? 'selected' : ''}><button className='btn btn-link' onClick={this.onOptionClick('json')}>Paste JSON</button></li>
                          <li className={(this.state.selectedOption === 'git') ? 'selected' : ''}><button className='btn btn-link' onClick={this.onOptionClick('git')}>GitHub Modules</button></li> */}
+                         <li className={(this.state.selectedOption === 'json') ? 'selected' : ''}><button className='btn btn-link' onClick={this.onOptionClick('json')}>Paste JSON</button></li>
                          <li className={(this.state.selectedOption === 'mongo') ? 'selected' : ''}><button className='btn btn-link' onClick={this.onOptionClick('mongo')}>MongoDB Modules</button></li>
                       </ul>
                     </div>

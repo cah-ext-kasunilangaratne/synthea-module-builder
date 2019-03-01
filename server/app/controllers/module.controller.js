@@ -38,6 +38,20 @@ exports.create = (req, res) => {
 exports.findAll = (req, res) => {
     // res.setHeader('Access-Control-Allow-Origin','*')
 
+
+    // var token = req.headers['x-access-token'];
+    // if (!token){
+    //     return res.status(401).send({ auth: false, message: 'No token provided.' });
+    // } 
+  
+    // jwt.verify(token, config.secret, function(err, decoded) {
+    // if (err){
+    //     return res.status(500).send({
+    //          auth: false, message: 'Failed to authenticate token.' 
+    //     });
+    // }
+    // })
+
     let name = req.query.name
 
     if(name){
@@ -84,6 +98,8 @@ exports.findOne = (req, res) => {
 // Update a syn_module identified by the moduleId in the request
 exports.update = (req, res) => {
     // Validate Request
+
+    // console.log(req.body)
     res.setHeader('Access-Control-Allow-Origin', '*')
     if(!req.body.states) {
         return res.status(400).send({
@@ -130,7 +146,7 @@ exports.delete = (req, res) => {
                 message: "Module not found with id " + req.params.moduleId
             });
         }
-        res.send({message: "Module deleted successfully!"});
+        res.send({message: "This module was successfully deleted!"});
     }).catch(err => {
         if(err.kind === 'ObjectId' || err.name === 'NotFound') {
             return res.status(404).send({

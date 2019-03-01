@@ -1,4 +1,5 @@
 const express = require('express');
+const session = require('express-session')
 const bodyParser = require('body-parser');
 var logger = require("morgan");
 
@@ -45,15 +46,22 @@ mongoose.connect(dbConfig.url, {
 });
 
 
-
+app.set('secretKey', 'nodeRestApi');
+app.use(session({
+    secret: 'work hard',
+    resave: true,
+    saveUninitialized: false
+}));
 
 // define a simple route
 app.get('/', (req, res) => {
     res.json({"message": "You have reached a MongoDB Api"});
 });
 
-require('./app/routes/module.routes.js')(app);
 
+
+require('./app/routes/module.routes.js')(app);
+require('./app/routes/users.routes.js')(app)
 
 
 // listen for requests

@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const module_schema =  mongoose.Schema({
+const moduleSchema =  mongoose.Schema({
     name: String
     ,remarks: String
     ,states: Object
@@ -12,4 +12,4 @@ const module_schema =  mongoose.Schema({
     versionKey: false
 });
 
-module.exports = mongoose.model('synthetics_module_model', module_schema, 'module'); 
+module.exports = mongoose.model('synthetics_module_model', moduleSchema, 'module'); 

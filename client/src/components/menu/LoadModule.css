@@ -14,16 +14,6 @@
   cursor: pointer;
 }
 
-.LoadModule-list {
-  height: 300px;
-  overflow-y: scroll;
-  list-style: none;
-  padding: 0;
-  background-color: #eee;
-  border-top-right-radius: 5px;
-  border-bottom-right-radius: 5px;
-
-}
 .LoadModule-body textarea{
   height: 300px;
   width: 100%;
@@ -74,6 +64,17 @@
   color: #336699;
 }
 
+.LoadModule-list {
+  height: 300px;
+  overflow-y: scroll;
+  list-style: none;
+  padding: 0;
+  background-color: #eee;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+
+}
+
 .LoadModule-sublist{
   height: 300px;
   overflow-y: scroll;
@@ -83,8 +84,8 @@
   border-top-right-radius: 5px;
   border-bottom-right-radius: 5px;
   width: max-content;
-  float: auto;
-  overflow-x: visible;
+  /* float: auto; */
+  overflow-x: hidden;
 }
 
 
@@ -94,6 +95,7 @@
   /* width: max-content; */
   background-color: #ddd !important;
   margin: 1px;
+  margin-right: 3px;
   border-radius: 4px;
 }
 
@@ -101,7 +103,8 @@
 .btn-left{
   float: left;
   width: max-content !important;
-  display: block;
+  position: static;
+
 }
 
 .btn-right{
@@ -110,6 +113,7 @@
   display: block;
   box-align: right;
   background-color: #eee !important;
-  margin: 4px;
-  border-radius: 2px;
+  margin: 0.5%;
+  border-radius: 0.2%;
+  margin-left: 0.3%;
 }
