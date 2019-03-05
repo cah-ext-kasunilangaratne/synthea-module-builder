@@ -47,6 +47,7 @@ mongoose.connect(dbConfig.url, {
 
 
 app.set('secretKey', 'nodeRestApi');
+
 app.use(session({
     secret: 'work hard',
     resave: true,
@@ -60,9 +61,21 @@ app.get('/', (req, res) => {
 
 
 
+function ensureAuthenticated(req, res, next) {
+//   if (req.ensureAuthenticated())
+//     return next();
+//   else{
+//     res.sent("UNAUTHORISED USER")
+//   }    
+console.log(req.ensureAuthenticated)
+return next()
+}
+
+app.use('/module', ensureAuthenticated)
+
+
 require('./app/routes/module.routes.js')(app);
 require('./app/routes/users.routes.js')(app)
-
 
 // listen for requests
 app.listen(5000, () => {

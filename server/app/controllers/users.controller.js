@@ -50,10 +50,9 @@ exports.authenticate = (req,res) => {
     User_Model.countDocuments({email: req.body.email})
     .exec( function(err, count){
         if (err){
-            // next(err)
+            console.log(err)
         }
 
-        // console.log(count)
         if(count>0){   
             User_Model.findOne({email: req.body.email})
             .exec(function (err, userInfo){
@@ -61,7 +60,6 @@ exports.authenticate = (req,res) => {
                     console.log(err)
                 } else {
                     if(bcrypt.compareSync(req.body.password, userInfo.password)) {
-                        console.log("USER FOUND")
                         const token = jwt.sign({id: userInfo._id}, req.app.get('secretKey'), { expiresIn: '1h' });
                         res.json({status:"success", message: "user found!!!", data:{user: userInfo, token:token}});
                     }else{

@@ -1,10 +1,22 @@
+const jwt = require('jsonwebtoken');
+
 const Module_model = require('../models/module.model.js');
+
+function verify(req,res){
+    jwt.verify(req.token, req.app.get('secretKey'), (err, AuthData) => {
+        if(err){
+            res.status(403).send({
+                message: "Unauthorized"
+            })
+        }
+    })
+}
 
 // Create and Save a new Module_model
 exports.create = (req, res) => {
     // Validate request
-    res.setHeader('Access-Control-Allow-Origin', '*')
-
+    verify(req,res);
+    
     if(!req.body.states) {
         console.log("Module states empty")
         return res.status(400).send({
@@ -36,21 +48,7 @@ exports.create = (req, res) => {
 
 // Retrieve and return all modules from the database.
 exports.findAll = (req, res) => {
-    // res.setHeader('Access-Control-Allow-Origin','*')
-
-
-    // var token = req.headers['x-access-token'];
-    // if (!token){
-    //     return res.status(401).send({ auth: false, message: 'No token provided.' });
-    // } 
-  
-    // jwt.verify(token, config.secret, function(err, decoded) {
-    // if (err){
-    //     return res.status(500).send({
-    //          auth: false, message: 'Failed to authenticate token.' 
-    //     });
-    // }
-    // })
+    verify(req,res);
 
     let name = req.query.name
 
@@ -74,7 +72,8 @@ exports.findAll = (req, res) => {
 
 // Find a single syn_module with a moduleId
 exports.findOne = (req, res) => {
-    res.setHeader('Access-Control-Allow-Origin', '*')
+    verify(req,res);
+    
     Module_model.findById(req.params.moduleId)
     .then(syn_module => {
         if(!syn_module) {
@@ -98,6 +97,7 @@ exports.findOne = (req, res) => {
 // Update a syn_module identified by the moduleId in the request
 exports.update = (req, res) => {
     // Validate Request
+    verify(req,res);
 
     // console.log(req.body)
     res.setHeader('Access-Control-Allow-Origin', '*')
@@ -138,6 +138,8 @@ exports.update = (req, res) => {
 
 // Delete a syn_module with the specified moduleId in the request
 exports.delete = (req, res) => {
+    verify(req,res);
+
     res.setHeader('Access-Control-Allow-Origin', '*')
     Module_model.findByIdAndRemove(req.params.moduleId)
     .then(syn_module => {
