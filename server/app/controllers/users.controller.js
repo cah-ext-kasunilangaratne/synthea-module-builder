@@ -47,17 +47,17 @@ exports.create = (req, res) => {
 
 exports.authenticate = (req,res) => {
     
-    User_Model.count({email: req.body.email})
+    User_Model.countDocuments({email: req.body.email})
     .exec( function(err, count){
         if (err){
             // next(err)
         }
 
-        console.log(count)
+        // console.log(count)
         if(count>0){   
+            console.log("HERE2")
             User_Model.findOne({email: req.body.email})
             .exec(function (err, userInfo){
-                var err = doc.validateSync();
                 if ( err ){
                     console.log(err)
                 } else {
