@@ -55,7 +55,6 @@ exports.authenticate = (req,res) => {
 
         // console.log(count)
         if(count>0){   
-            console.log("HERE2")
             User_Model.findOne({email: req.body.email})
             .exec(function (err, userInfo){
                 if ( err ){
