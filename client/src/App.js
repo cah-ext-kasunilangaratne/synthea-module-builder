@@ -1,14 +1,15 @@
 // @flow
 import React from 'react';
 import { Provider } from 'react-redux'
-import { Route } from 'react-router-dom'
+import { Route, Link, BrowserRouter as Router, Switch } from 'react-router-dom'
 import { ConnectedRouter} from 'react-router-redux'
 import createHistory from 'history/createBrowserHistory'
 
 import createAppStore from './store';
 import Editor from './containers/Editor';
-
+import LogIn from './components/Login/Login'
 import { openModule } from './actions/router';
+import { ProtectedRoute } from './components/Login/Protected.Route'
 
 const history = createHistory()
 
@@ -16,11 +17,23 @@ const store = createAppStore(history)
 
 const App = () => {
   return (
-    <Provider store={store}>
-      <ConnectedRouter history={history}>
-        <Route path="/" component={Editor} />
-      </ConnectedRouter>
-    </Provider>
+    <Router>
+      <div>
+      <Switch>
+
+      <Route exact path="/login" component={LogIn}/>  
+      <Provider store={store}>
+        <ConnectedRouter history={history}>
+          <ProtectedRoute path="/" component={Editor} /> 
+        </ConnectedRouter>
+      </Provider>
+      </Switch>
+      
+      </div>
+      
+    </Router>
+      
+      
   );
 }
 

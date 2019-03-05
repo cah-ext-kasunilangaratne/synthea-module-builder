@@ -6,6 +6,8 @@ import _ from 'lodash'
 import Joyride from 'react-joyride'
 import ReactTooltip from 'react-tooltip'
 import Draggable from 'react-draggable'
+import {withRouter} from 'react-router'
+import {BrowserRouter,Link,Route, history} from 'react-router-dom';
 
 import StateEditor from '../components/editor/State';
 import ModulePropertiesEditor from '../components/editor/ModuleProperties';
@@ -16,6 +18,7 @@ import Save from '../components/menu/Save'
 import NavTabs from '../components/editor/NavTabs';
 import { extractStates } from '../transforms/Module';
 import {cleanString } from '../utils/stringUtils';
+import auth from '../components/Login/auth'
 
 import { findAvailableKey, createSafeKeyFromName } from '../utils/keys';
 import { getTemplate } from '../templates/Templates';
@@ -76,8 +79,9 @@ import {loadLibrary} from '../actions/library';
 
 class Editor extends Component {
 
-  constructor() {
+  constructor(props) {
     super();
+    super(props);
 
     this.originalPanelWidth = 500;
     this.state = {
@@ -90,6 +94,8 @@ class Editor extends Component {
     }
   }
 
+  
+  
   componentDidMount() {
     import("../data/modules").then(modules => {
       this.props.loadLibrary({...examplitis, ...modules.default});
@@ -428,7 +434,11 @@ class Editor extends Component {
     }
   }
 
-  renderNav = () => {
+  logoutHandler =() => {
+    console.log("LOGOUT");
+  }
+
+  renderNav = (props) => {
     return(
       <div className='Editor-top'>
         <img src={SyntheaLogo} className='Editor-top-logo'/>
@@ -440,12 +450,15 @@ class Editor extends Component {
           <button className='button-clear Editor-top-save' onClick={this.props.showSaveModule}>Save Module</button>
         </div>
         <button className='button-clear Editor-top-help' onClick={this.startTutorial(BasicTutorial)}> ? </button>
-        <NavTabs selectedModuleKey={this.props.selectedModuleKey}
+        <button className='button-clear Editor-top-logout'> LOGOUT </button>
+        
+        <div className='Editor-top-tabs' >
+          <NavTabs selectedModuleKey={this.props.selectedModuleKey}
                  modules={this.props.modules}
                  onChangeModule={(key) => this.props.push('#' + key)}
                  onCloseModule={(key) => {this.props.closeModule(key)}}
                  />
-              
+        </div>        
       </div>
     )
 
@@ -522,7 +535,6 @@ class Editor extends Component {
 
     return (
       <div className='Editor'>
-
         <ReactTooltip
           className='react-tooltip-customized'
           effect='solid'

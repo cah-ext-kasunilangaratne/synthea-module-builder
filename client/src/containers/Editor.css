@@ -1,3 +1,4 @@
+
 button {
   cursor: pointer;
 }
@@ -32,24 +33,26 @@ button {
 }
 
 .Editor-main {
+  
 }
 
 .Editor-top {
    background-color: #fff;
-   height: 50px;
+   height: 75px;
    border-bottom: 1px solid #aaa;
+   
 }
 
 .Editor-top-title {
   display: inline-block;
-  font-size: 1.3em;
-  margin: 10px 20px 0 65px;
+  font-size: 1.8em;
+  margin: 20px 20px 0 65px;
 
 }
 
 .Editor-top-module{
   display: inline-block;
-  font-size: 1.5em;
+  font-size: 1.6em;
   margin-left: 65px;
   color: #7f9ad3;
 
@@ -58,9 +61,9 @@ button {
 .Editor-top-logo {
   position: absolute;
   left: 12px;
-  top: 10px;
-  width: 30px;
-  height: 30px;
+  top: 17px;
+  width: 40px;
+  height: 40px;
 }
 
 .Editor-top button.Editor-top-help{
@@ -76,13 +79,29 @@ button {
 
 }
 
+.Editor-top button.Editor-top-logout{
+  position: absolute;
+  top: 9px;
+  right: 56px;
+  color: #fff1f1;
+  background-color: #28315c;
+  padding: 1px 6px;
+  border-radius: 5px;
+  border: 3px solid #28435c;
+  font-size: 1em;
+
+}
+
+
 .Editor-top-open {
   display:inline-block;
 }
 
 .Editor-top-open button {
   color: #5190cb;
-  margin: 0 12px
+  margin: 0 12px;
+  
+
 }
 
 .Editor-top-open button.Editor-top-download {
@@ -114,9 +133,10 @@ button {
   background-color: #54544e;
   border-bottom: 10px solid #22425e;
   -webkit-box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.23);
--moz-box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.23);
-box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.23);
-z-index: 500;
+  -moz-box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.23);
+  box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.23);
+  z-index: 500;
+  border: 10px solid orange;
 }
 
 .Editor-fullscreen-name {
@@ -129,10 +149,13 @@ z-index: 500;
   z-index: 200;
   border: 0;
   padding: 0;
+  border: 5px solid orange;
 }
 
 .Editor-fullscreen-name:focus {
   outline: 0;
+  border: 5px solid orange;
+  
 }
 
 .Editor-action-bar {
@@ -143,11 +166,14 @@ z-index: 500;
     /* -webkit-box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.23); */
     /* -moz-box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.23); */
     /* box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.23); */
-}
+    
+
+  }
 
 .Editor-graph-buttons button.Editor-action-download {
   border: 0;
   background-color: #cb7732;
+  
 }
 
 .Editor-left {
@@ -155,7 +181,7 @@ z-index: 500;
   width: 50px;
   position: fixed;
   height: 100%;
-  top: 90px;
+  top: 105px;
   left: 0px;
   z-index: 1000;
   border-right: 1px solid #aaa;
@@ -273,7 +299,7 @@ z-index: 500;
   /* z-index: 300; */
 
 
-  /* margin-top: 60px; */
+  margin-top: 60px;
   background-color: #22425e;
   color: #eee;
   font-size: 1.25rem;
@@ -284,18 +310,18 @@ z-index: 500;
 .Editor .Editor-module-name input {
   font-size: 1rem;
   width: 480px;
+  /* border: 5px solid rgb(42, 19, 175); */
 }
 
 .Editor-panel {
   background-color: #fafafa;
   position:fixed;
   height: 100%;
-  top: 0;
+  top: 1;
   left: 50px;
   z-index: 900;
   margin: 90px 20px 200px 0;
   padding: 0;
-
   /* -webkit-box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.23); */
   /* -moz-box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.23); */
   /* box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.23); */
@@ -305,13 +331,27 @@ z-index: 500;
   border-right: 2px solid #ccc;
 }
 
+.Editor-panel-content {
+  margin-top: 10px;
+  padding-bottom: 100px;
+  padding-left: 15px;
+  width: 100%;
+  padding-right: 15px;
+  position: absolute;
+  height: 100%;
+  overflow-y: scroll;
+  top: -100px;
+}
+
 .Editor-panel .Editor-panel-resize {
   width:16px;
   height: 100%;
   position:absolute;
 }
+
 .Editor-panel .Editor-panel-resize:hover {
   cursor: col-resize;
+  
 }
 
 .Editor-panel-title {
@@ -320,19 +360,7 @@ z-index: 500;
 }
 
 .Editor-panel-menu {
-
-}
-
-.Editor-panel-content {
-  margin-top: 100px;
-  padding-bottom: 100px;
-  padding-left: 15px;
-  width: 100%;
-  /* padding-right: 15px; */
-  position: absolute;
-  height: 100%;
-  overflow-y: scroll;
-  top: -100px;
+  /* border: 15px solid rgb(42, 19, 175); */
 }
 
 .Editor-panel-minimize {
@@ -367,7 +395,6 @@ z-index: 500;
   padding: 3px 5px;
   border-radius: 4px;
   border: 1px solid #999;
-  /* text-shadow: 5px 5px 8px rgba(0,0,0,0.23); */
   color: #fff;
   background-color: #7f9ad3;
   margin: 0 5px;
