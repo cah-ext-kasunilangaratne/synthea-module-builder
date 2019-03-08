@@ -338,9 +338,17 @@ class LoadModule extends Component {
     
   //Related to Mongo Option
   fetchMongoList(){
-    console.log(Login.getToken);
+    // console.log(Login.getToken);
+    console.log("FETCHING WITH TOKEN ", sessionStorage.getItem('token'))
+    const get_options = {    
+      method: 'GET',
+      headers: {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer "+ sessionStorage.getItem('token')
+      }
+    };
 
-    fetch(`http://localhost:5000/module`)
+    fetch(`http://localhost:5000/module`, get_options)
       .then(response => response.json())
         .then(data => {
           data.forEach(function(current_value, index, data){
@@ -367,8 +375,15 @@ class LoadModule extends Component {
 
   fetchMongoVersionsList(name){
     this.state.name=name;
+    const get_options = {    
+      method: 'GET',
+      headers: {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer "+ sessionStorage.getItem('token')
+      }
+    };
     console.log("fetch version list")
-    fetch(`http://localhost:5000/module/?name=`+name)
+    fetch(`http://localhost:5000/module/?name=`+name, get_options)
       .then(response => response.json())
         .then(data => {
           this.setState({
@@ -395,7 +410,14 @@ class LoadModule extends Component {
   }
 
   fetchMongoModule(id){
-    fetch(`http://localhost:5000/module/`+ id)
+    const get_options = {    
+      method: 'GET',
+      headers: {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer "+ sessionStorage.getItem('token')
+      }
+    };
+    fetch(`http://localhost:5000/module/`+ id, get_options)
       .then(response => response.text())
       .then(data => this.loadModule(data))
       .then(this.setState({
@@ -405,9 +427,16 @@ class LoadModule extends Component {
   }
 
   setActive(branch){
+    const get_options = {    
+      method: 'GET',
+      headers: {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer "+ sessionStorage.getItem('token')
+      }
+    };
     console.log('Set Active')
     let id = branch._id
-    fetch(`http://localhost:5000/module/` + id)
+    fetch(`http://localhost:5000/module/` + id, get_options)
         .then(response => response.json())
         .then(data => { 
             data.active = true
@@ -418,6 +447,7 @@ class LoadModule extends Component {
               body: JSON.stringify(data),
               headers: {
                   "Content-Type": "application/json",
+                  "Authorization": "Bearer "+ sessionStorage.getItem('token')
               }
             };
 
@@ -433,21 +463,26 @@ class LoadModule extends Component {
         .catch(function(error){
             console.log(error)
         })
-
-    
-
-      // this.fetchMongoVersionsList(branch.name); 
   }
 
   setInactive(branch){
     let id = branch._id
-    fetch(`http://localhost:5000/module/?name=`+branch.name)
+    const get_options = {    
+      method: 'GET',
+      headers: {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer "+ sessionStorage.getItem('token')
+      }
+    };
+
+    console.log("SET INACTIVE")
+    fetch(`http://localhost:5000/module/?name=`+branch.name, get_options)
         .then(response => response.json())
         .then(data => {
             data.forEach(function(current_value, index, data){
               
               if (data[index].active && data[index]._id != id) { 
-                fetch(`http://localhost:5000/module/`+data[index]._id)
+                fetch(`http://localhost:5000/module/`+data[index]._id, get_options)
                 .then(get_response => get_response.json())
                 .then(module_data => {
                   module_data.active = false;
@@ -457,6 +492,7 @@ class LoadModule extends Component {
                     body: JSON.stringify(module_data),
                     headers: {
                       "Content-Type": "application/json",
+                      "Authorization": "Bearer "+ sessionStorage.getItem('token')
                     }
                   };
   
@@ -497,7 +533,7 @@ class LoadModule extends Component {
 
     if (this.state.activechange && this.state.inactivechange){
       this.fetchMongoVersionsList(this.state.name)
-      this.changeColor(this.state.id, 'mongoModule');   
+      // this.changeColor(this.state.id, 'mongoModule');   
     }
   }
 

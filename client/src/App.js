@@ -20,11 +20,16 @@ const App = () => {
     <Router>
       <div>
       <Switch>
-
+      {/* <Provider store={store}>
+        <ConnectedRouter history={history}> */}
+      
+      
+       
       <Route exact path="/login" component={LogIn}/>  
+           
       <Provider store={store}>
         <ConnectedRouter history={history}>
-          <Route exact path="/" component={Editor} /> 
+          <ProtectedRoute path="/" component={Editor} />          
         </ConnectedRouter>
       </Provider>
       </Switch>

@@ -458,7 +458,8 @@ class Editor extends Component {
     return () => {
       auth.logout(()=>{
         this.props.history.push("/login")
-        //window.location.reload();
+        sessionStorage.setItem('token', null)
+        window.location.reload();
       })          
     }
   }

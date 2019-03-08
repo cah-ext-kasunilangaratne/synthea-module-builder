@@ -22,6 +22,7 @@ class Save extends Component {
         body: JSON.stringify(this.props.module),
         headers: {
             "Content-Type": "application/json",
+            "Authorization": "Bearer "+ sessionStorage.getItem('token')
         }
     };
  
@@ -37,7 +38,16 @@ class Save extends Component {
     })
 
     if(id){
-        fetch(`http://localhost:5000/module/` + id)
+      const get_options = {    
+        method: 'GET',
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer "+ sessionStorage.getItem('token')
+        }
+      };
+  
+
+        fetch(`http://localhost:5000/module/` + id, get_options)
         .then(response => response.json())
         .then(data => { 
             data.active = false
@@ -48,6 +58,7 @@ class Save extends Component {
               body: JSON.stringify(data),
               headers: {
                   "Content-Type": "application/json",
+                  "Authorization": "Bearer "+ sessionStorage.getItem('token')
               }
             };
 
