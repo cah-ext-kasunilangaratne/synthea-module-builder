@@ -1,3 +1,16 @@
+export const isAuthenticated = () => {
+    if (this.authenticated){
+        return ({
+            type: true
+          })
+    }else{
+        return ({
+            type: false
+        })
+    }
+    
+  }
+
 
 class Auth{
     constructor(){
@@ -11,6 +24,7 @@ class Auth{
     }
 
     logout(cb){
+        console.log("AUTH LOGGOUT")
         this.authenticated=false;
         cb()
     }

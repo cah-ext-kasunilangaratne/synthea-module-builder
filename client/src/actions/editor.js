@@ -179,6 +179,18 @@ export const hideDownload = () => {
   })
 }
 
+export const do_logout = () =>{
+  return ({
+    type: 'LOGOUT_USER'
+  }) 
+}
+
+export const finish_logout = () => {
+  return ({
+    type: 'LOGOUT_DONE'
+  })  
+}
+
 export const showSaveModule = () => {
   return ({
     type: 'SHOW_SAVE_MODULE'
@@ -219,5 +231,8 @@ export const refreshCode = () => {
 
 
   }
+}
+
+export const logoutHandler =() => {
 }
 

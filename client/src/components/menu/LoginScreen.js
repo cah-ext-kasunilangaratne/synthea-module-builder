@@ -4,7 +4,7 @@ import './LoadModule.css';
 import {generateDOT} from '../../utils/graphviz';
 import Login from '../Login/Login';
 
-class LoadModule extends Component {
+class LoginScreen extends Component {
   constructor(props) {
     super(props)
     this.state = {json: '', 
@@ -562,4 +562,4 @@ class LoadModule extends Component {
 
 }
 
-export default LoadModule;
+export default LoginScreen;
