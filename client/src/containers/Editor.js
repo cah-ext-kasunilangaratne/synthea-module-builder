@@ -434,8 +434,12 @@ class Editor extends Component {
     }
   }
 
-  logoutHandler =() => {
-    console.log("LOGOUT");
+  LogoutHandler = () => {
+    return () => {
+      auth.logout(()=>{
+        this.props.history.push("/login")
+      })          
+    }
   }
 
   renderNav = (props) => {
@@ -449,8 +453,10 @@ class Editor extends Component {
           <button className='button-clear Editor-top-download' onClick={this.props.showDownload}>Download</button>
           <button className='button-clear Editor-top-save' onClick={this.props.showSaveModule}>Save Module</button>
         </div>
-        <button className='button-clear Editor-top-help' onClick={this.startTutorial(BasicTutorial)}> ? </button>
-        <button className='button-clear Editor-top-logout'> LOGOUT </button>
+        <div>
+          <button className='button-clear Editor-top-help' onClick={this.startTutorial(BasicTutorial)}> ? </button>
+          <button className='button-clear Editor-top-logout' onClick={this.LogoutHandler()}> LOGOUT </button>
+        </div>
         
         <div className='Editor-top-tabs' >
           <NavTabs selectedModuleKey={this.props.selectedModuleKey}
