@@ -24,7 +24,7 @@ const App = () => {
       <Route exact path="/login" component={LogIn}/>  
       <Provider store={store}>
         <ConnectedRouter history={history}>
-          <ProtectedRoute path="/" component={Editor} /> 
+          <Route exact path="/" component={Editor} /> 
         </ConnectedRouter>
       </Provider>
       </Switch>

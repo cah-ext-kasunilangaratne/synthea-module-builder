@@ -6,8 +6,8 @@ import _ from 'lodash'
 import Joyride from 'react-joyride'
 import ReactTooltip from 'react-tooltip'
 import Draggable from 'react-draggable'
-import {withRouter} from 'react-router'
-import {BrowserRouter,Link,Route, history} from 'react-router-dom';
+import { Route, Redirect } from 'react-router-dom'
+
 
 import StateEditor from '../components/editor/State';
 import ModulePropertiesEditor from '../components/editor/ModuleProperties';
@@ -64,6 +64,8 @@ import {selectNode,
         hideLoadModule,
         showDownload,
         hideDownload,
+        do_logout,
+        finish_logout,
         showSaveModule,
         hideSaveModule,
         refreshCode,
@@ -73,7 +75,8 @@ import {selectNode,
         closeModule,
         undo,
         redo,
-        changeModulePanel} from '../actions/editor';
+        changeModulePanel
+      } from '../actions/editor';
 
 import {loadLibrary} from '../actions/library';
 
@@ -161,8 +164,6 @@ class Editor extends Component {
     }
   }
 
-  
-
   addNode = (selectedModuleKey, takenKeys, selectedState, selectedStateTransition) => {
     return () => {
       let key = findAvailableKey(createSafeKeyFromName('New State'), takenKeys);
@@ -177,6 +178,7 @@ class Editor extends Component {
       this.setState({joyride: {run: true, steps}})
     }
   }
+
   renderAddStateButton = () => {
     if(this.props.selectedModuleKey){
       return <button className='button-clear' data-tip='Add a state to this graph.' onClick={this.addNode(this.props.selectedModuleKey, Object.keys(this.props.module.states), this.props.selectedStateKey, this.props.selectedStateTransition)}> + Add State </button>
@@ -263,9 +265,29 @@ class Editor extends Component {
     return <div/>
   }
 
+  logout_handler =() => {
+    // console.log("LOGOUT")
+    if(this.props.logout){
+      this.props.history.push("/login")
+      this.props.finish_logout
+      // })
+      // return (
+      {
+      <Redirect to={
+            {
+              pathname: "/login",
+              // state: {
+              //     from: props.location
+              //   }
+            }}/>
+      }
+    }
+  }
+
   renderSave = () => {
     if(this.props.module && this.props.saveVisible){
       console.log("SAVING MODULE")
+      console.log(this.props.logout)
       return <Save 
         module={this.props.module}
         visible={this.props.saveVisible}
@@ -275,8 +297,6 @@ class Editor extends Component {
   }
 
   prepareJSON = () => {
-    
-
   }
 
   saveModule = () => {
@@ -434,10 +454,6 @@ class Editor extends Component {
     }
   }
 
-  logoutHandler =() => {
-    console.log("LOGOUT");
-  }
-
   renderNav = (props) => {
     return(
       <div className='Editor-top'>
@@ -449,8 +465,10 @@ class Editor extends Component {
           <button className='button-clear Editor-top-download' onClick={this.props.showDownload}>Download</button>
           <button className='button-clear Editor-top-save' onClick={this.props.showSaveModule}>Save Module</button>
         </div>
-        <button className='button-clear Editor-top-help' onClick={this.startTutorial(BasicTutorial)}> ? </button>
-        <button className='button-clear Editor-top-logout'> LOGOUT </button>
+        <div>
+          <button className='button-clear Editor-top-help' onClick={this.startTutorial(BasicTutorial)}> ? </button>
+        </div>
+        <button className='button-clear Editor-top-logout' onClick={this.props.do_logout}> LOGOUT </button>
         
         <div className='Editor-top-tabs' >
           <NavTabs selectedModuleKey={this.props.selectedModuleKey}
@@ -532,9 +550,10 @@ class Editor extends Component {
   }
 
   render() {
-
     return (
       <div className='Editor'>
+        {/* {this.renderLoginScreen()} */}
+        
         <ReactTooltip
           className='react-tooltip-customized'
           effect='solid'
@@ -542,12 +561,10 @@ class Editor extends Component {
           />
 
         { this.renderNav() }
-
         { this.renderLoadModule() }
         { this.renderDownload() }
         { this.renderSave() }
         { this.renderMainEditor() }
-
 
         <Joyride
           ref={c => (this.joyride = c)}
@@ -571,6 +588,8 @@ const mapStateToProps = state => {
 
   let selectedModuleKey = state.editor.selectedModuleKey;
 
+  let authenticated = state.editor.authenticated
+
   let loadModuleVisible = state.editor.loadModuleVisible;
 
   if(!selectedModuleKey){
@@ -585,11 +604,14 @@ const mapStateToProps = state => {
   let undoEnabled = state.editor.historyIndex < state.editor.history.length - 1;
   let redoEnabled = state.editor.historyIndex > 0;
 
+  let logout = state.editor.logout;
+
   return {
     module,
     modules: state.editor.modules,
     library: state.library.modules,
     selectedModuleKey,
+    authenticated,
     moduleState,
     moduleStates,
     selectedStateKey: state.editor.selectedStateKey,
@@ -597,6 +619,7 @@ const mapStateToProps = state => {
     loadModuleVisible: loadModuleVisible,
     downloadVisible: state.editor.downloadVisible,
     saveVisible:state.editor.saveVisible,
+    logout:state.editor.logout,
     selectedModulePanel: state.editor.selectedModulePanel,
     modulePanelVisible: state.editor.modulePanelVisible,
     warnings: state.analysis.warnings,
@@ -624,6 +647,8 @@ const mapDispatchToProps = dispatch => bindActionCreators({
   hideLoadModule,
   showDownload,
   hideDownload,
+  do_logout,
+  finish_logout,
   showSaveModule,
   hideSaveModule, 
   refreshCode,
@@ -634,7 +659,8 @@ const mapDispatchToProps = dispatch => bindActionCreators({
   closeModule,
   undo,
   redo,
-  push
+  push,
+
 }, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(Editor);

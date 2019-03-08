@@ -1,3 +1,16 @@
+export const isAuthenticated = () => {
+    if (this.authenticated){
+        return ({
+            type: true
+          })
+    }else{
+        return ({
+            type: false
+        })
+    }
+    
+  }
+
 
 class Auth{
     constructor(){

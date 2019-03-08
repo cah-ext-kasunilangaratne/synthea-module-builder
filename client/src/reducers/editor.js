@@ -6,7 +6,8 @@ const initialState = {
     selectedStateKey: null, 
     selectedStateTransition: null, 
     selectedModuleKey: null, 
-    loadModuleVisible: false, 
+    loadModuleVisible: false,
+    logout: false, 
     downloadVisible: false,
     saveVisible: false,
     selectedModulePanel: 'info',
@@ -26,7 +27,8 @@ export default (state = initialState, action) => {
     case 'SELECT_NODE':
       let selectedModulePanel = state.selectedModulePanel;
       if(action.data.key){
-        if(selectedModulePanel === 'info' || state.selectedStateKey === action.data.key){ // if on info or a 'double click'
+        if(selectedModulePanel === 'info' || state.selectedStateKey === action.data.key){ 
+          // if on info or a 'double click'
           selectedModulePanel = 'state';
         }
       } else {
@@ -35,7 +37,10 @@ export default (state = initialState, action) => {
         }
       }
 
-      newState = { ...newState, selectedModulePanel, selectedStateKey: action.data.key, selectedStateTransition: action.data.transitionIndex};
+      newState = { ...newState, selectedModulePanel, 
+                  selectedStateKey: action.data.key, 
+                  selectedStateTransition: action.data.transitionIndex
+                };
 
       // special case where we just want to reflect the selection change in the current history
       newState.history = [...newState.history]
@@ -439,6 +444,12 @@ export default (state = initialState, action) => {
 
       return { ...newState};
 
+    case 'LOGOUT_USER':
+        return {...newState, logout: true}
+    
+    case 'LOGOUT_DONE':
+        return {...newState, logout: false}
+    
     case 'SHOW_LOAD_MODULE':
       return { ...newState, loadModuleVisible: true};
 
