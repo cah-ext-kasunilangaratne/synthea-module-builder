@@ -1,6 +1,6 @@
 .nopadding {
   margin: 0 !important;
-  padding: 0 !important;
+  padding: 20 !important;
 }
 
 .LoadModule-body ul {
@@ -39,6 +39,7 @@
 
 .LoadModule-options li {
   padding: 10px;
+  width: 70%;
 }
 
 .LoadModule-options .selected{
@@ -72,6 +73,7 @@
   background-color: #eee;
   border-top-right-radius: 5px;
   border-bottom-right-radius: 5px;
+  width: 30%;
 
 }
 
@@ -86,6 +88,8 @@
   width: max-content;
   /* float: auto; */
   overflow-x: hidden;
+ width:350%;
+ align-self: right;
 }
 
 

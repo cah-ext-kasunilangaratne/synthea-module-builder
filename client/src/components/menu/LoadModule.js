@@ -8,7 +8,7 @@ class LoadModule extends Component {
   constructor(props) {
     super(props)
     this.state = {json: '', 
-                  selectedOption: 'sum', 
+                  selectedOption: 'mongo', 
                   stateList: [], 
                   activechange: false,
                   inactivechange: false,
@@ -43,7 +43,7 @@ class LoadModule extends Component {
 
   onClick = (key) => {
     return () => {
-      this.setState({...this.state, json: '', selectedOption: 'core'})
+      this.setState({...this.state, json: '', selectedOption: ''})
       this.props.push('#' + key);   
     }
   }
@@ -96,59 +96,10 @@ class LoadModule extends Component {
 
   renderDetails = () => {
 
-    switch(this.state.selectedOption){
-      case 'core':
-        return (
-          <ul className='LoadModule-list'>
-            { Object.keys(this.props.library).filter(n => (n.indexOf('/') === -1)).map( (key, index) => {
-              let module = this.props.library[key]
-              return (
-                <li key={key}><button className='btn btn-link' onClick={this.onClick(key)}>{module.name}</button></li>
-              )
-            })}
-          </ul>
-        )
-
-      case 'submodules':
-        return (
-          <ul className='LoadModule-list'>
-            { Object.keys(this.props.library).filter(n => (n.indexOf('/') > -1)).map( (key, index) => {
-              let module = this.props.library[key]
-              return (
-                <li key={key}>
-                <button className='btn btn-link' onClick={this.onClick(key)}>
-                {key.split('/')[0] + ': ' + module.name}
-                </button>
-                </li>
-              )
-            })}
-          </ul>
-        )
-      
-      case 'my':
-        return (
-          <ul className='LoadModule-list'>
-            { Object.keys(this.props.modules).map( (key, index) => {
-              let module = this.props.modules[key]
-              return (
-                <li key={key}><button className='btn btn-link' onClick={this.onClick(key)}>{module.name} ({key})</button></li>
-              )
-            })}
-          </ul>
-        )
-
-
-      case 'json':
-        return (
-          <textarea id='loadJSON' value={this.state.json} onChange={this.updateJson}></textarea>
-        )
-
-
-      case 'mongo':
-      let mongoModuleVersionList = null;
-      if (this.state.mongoVersions){
+    let mongoModuleVersionList = null;
+    if (this.state.mongoVersions){
         mongoModuleVersionList = (
-          <div className='col-4 nopadding'>
+          <div className='col-4'>  
             <ul className='LoadModule-sublist'>
               {this.state.mongoVersions}
             </ul>
@@ -163,57 +114,125 @@ class LoadModule extends Component {
         {mongoModuleVersionList}
         </div>  
       )
+    // console.log(this.state.mongoActiveModules)
+    // switch(this.state.selectedOption){
+    //   case 'core':
+    //     return (
+    //       <ul className='LoadModule-list'>
+    //         { Object.keys(this.props.library).filter(n => (n.indexOf('/') === -1)).map( (key, index) => {
+    //           let module = this.props.library[key]
+    //           return (
+    //             <li key={key}><button className='btn btn-link' onClick={this.onClick(key)}>{module.name}</button></li>
+    //           )
+    //         })}
+    //       </ul>
+    //     )
 
-      case 'git':
-        let moduleList = null;
-        let submoduleList = null;
-        if (this.state.Modules) {
-          moduleList = (
-          <div className='col-4 nopadding'>
-            <ul className='LoadModule-list'>
-              {this.state.Folders}
-              {this.state.Modules}
-            </ul>
-          </div>
-          )
-          if (this.state.Submodules) {
-            submoduleList = (
-              <div className='col-4 nopadding'>
-                <ul className='LoadModule-list'>
-                  {this.state.Submodules}
-                </ul>
-              </div>
-            )
-          }
-        }
-        return(
-        <div className='row'>  
-          <ul className='LoadModule-list'>
-            {this.state.Branches}  
-          </ul>
-          {moduleList}
-          {submoduleList}
-        </div>  
-        )
+    //   case 'submodules':
+    //     return (
+    //       <ul className='LoadModule-list'>
+    //         { Object.keys(this.props.library).filter(n => (n.indexOf('/') > -1)).map( (key, index) => {
+    //           let module = this.props.library[key]
+    //           return (
+    //             <li key={key}>
+    //             <button className='btn btn-link' onClick={this.onClick(key)}>
+    //             {key.split('/')[0] + ': ' + module.name}
+    //             </button>
+    //             </li>
+    //           )
+    //         })}
+    //       </ul>
+    //     )
+      
+    //   case 'my':
+    //     return (
+    //       <ul className='LoadModule-list'>
+    //         { Object.keys(this.props.modules).map( (key, index) => {
+    //           let module = this.props.modules[key]
+    //           return (
+    //             <li key={key}><button className='btn btn-link' onClick={this.onClick(key)}>{module.name} ({key})</button></li>
+    //           )
+    //         })}
+    //       </ul>
+    //     )
 
-      case 'core':
-        return (
-          <ul className='LoadModule-list'>
-            { Object.keys(this.props.library).filter(n => (n.indexOf('/') === -1)).map( (key, index) => {
-              let module = this.props.library[key]
-              return (
-                <li key={key}><button className='btn btn-link' onClick={this.onClick(key)}>{module.name}</button></li>
-              )
-            })}
-          </ul>
-        )
+
+      // case 'json':
+      //   return (
+      //     <textarea id='loadJSON' value={this.state.json} onChange={this.updateJson}></textarea>
+      //   )
+
+
+      // case 'mongo':
+      // let mongoModuleVersionList = null;
+      // if (this.state.mongoVersions){
+      //   mongoModuleVersionList = (
+      //     <div className='col-4 nopadding'>
+      //       <ul className='LoadModule-sublist'>
+      //         {this.state.mongoVersions}
+      //       </ul>
+      //     </div>
+      //   )
+      // }
+      // return (
+      //   <div className='row'>  
+      //   <ul className='LoadModule-list'>
+      //     {this.state.mongoActiveModules}  
+      //   </ul>
+      //   {mongoModuleVersionList}
+      //   </div>  
+      // )
+
+    //   case 'git':
+    //     let moduleList = null;
+    //     let submoduleList = null;
+    //     if (this.state.Modules) {
+    //       moduleList = (
+    //       <div className='col-4 nopadding'>
+    //         <ul className='LoadModule-list'>
+    //           {this.state.Folders}
+    //           {this.state.Modules}
+    //         </ul>
+    //       </div>
+    //       )
+    //       if (this.state.Submodules) {
+    //         submoduleList = (
+    //           <div className='col-4 nopadding'>
+    //             <ul className='LoadModule-list'>
+    //               {this.state.Submodules}
+    //             </ul>
+    //           </div>
+    //         )
+    //       }
+    //     }
+    //     return(
+    //     <div className='row'>  
+    //       <ul className='LoadModule-list'>
+    //         {this.state.Branches}  
+    //       </ul>
+    //       {moduleList}
+    //       {submoduleList}
+    //     </div>  
+    //     )
+
+    //   case 'core':
+    //     return (
+    //       <ul className='LoadModule-list'>
+    //         { Object.keys(this.props.library).filter(n => (n.indexOf('/') === -1)).map( (key, index) => {
+    //           let module = this.props.library[key]
+    //           return (
+    //             <li key={key}><button className='btn btn-link' onClick={this.onClick(key)}>{module.name}</button></li>
+    //           )
+    //         })}
+    //       </ul>
+    //     )
     
       
 
-    default:
-      return;
+    // default:
+    //   return;
 
-    }
+    // }
   }
 
   changeColor(ID, type) {
@@ -234,13 +253,14 @@ class LoadModule extends Component {
       case 'mongoVersion':
         list = this.state.mongoVersions
     }
-    // console.log(list)
-    // list.forEach((i) => {
-      // console.log("list item")
-    //   if (i.props.id !== ID) {
-    //     document.getElementById(i.props.id).style.backgroundColor = "#eee";
-    //   }
-    // }) 
+    if (this.state.mongoActiveModules){
+      this.state.mongoActiveModules.forEach((i) => {
+        console.log("list item")
+        if (i.props.id !== ID) {
+          document.getElementById(i.props.id).style.backgroundColor = "#eee";
+        }
+      })
+    } 
   }
   
   //Related to Github Option
@@ -339,7 +359,7 @@ class LoadModule extends Component {
   //Related to Mongo Option
   fetchMongoList(){
     // console.log(Login.getToken);
-    console.log("FETCHING WITH TOKEN ", sessionStorage.getItem('token'))
+    // console.log("FETCHING WITH TOKEN ", sessionStorage.getItem('token'))
     const get_options = {    
       method: 'GET',
       headers: {
@@ -382,7 +402,7 @@ class LoadModule extends Component {
           "Authorization": "Bearer "+ sessionStorage.getItem('token')
       }
     };
-    console.log("fetch version list")
+
     fetch(`http://localhost:5000/module/?name=`+name, get_options)
       .then(response => response.json())
         .then(data => {
@@ -392,7 +412,7 @@ class LoadModule extends Component {
                   <li key={i} id={branch._id}>
                     <span className='LoadModule-li-elements'>
                       <button className='btn btn-link btn-left' onClick={() => {
-                        this.changeColor(branch._id, 'mongoVersion');
+                        this.changeColor(branch._id, 'mongoModule');
                         this.fetchMongoModule(branch._id);}}>
                         {branch.updatedTimeStamp}
                       </button>
@@ -434,7 +454,7 @@ class LoadModule extends Component {
           "Authorization": "Bearer "+ sessionStorage.getItem('token')
       }
     };
-    console.log('Set Active')
+
     let id = branch._id
     fetch(`http://localhost:5000/module/` + id, get_options)
         .then(response => response.json())
@@ -475,7 +495,6 @@ class LoadModule extends Component {
       }
     };
 
-    console.log("SET INACTIVE")
     fetch(`http://localhost:5000/module/?name=`+branch.name, get_options)
         .then(response => response.json())
         .then(data => {
@@ -526,9 +545,9 @@ class LoadModule extends Component {
 
   componentDidUpdate(prevProps, prevState) {
 
-
-    if (this.state.selectedOption === 'mongo' && prevState.selectedOption!=='mongo'){
-       this.fetchMongoList()
+    if (this.state.selectedOption === 'mongo' && prevState.selectedOption!==''){
+      this.fetchMongoList()
+      this.setState({...this.state, selectedOption: ''});
     }
 
     if (this.state.activechange && this.state.inactivechange){
@@ -572,18 +591,21 @@ class LoadModule extends Component {
                 </Dropzone>
                 <div className='container'>
                   <div className='row'>
-                    <div className='col-3 nopadding'>
-                      <ul className='LoadModule-options'>
-                         {/* <li className={(this.state.selectedOption === 'core') ? 'selected' : ''}><button className='btn btn-link' onClick={this.onOptionClick('core')}>Core Modules</button></li>
+                    {/* <div className='col-3 nopadding'>
+                      <ul className='LoadModule-options'>                       
+                         <li className={(this.state.selectedOption === 'core') ? 'selected' : ''}><button className='btn btn-link' onClick={this.onOptionClick('core')}>Core Modules</button></li>
                          <li className={(this.state.selectedOption === 'submodules') ? 'selected' : ''}><button className='btn btn-link' onClick={this.onOptionClick('submodules')}>Submodules</button></li>
                          {Object.keys(this.props.modules).length > 0 ? <li className={(this.state.selectedOption === 'my') ? 'selected' : ''}><button className='btn btn-link' onClick={this.onOptionClick('my')}>My Modules</button></li> : ''}
-                         <li className={(this.state.selectedOption === 'git') ? 'selected' : ''}><button className='btn btn-link' onClick={this.onOptionClick('git')}>GitHub Modules</button></li> */}
+                         <li className={(this.state.selectedOption === 'git') ? 'selected' : ''}><button className='btn btn-link' onClick={this.onOptionClick('git')}>GitHub Modules</button></li>
                          <li className={(this.state.selectedOption === 'json') ? 'selected' : ''}><button className='btn btn-link' onClick={this.onOptionClick('json')}>Paste JSON</button></li>
                          <li className={(this.state.selectedOption === 'mongo') ? 'selected' : ''}><button className='btn btn-link' onClick={this.onOptionClick('mongo')}>MongoDB Modules</button></li>
                       </ul>
-                    </div>
+                    </div> */}
                     <div className='col-9 nopadding'>
-                      {this.renderDetails()}
+                      <div className={(this.state.selectedOption === 'mongo') ? 'selected' : ''}>
+                        {this.onOptionClick('mongo')}
+                        {this.renderDetails()}
+                      </div>
                     </div>
                   </div>
                 </div>

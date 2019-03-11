@@ -64,8 +64,6 @@ import {selectNode,
         hideLoadModule,
         showDownload,
         hideDownload,
-        do_logout,
-        finish_logout,
         showSaveModule,
         hideSaveModule,
         refreshCode,
@@ -265,29 +263,8 @@ class Editor extends Component {
     return <div/>
   }
 
-  logout_handler =() => {
-    // console.log("LOGOUT")
-    if(this.props.logout){
-      this.props.history.push("/login")
-      this.props.finish_logout
-      // })
-      // return (
-      {
-      <Redirect to={
-            {
-              pathname: "/login",
-              // state: {
-              //     from: props.location
-              //   }
-            }}/>
-      }
-    }
-  }
-
   renderSave = () => {
     if(this.props.module && this.props.saveVisible){
-      console.log("SAVING MODULE")
-      console.log(this.props.logout)
       return <Save 
         module={this.props.module}
         visible={this.props.saveVisible}
@@ -614,8 +591,6 @@ const mapStateToProps = state => {
   let undoEnabled = state.editor.historyIndex < state.editor.history.length - 1;
   let redoEnabled = state.editor.historyIndex > 0;
 
-  let logout = state.editor.logout;
-
   return {
     module,
     modules: state.editor.modules,
@@ -629,7 +604,6 @@ const mapStateToProps = state => {
     loadModuleVisible: loadModuleVisible,
     downloadVisible: state.editor.downloadVisible,
     saveVisible:state.editor.saveVisible,
-    logout:state.editor.logout,
     selectedModulePanel: state.editor.selectedModulePanel,
     modulePanelVisible: state.editor.modulePanelVisible,
     warnings: state.analysis.warnings,
@@ -657,8 +631,6 @@ const mapDispatchToProps = dispatch => bindActionCreators({
   hideLoadModule,
   showDownload,
   hideDownload,
-  do_logout,
-  finish_logout,
   showSaveModule,
   hideSaveModule, 
   refreshCode,

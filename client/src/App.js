@@ -19,19 +19,14 @@ const App = () => {
   return (
     <Router>
       <div>
-      <Switch>
-      {/* <Provider store={store}>
-        <ConnectedRouter history={history}> */}
+      <Switch>  
+      <Route path="/login" component={LogIn}/>  
       
-      
-       
-      <Route exact path="/login" component={LogIn}/>  
-           
-      <Provider store={store}>
-        <ConnectedRouter history={history}>
-          <ProtectedRoute path="/" component={Editor} />          
-        </ConnectedRouter>
-      </Provider>
+        <Provider store={store}>
+          <ConnectedRouter history={history}>
+            <ProtectedRoute exact path="/" component={Editor} />          
+          </ConnectedRouter>
+        </Provider>
       </Switch>
       
       </div>

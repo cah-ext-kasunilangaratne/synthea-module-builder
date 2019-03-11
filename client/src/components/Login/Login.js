@@ -40,15 +40,12 @@ class Login extends Component{
         })
         .then(response => response.json())
         .then(data => {
-            console.log("LOGGING IN")
-            console.log(data)
-            console.log(data.data.token)
-
             if (data.data.token){
-                console.log("LOGGING IN")
+                // console.log("LOGGING IN")
                 auth.login(()=>{
                     this.props.history.push("/")
                     sessionStorage.setItem('token', data.data.token)
+                    window.location.reload();
                 })
             }else{
                 const error = new Error(data.error);
