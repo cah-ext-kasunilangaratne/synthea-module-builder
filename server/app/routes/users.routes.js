@@ -6,4 +6,7 @@ module.exports = (app) => {
 
     // Authenticate user on login
     app.post('/authenticate', users_controller.authenticate);
+
+    //List all users
+    app.get('/users', users_controller.listall)
 }

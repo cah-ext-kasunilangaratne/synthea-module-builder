@@ -68,11 +68,20 @@ exports.authenticate = (req,res) => {
                 }
             })
         }
-    })    
-    // .catch(err => {
-    //     return res.status(500).send({
-    //         message: "Error authenticating user: " + req.body.email
-    //     });
-    // });
+    }) 
     
+}
+
+exports.listall = (req, res) => {
+    records=User_Model.find({})
+
+    records.find({})
+    .select('name').select('email')
+    .then(syn_modules => {
+        res.status(200).send(syn_modules);
+    }).catch(err => {
+        res.status(500).send({
+            message: err.message || "Some error occurred while retrieving Users."
+        });
+    });
 }
