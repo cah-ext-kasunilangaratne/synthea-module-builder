@@ -368,7 +368,7 @@ class LoadModule extends Component {
       }
     };
 
-    fetch(`http://localhost:5000/module`, get_options)
+    fetch(`http://54.88.151.77:5000/module`, get_options)
       .then(response => response.json())
         .then(data => {
           data.forEach(function(current_value, index, data){
@@ -403,7 +403,7 @@ class LoadModule extends Component {
       }
     };
 
-    fetch(`http://localhost:5000/module/?name=`+name, get_options)
+    fetch(`http://54.88.151.77:5000/module/?name=`+name, get_options)
       .then(response => response.json())
         .then(data => {
           this.setState({
@@ -437,7 +437,7 @@ class LoadModule extends Component {
           "Authorization": "Bearer "+ sessionStorage.getItem('token')
       }
     };
-    fetch(`http://localhost:5000/module/`+ id, get_options)
+    fetch(`http://54.88.151.77:5000/module/`+ id, get_options)
       .then(response => response.text())
       .then(data => this.loadModule(data))
       .then(this.setState({
@@ -456,7 +456,7 @@ class LoadModule extends Component {
     };
 
     let id = branch._id
-    fetch(`http://localhost:5000/module/` + id, get_options)
+    fetch(`http://54.88.151.77:5000/module/` + id, get_options)
         .then(response => response.json())
         .then(data => { 
             data.active = true
@@ -471,7 +471,7 @@ class LoadModule extends Component {
               }
             };
 
-            fetch('http://localhost:5000/module/' + id, put_options)
+            fetch('http://54.88.151.77:5000/module/' + id, put_options)
             .then(function(response) {
 
             })
@@ -495,13 +495,13 @@ class LoadModule extends Component {
       }
     };
 
-    fetch(`http://localhost:5000/module/?name=`+branch.name, get_options)
+    fetch(`http://54.88.151.77:5000/module/?name=`+branch.name, get_options)
         .then(response => response.json())
         .then(data => {
             data.forEach(function(current_value, index, data){
               
               if (data[index].active && data[index]._id != id) { 
-                fetch(`http://localhost:5000/module/`+data[index]._id, get_options)
+                fetch(`http://54.88.151.77:5000/module/`+data[index]._id, get_options)
                 .then(get_response => get_response.json())
                 .then(module_data => {
                   module_data.active = false;
@@ -515,7 +515,7 @@ class LoadModule extends Component {
                     }
                   };
   
-                  fetch('http://localhost:5000/module/' + module_data._id, put_options)
+                  fetch('http://54.88.151.77:5000/module/' + module_data._id, put_options)
                   .then(get_response => get_response.json())
                   .catch(function(error) {
                     console.log(error)

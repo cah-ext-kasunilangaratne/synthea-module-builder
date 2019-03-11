@@ -30,7 +30,7 @@ class Login extends Component{
     
     onSubmit = (event) => {
         event.preventDefault();
-        fetch('http://localhost:5000/authenticate', {
+        fetch('http://54.88.151.77:5000/authenticate', {
             method: 'POST',
             body: JSON.stringify(this.state),
             headers: {

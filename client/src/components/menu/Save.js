@@ -26,7 +26,7 @@ class Save extends Component {
         }
     };
  
-    fetch('http://localhost:5000/module', post_options)
+    fetch('http://54.88.151.77:5000/module', post_options)
     .then(response => response.json())
     .then(data => {
         // console.log(post_options.body) 
@@ -47,7 +47,7 @@ class Save extends Component {
       };
   
 
-        fetch(`http://localhost:5000/module/` + id, get_options)
+        fetch(`http://54.88.151.77:5000/module/` + id, get_options)
         .then(response => response.json())
         .then(data => { 
             data.active = false
@@ -62,7 +62,7 @@ class Save extends Component {
               }
             };
 
-            fetch('http://localhost:5000/module/' + id, put_options)
+            fetch('http://54.88.151.77:5000/module/' + id, put_options)
             .then(function(response) {
                 
             })

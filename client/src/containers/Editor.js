@@ -254,7 +254,6 @@ class Editor extends Component {
 
   renderDownload = () => {
     if(this.props.module && this.props.downloadVisible){
-      console.log("DOWNLOADING MODULE")
       return <Download 
         module={this.props.module}
         visible={this.props.downloadVisible}
