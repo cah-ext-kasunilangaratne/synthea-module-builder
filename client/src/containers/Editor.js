@@ -493,16 +493,20 @@ class Editor extends Component {
 
         <div className='Editor-left'>
          <ul>
-        <li className={'Editor-left-fullscreen' + (!this.props.modulePanelVisible ? ' Editor-left-fullscreen-active' : '')}><button data-tip='Show/hide editor panel.' onClick={this.leftNavClick('hide')}><img src={FullscreenButton}/></button></li>
+           <li className={'Editor-left-fullscreen' + (!this.props.modulePanelVisible ? ' Editor-left-fullscreen-active' : '')}><button data-tip='Show/hide editor panel.' onClick={this.leftNavClick('hide')}><img src={FullscreenButton}/></button></li>
            <li className='Editor-left-spacer'></li>
            <li className={this.props.selectedModulePanel === 'info' ? 'Editor-left-selected' : ''}><button data-tip='Module Properties.' onClick={this.leftNavClick('info')}><img src={InfoButton}/></button></li>
+           <li className='Editor-left-spacer'></li>
            {this.renderStateButton()}
            <li className='Editor-left-spacer'></li>
            <li className={this.props.selectedModulePanel === 'code' ? 'Editor-left-selected' : ''}><button data-tip='Directly edit module JSON.' onClick={this.leftNavClick('code')}><img src={CodeButton}/></button></li>
            <li className='Editor-left-spacer'></li>
            {this.renderStateListButton()}
+           <li className='Editor-left-spacer'></li>
            {this.renderAttributesButton()}
+           <li className='Editor-left-spacer'></li>
            {this.renderWarningButton()}
+           <li className='Editor-left-spacer'></li>
            {this.renderRelatedModulesButton()}
 
 

@@ -136,7 +136,6 @@ button {
   -moz-box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.23);
   box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.23);
   z-index: 500;
-  border: 10px solid orange;
 }
 
 .Editor-fullscreen-name {
@@ -149,12 +148,10 @@ button {
   z-index: 200;
   border: 0;
   padding: 0;
-  border: 5px solid orange;
 }
 
 .Editor-fullscreen-name:focus {
   outline: 0;
-  border: 5px solid orange;
   
 }
 
@@ -181,7 +178,7 @@ button {
   width: 50px;
   position: fixed;
   height: 100%;
-  top: 105px;
+  top: 115px;
   left: 0px;
   z-index: 1000;
   border-right: 1px solid #aaa;
@@ -189,6 +186,7 @@ button {
 
 .Editor-left ul{
   padding: 0;
+  /* margin-top:9px; */
 }
 
 .Editor-left li{
@@ -201,6 +199,7 @@ button {
   background-color: #fff;
   height: 10px;
   border-bottom: 1px solid #999;
+  
 }
 
 .Editor-left button {
@@ -287,6 +286,7 @@ button {
 .Editor-left .Editor-left-fullscreen-active{
   height: 30px;
   /* transform: rotate(180deg); */
+
 }
 
 .Editor .Editor-module-name {
@@ -305,22 +305,21 @@ button {
   font-size: 1.25rem;
   padding: 2px 0 8px 10px;
   /* padding-left: 55px; */
+
 }
 
 .Editor .Editor-module-name input {
   font-size: 1rem;
   width: 480px;
-  /* border: 5px solid rgb(42, 19, 175); */
 }
 
 .Editor-panel {
-  background-color: #fafafa;
+  background-color: #fafafa;  
   position:fixed;
   height: 100%;
-  top: 1;
   left: 50px;
   z-index: 900;
-  margin: 90px 20px 200px 0;
+  margin: 10px 20px 200px 0;
   padding: 0;
   /* -webkit-box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.23); */
   /* -moz-box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.23); */
@@ -332,7 +331,10 @@ button {
 }
 
 .Editor-panel-content {
-  margin-top: 10px;
+
+  margin-top: 90px;
+  padding-top: 0px;
+  top: 90px;
   padding-bottom: 100px;
   padding-left: 15px;
   width: 100%;
@@ -360,13 +362,16 @@ button {
 }
 
 .Editor-panel-menu {
-  /* border: 15px solid rgb(42, 19, 175); */
+  border: 15px solid rgb(42, 19, 175);
+
 }
 
 .Editor-panel-minimize {
   position:absolute;
   top: 10px;
-  right: 10px;
+  right: 2px;
+  padding-top: 0px;
+  z-index: 1000;
 }
 
 .Editor-panel-minimize img{
