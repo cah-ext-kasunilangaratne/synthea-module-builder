@@ -30,7 +30,7 @@ class Login extends Component{
     
     onSubmit = (event) => {
         event.preventDefault();
-        fetch('http://54.88.151.77:5000/authenticate', {
+        fetch('http://' + process.env.REACT_APP_BACKEND + ':5000/authenticate', {
             method: 'POST',
             body: JSON.stringify(this.state),
             headers: {
@@ -41,25 +41,22 @@ class Login extends Component{
         .then(response => response.json())
         .then(data => {
             if (data.data.token){
-                // console.log("LOGGING IN")
-                auth.login(()=>{
-                    this.props.history.push("/")
-                    sessionStorage.setItem('token', data.data.token)
-                    window.location.reload();
-                })
+                this.props.history.push("/")
+                sessionStorage.setItem('token', data.data.token)
+                window.location.reload();
             }else{
                 const error = new Error(data.error);
                 throw error;
             }
-            
         })
         .catch(err => {
-            console.error(err);
             alert('Error logging in please try again');
         });
     }
 
     render(){
+        console.log(process.env.NODE_ENV)
+        console.log(process.env.REACT_APP_BACKEND)
         return(
             <div>
                 <form onSubmit={this.onSubmit}>
