@@ -59,6 +59,14 @@ const nodesAsDOT = (module: Module, selectedState: State, relatedStates: mixed) 
         node['fillcolor'] = 'Grey'
         node['style'] = 'rounded,filled'
         node['fontcolor'] = 'White'
+    }else if(state['type'] === 'Encounter'){
+      node['fillcolor'] = '#85a2d1'
+    }else if(state['type'] === 'ConditionOnset'){
+      node['fillcolor'] = '#45bcae'
+    }else if(state['type'] === 'MedicationOrder'){
+      node['fillcolor'] = '#ff9926'
+    }else if(state['type'] === 'Delay'){
+      node['fillcolor'] = '#ff5b5b'
     }
 
     if(selectedState && state.name === selectedState.name){
