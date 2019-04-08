@@ -33,7 +33,7 @@ class ModulePropertiesEditor extends Component<Props> {
     return (
       <div className='ModuleProperties'>
         <div className='Editor-panel-title'> 
-           Module Remarks
+           Model Remarks
         </div>
         <div className='ModuleProperties-remarks'>
           <RIETextArea value={remarks} propName="remarks" change={(newval) => this.onRemarksChange(newval.remarks)} />

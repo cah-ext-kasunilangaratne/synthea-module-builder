@@ -1,12 +1,12 @@
 import _ from 'lodash';
 import { getTemplate } from '../templates/Templates';
-import { normalizeType, cleanString } from '../utils/stringUtils';
+import { normalizeType } from '../utils/stringUtils';
 
 const initialState = {
     selectedStateKey: null, 
     selectedStateTransition: null, 
     selectedModuleKey: null, 
-    loadModuleVisible: false,
+    loadModuleVisible: true,
     logout: false, 
     downloadVisible: false,
     saveVisible: false,
@@ -131,7 +131,7 @@ export default (state = initialState, action) => {
                     newState.modules[action.data.currentModuleKey].states[action.data.stateKey].direct_transition = oldTransitionPoint;
                   }
                   transitionIndex++;
-                } else if(nodes == rightNode){
+                } else if(nodes === rightNode){
                   let oldTransitionPoint = dist.transition;
                   dist.transition = action.data.stateKey;
                   newState.modules[action.data.currentModuleKey].states[action.data.stateKey].direct_transition = oldTransitionPoint;
@@ -295,7 +295,7 @@ export default (state = initialState, action) => {
           let stateName = splitPath[2]
           fixStateReferences(newState.modules[splitPath[0]], stateName, null)
 
-          if(splitPath[2] == newState.selectedStateKey){
+          if(splitPath[2] === newState.selectedStateKey){
             newState.selectedStateKey = null; // deleselect
           }
         }

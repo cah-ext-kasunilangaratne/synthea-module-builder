@@ -1,9 +1,7 @@
 // @flow
 import React, { Component } from 'react';
-import _ from 'lodash';
-
 import './StateList.css';
-import CancelButton from './cancel-button.png';
+import CancelButton from '../../images/cancel-button.png';
 
 type Props = {
   states: State[],

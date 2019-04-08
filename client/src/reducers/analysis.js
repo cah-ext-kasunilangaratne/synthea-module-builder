@@ -87,13 +87,11 @@ const placeholderCodeWarnings = (module) => {
             }
 
           })
-
         }
-
-      default:
         break;
-
-
+        
+      default:
+        console.log(state.type);
     }
   })
   return warnings;
@@ -238,7 +236,7 @@ const libraryRelatedModules = (modules) => {
     const module = modules[moduleKey];
     Object.keys(module.states).forEach(stateName => {
       const moduleState = module.states[stateName];
-      if(moduleState.type == 'CallSubmodule'){
+      if(moduleState.type === 'CallSubmodule'){
         libraryRelatedModules[moduleKey] = libraryRelatedModules[stateName] || []
         libraryRelatedModules[moduleKey].push({type: 'submodule', moduleKey: moduleState.submodule, stateName})
 
@@ -260,7 +258,7 @@ const relatedBySubmodule = (moduleKey, module, relatedMap) => {
   
   Object.keys(module.states).forEach(stateName => {
     const moduleState = module.states[stateName];
-     if(moduleState.type == 'CallSubmodule'){
+     if(moduleState.type === 'CallSubmodule'){
        related.push({type: 'submodule', module: moduleState.submodule, stateName});
      }
   });

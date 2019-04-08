@@ -2,12 +2,13 @@ const mongoose = require('mongoose');
 
 const moduleSchema =  mongoose.Schema({
     name: String
-    ,remarks: String
+    ,remarks: [String]
     ,states: Object
     ,submodule: Boolean
     ,relPath: String
     ,active: Boolean
-    ,updatedTimeStamp: Date    
+    ,updatedTimeStamp: Date
+    ,user: String    
 },{
     versionKey: false
 });

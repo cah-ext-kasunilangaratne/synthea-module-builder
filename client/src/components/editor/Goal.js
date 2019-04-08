@@ -2,8 +2,6 @@
 
 import React, { Component } from 'react';
 import { RIESelect, RIEInput, RIENumber } from 'riek';
-import _ from 'lodash';
-
 import type { Goal as GoalType } from '../../types/Attributes';
 import { Codes } from './Code';
 import { StringsEditor } from './String';

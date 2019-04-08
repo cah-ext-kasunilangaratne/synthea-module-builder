@@ -1,7 +1,6 @@
 // @flow
 import type { Module } from './types/Module';
 import type { State } from './types/State';
-
 import { cleanString } from '../utils/stringUtils';
 
 const STANDARD_COLOR = 'Black';
@@ -59,15 +58,23 @@ const nodesAsDOT = (module: Module, selectedState: State, relatedStates: mixed) 
         node['fillcolor'] = 'Grey'
         node['style'] = 'rounded,filled'
         node['fontcolor'] = 'White'
-    }else if(state['type'] === 'Encounter'){
-      node['fillcolor'] = '#85a2d1'
-    }else if(state['type'] === 'ConditionOnset'){
-      node['fillcolor'] = '#45bcae'
-    }else if(state['type'] === 'MedicationOrder'){
-      node['fillcolor'] = '#ff9926'
-    }else if(state['type'] === 'Delay'){
-      node['fillcolor'] = '#ff5b5b'
     }
+    
+    else if (state['node_type'] === 'incidence_stat'){
+       node['fillcolor'] = '#85a2d1'
+    } else if(state['node_type'] === 'clinical_path'){
+      node['fillcolor'] = '#ff9926'
+    }
+
+    // else if(state['type'] === 'Encounter'){
+    //   node['fillcolor'] = '#85a2d1'
+    // }else if(state['type'] === 'ConditionOnset'){
+    //   node['fillcolor'] = '#45bcae'
+    // }else if(state['type'] === 'MedicationOrder'){
+    //   node['fillcolor'] = '#ff9926'
+    // }else if(state['type'] === 'Delay'){
+    //   node['fillcolor'] = '#ff5b5b'
+    // }
 
     if(selectedState && state.name === selectedState.name){
       node['fillcolor'] = 'White'

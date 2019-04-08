@@ -1,7 +1,5 @@
 // @flow
 import React, { Component } from 'react';
-import _ from 'lodash';
-
 import './RelatedList.css';
 
 type Props = {
@@ -22,14 +20,14 @@ class RelatedList extends Component<Props> {
           </div>
 
           <div>
-            This currently only displays relationships based on submodules.  Additional relationships are in progress.
+            This currently only displays relationships based on submodels.  Additional relationships are in progress.
           </div>
 
           <table className="table table-sm table-hover">
               <thead className="thead-light">
                 <tr>
                   <th scope="col">Type</th>
-                  <th scope="col">Module</th>
+                  <th scope="col">Model</th>
                   <th scope="col">State</th>
                 </tr>
               </thead>

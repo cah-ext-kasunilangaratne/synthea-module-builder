@@ -12,30 +12,31 @@ function verify(req,res){
     })
 }
 
-// Create and Save a new Module_model
+// Create and SaveModule a new Module_model
 exports.create = (req, res) => {
     // Validate request
     verify(req,res);
     
-    if(!req.body.states) {
-        console.log("Module states empty")
+    if(!req.body.states ) {
+        console.log("Module states empty");
         return res.status(400).send({
             message: "Module_model states can not be empty"
         });
-    }
+    } 
 
     // Create a Module
     const syn_module = new Module_model({
-        name: req.body.name || "Untitled Module", 
-        remarks: req.body.remarks,
-        states: req.body.states,
-        submodule: req.body.submodule || false,
+        name:req.body.name || "Untitled Module", 
+        remarks:req.body.remarks,
+        states:req.body.states,
+        submodule:req.body.submodule || false,
         relPath:req.body.relPath || req.body.name,
         active:req.body.active || true,
-        updatedTimeStamp: req.body.updatedTimeStamp
+        updatedTimeStamp: req.body.updatedTimeStamp,
+        user: req.body.user
     });
 
-    // Save Module in the database
+    // SaveModule Module in the database
     syn_module.save()
     .then(data => {
         res.status(200).send(data);
@@ -59,13 +60,13 @@ exports.findAll = (req, res) => {
     }
 
     records.find({})
-    .select('name').select('submodule').select('relPath').select('active').select('updatedTimeStamp')
+    .select('name').select('submodule').select('relPath').select('active').select('updatedTimeStamp').select('user')
     .sort('name')
     .then(syn_modules => {
         res.status(200).send(syn_modules);
     }).catch(err => {
         res.status(500).send({
-            message: err.message || "Some error occurred while retrieving synthea modules."
+            message: "Some error occurred while retrieving synthea modules."
         });
     });
 };
@@ -105,7 +106,7 @@ exports.update = (req, res) => {
         return res.status(400).send({
             message: "Module states can not be empty"
         });
-    }
+    } 
 
     // Find syn_module and update it with the request body
     Module_model.findByIdAndUpdate(req.params.moduleId, {
@@ -115,7 +116,8 @@ exports.update = (req, res) => {
         submodule: req.body.submodule,
         relPath:req.body.relPath,
         active:req.body.active,
-        updatedTimeStamp: req.body.updatedTimeStamp
+        updatedTimeStamp: req.body.updatedTimeStamp,
+        user: req.body.user
     }, {new: true})
     .then(syn_module => {
         if(!syn_module) {

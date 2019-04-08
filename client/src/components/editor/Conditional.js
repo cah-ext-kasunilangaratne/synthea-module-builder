@@ -1,7 +1,6 @@
 // @flow
 import React, { Component } from 'react';
 import { RIESelect, RIEInput, RIENumber } from 'riek';
-import _ from 'lodash';
 import type { Conditional, GenderConditional , AgeConditional , DateConditional , SocioeconomicStatusConditional , RaceConditional , SymptomConditional , ObservationConditional , VitalSignConditional , ActiveConditionConditional , ActiveMedicationConditional , ActiveCarePlanConditional , PriorStateConditional , AttributeConditional , AndConditional , OrConditional , AtLeastConditional , AtMostConditional , NotConditional } from '../../types/Conditional';
 import type { State } from '../../types/State';
 import { Codes } from './Code';

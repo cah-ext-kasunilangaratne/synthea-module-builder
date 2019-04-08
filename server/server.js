@@ -1,5 +1,5 @@
 const express = require('express');
-const session = require('express-session')
+const session = require('express-session');
 const bodyParser = require('body-parser');
 var logger = require("morgan");
 
@@ -7,10 +7,10 @@ var logger = require("morgan");
 const app = express();
 
 // parse application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({ extended: true }))
+app.use(bodyParser.urlencoded({ extended: true }));
 
 // parse application/json
-app.use(bodyParser.json())
+app.use(bodyParser.json());
 
 app.use(logger('dev'));
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -61,15 +61,15 @@ app.get('/', (req, res) => {
 
 function ensureAuthenticated(req, res, next) {
 
-console.log(req.ensureAuthenticated)
+console.log(req.ensureAuthenticated);
 return next()
 }
 
-app.use('/module', ensureAuthenticated)
+app.use('/module', ensureAuthenticated);
 
 
 require('./app/routes/module.routes.js')(app);
-require('./app/routes/users.routes.js')(app)
+require('./app/routes/users.routes.js')(app);
 
 // listen for requests
 app.listen(5000, () => {

@@ -1,7 +1,5 @@
 // @flow
 import React, { Component } from 'react';
-import _ from 'lodash';
-
 import './WarningList.css';
 
 type Props = {

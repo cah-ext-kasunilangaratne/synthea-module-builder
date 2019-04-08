@@ -1,9 +1,6 @@
 // @flow
 import React, { Component } from 'react';
 import { RIESelect, RIEInput, RIENumber } from 'riek';
-import _ from 'lodash';
-
-
 import type { DistributedTransition as DistributedTransitionType } from '../../types/Transition';
 import { getTemplate } from '../../templates/Templates';
 import type { State } from '../../types/State';
@@ -54,7 +51,7 @@ class DistributedTransition extends Component<Props> {
     if(typeof distribution === 'object') {
       remainder = 1 - (sum - distribution.default);
       let remainderOption = null
-      if (sum != 1) {
+      if (sum !== 1) {
         remainderOption = <a className='editable-text' onClick={() => this.props.onChange(`[${index}].distribution.default`)({val: remainder})}>(Change to Remainder)</a>
       }
       return (
@@ -70,7 +67,7 @@ class DistributedTransition extends Component<Props> {
     } else {
       remainder = 1 - (sum - distribution);
       let remainderOption = null
-      if (sum != 1) {
+      if (sum !== 1) {
         remainderOption = <a className='editable-text' onClick={() => this.props.onChange(`[${index}].distribution`)({val: remainder})}>(Change to Remainder)</a>
       }
       return (

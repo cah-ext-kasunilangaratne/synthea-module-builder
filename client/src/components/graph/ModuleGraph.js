@@ -190,7 +190,7 @@ class ModuleGraph extends Component<Props> {
       let transitionIndexClass = group.className.baseVal.split(' ').find(t => t.startsWith('transition-index'));
       if(transitionIndexClass){
         try{
-          transitionIndex = parseInt(transitionIndexClass.split('_')[1])
+          transitionIndex = parseInt(transitionIndexClass.split('_')[1],3)
         } catch(e){
           // just ignore if not a number
         }

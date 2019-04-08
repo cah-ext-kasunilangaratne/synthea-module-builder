@@ -15,7 +15,7 @@ export default {"allergic_rhinitis":{
     "Delay_For_Atopy": {
       "type": "Delay",
       "remarks": [
-        "The Atopy module must be processed before any of the allergy modules so ",
+        "The Atopy model must be processed before any of the allergy models so ",
         "atopy can appropriately influence allergies. Delaying the smallest possible ",
         "time step to ensure this happens."
       ],
@@ -217,12 +217,12 @@ export default {"allergic_rhinitis":{
       "direct_transition": "Prescribe_OTC_Antihistamine"
     },
     "Prescribe_OTC_Antihistamine": {
-      "type": "CallSubmodule",
+      "type": "CallSubmodel",
       "remarks": [
-        "This submodule will only prescribe an antihistamine if one is ",
+        "This submodel will only prescribe an antihistamine if one is ",
         "not already prescribed."
       ],
-      "submodule": "medications/otc_antihistamine",
+      "submodel": "medications/otc_antihistamine",
       "direct_transition": "Advise_To_Visit_Allergist"
     },
     "Advise_To_Visit_Allergist": {
@@ -366,8 +366,8 @@ export default {"allergic_rhinitis":{
 "allergies/allergy_incidence":{
   "name": "Allergy Incidence",
   "remarks": [
-    "This submodule onsets various allergies and is intended to be called ",
-    "by the main allergies module."
+    "This submodel onsets various allergies and is intended to be called ",
+    "by the main allergies model."
   ],
   "states": {
     "Initial": {
@@ -1198,7 +1198,7 @@ export default {"allergic_rhinitis":{
 "allergies/allergy_panel":{
   "name": "Allergy Panel",
   "remarks": [
-    "This submodule explicity references states in the 'Allergies and Treatment' module. ",
+    "This submodel explicity references states in the 'Allergies and Treatment' model. ",
     "In the future an Active Condition test should be favored instead of PriorState once ",
     "there's a distinction between an 'Active' and 'Diagnosed' condition.",
     "Most of these tests measure the amount of IgE Ab antibody in serum. ",
@@ -2126,7 +2126,7 @@ export default {"allergic_rhinitis":{
 "allergies/immunotherapy":{
   "name": "Allergy Immunotherapy",
   "remarks": [
-    "This submodule is called by 'allergies.json'. This models a series of ",
+    "This submodel is called by 'allergies.json'. This models a series of ",
     "immunotherapy treatments designed to lessen the severity of allergy ",
     "symptoms, or even eliminate the sensitivity altogether. ",
     "Immunotherapy is most effective against outdoor allergens (trees, grass), ",
@@ -2221,8 +2221,8 @@ export default {"allergic_rhinitis":{
       "direct_transition": "Benchmark_Allergy_Panel"
     },
     "Benchmark_Allergy_Panel": {
-      "type": "CallSubmodule",
-      "submodule": "allergies/allergy_panel",
+      "type": "CallSubmodel",
+      "submodel": "allergies/allergy_panel",
       "direct_transition": "End_Consultation"
     },
     "End_Consultation": {
@@ -2354,8 +2354,8 @@ export default {"allergic_rhinitis":{
       ]
     },
     "Outgrown_Environmental_Allergies": {
-      "type": "CallSubmodule",
-      "submodule": "allergies/outgrow_env_allergies",
+      "type": "CallSubmodel",
+      "submodel": "allergies/outgrow_env_allergies",
       "direct_transition": "Followup_Test"
     },
     "Followup_Test": {
@@ -2375,8 +2375,8 @@ export default {"allergic_rhinitis":{
       "direct_transition": "Followup_Allergy_Panel"
     },
     "Followup_Allergy_Panel": {
-      "type": "CallSubmodule",
-      "submodule": "allergies/allergy_panel",
+      "type": "CallSubmodel",
+      "submodel": "allergies/allergy_panel",
       "direct_transition": "Followup_End"
     },
     "Followup_End": {
@@ -3113,9 +3113,9 @@ export default {"allergic_rhinitis":{
 "allergies":{
   "name": "Allergies and Treatment",
   "remarks": [
-    "This module onsets allergies and manages the treatment of allergies and ",
+    "This model onsets allergies and manages the treatment of allergies and ",
     "allergic diseases. After the initial series of AllergyOnset states, the ",
-    "module waits for an allergic condition (as a result of a person's allergies)",
+    "model waits for an allergic condition (as a result of a person's allergies)",
     "to prompt treatment.",
     "Primary reference for allergy statistics: ",
     "https://web.archive.org/web/20100407195412/http://www.niaid.nih.gov/topics/foodAllergy/understanding/Pages/quickFacts.aspx"
@@ -3128,7 +3128,7 @@ export default {"allergic_rhinitis":{
     "Delay_For_Atopy": {
       "type": "Delay",
       "remarks": [
-        "The Atopy module must be processed before any of the allergy modules so ",
+        "The Atopy model must be processed before any of the allergy models so ",
         "atopy can appropriately influence allergies. Delaying the smallest possible ",
         "time step to ensure this happens."
       ],
@@ -3136,16 +3136,16 @@ export default {"allergic_rhinitis":{
         "quantity": 1,
         "unit": "weeks"
       },
-      "direct_transition": "Allergy_Incidence_Submodule"
+      "direct_transition": "Allergy_Incidence_Submodel"
     },
-    "Allergy_Incidence_Submodule": {
-      "type": "CallSubmodule",
+    "Allergy_Incidence_Submodel": {
+      "type": "CallSubmodel",
       "remarks": [
-        "This submodule onsets the various food and environmental allergies that ",
+        "This submodel onsets the various food and environmental allergies that ",
         "a person can get, with different incidences for atopic and non-atopic ",
         "patients."
       ],
-      "submodule": "allergies/allergy_incidence",
+      "submodel": "allergies/allergy_incidence",
       "direct_transition": "Allergist_Guard"
     },
     "Allergist_Guard": {
@@ -3161,7 +3161,7 @@ export default {"allergic_rhinitis":{
         "- Moderate to severe eczema ",
         "- Any allergic reaction to food ",
         "- Moderate to severe allergic rhinitis symptoms ",
-        "The asthma, eczema, and allergic rhinitis submodules set the 'visit_allergist' ",
+        "The asthma, eczema, and allergic rhinitis submodels set the 'visit_allergist' ",
         "attribute to trigger the visit. At the first visit to an allergist an ",
         "allergy panel is always performed."
       ],
@@ -3175,7 +3175,7 @@ export default {"allergic_rhinitis":{
     "Delay_For_Allergist_Initial_Visit": {
       "type": "Delay",
       "remarks": [
-        "Other modules are not expected to make this delay after making a ",
+        "Other models are not expected to make this delay after making a ",
         "'visit_allergist' recommendation."
       ],
       "range": {
@@ -3230,17 +3230,17 @@ export default {"allergic_rhinitis":{
       "direct_transition": "Allergy_Panel"
     },
     "Allergy_Panel": {
-      "type": "CallSubmodule",
-      "submodule": "allergies/allergy_panel",
+      "type": "CallSubmodel",
+      "submodel": "allergies/allergy_panel",
       "direct_transition": "Prescribe_OTC_Antihistamine"
     },
     "Prescribe_OTC_Antihistamine": {
-      "type": "CallSubmodule",
+      "type": "CallSubmodel",
       "remarks": [
-        "This submodule will only prescribe an antihistamine if one is ",
+        "This submodel will only prescribe an antihistamine if one is ",
         "not already prescribed."
       ],
-      "submodule": "medications/otc_antihistamine",
+      "submodel": "medications/otc_antihistamine",
       "direct_transition": "General_Allergy_CarePlan"
     },
     "General_Allergy_CarePlan": {
@@ -3334,16 +3334,16 @@ export default {"allergic_rhinitis":{
           }
         ]
       },
-      "direct_transition": "Immunotherapy_Submodule"
+      "direct_transition": "Immunotherapy_Submodel"
     },
-    "Immunotherapy_Submodule": {
-      "type": "CallSubmodule",
+    "Immunotherapy_Submodel": {
+      "type": "CallSubmodel",
       "remarks": [
-        "This submodule may or may not give the patient immunotherapy. If ",
+        "This submodel may or may not give the patient immunotherapy. If ",
         "immunotherapy is given a series of 60 treatments will be provided ",
         "over the course of 3-5 years."
       ],
-      "submodule": "allergies/immunotherapy",
+      "submodel": "allergies/immunotherapy",
       "direct_transition": "Living_With_Allergies"
     }
   }
@@ -3731,7 +3731,7 @@ export default {"allergic_rhinitis":{
 "asthma":{
   "name": "Asthma",
   "remarks": [
-    "This module is mostly based on statistics from the AAAAI and CDC. See:",
+    "This model is mostly based on statistics from the AAAAI and CDC. See:",
     "http://www.aaaai.org/about-aaaai/newsroom/asthma-statistics",
     "http://www.cdc.gov/nchs/fastats/asthma.htm",
     "http://www.cdc.gov/nchs/products/databriefs/db94.htm"
@@ -3744,7 +3744,7 @@ export default {"allergic_rhinitis":{
     "Delay_For_Atopy": {
       "type": "Delay",
       "remarks": [
-        "The Atopy module must be processed before any of the allergy modules so ",
+        "The Atopy model must be processed before any of the allergy models so ",
         "atopy can appropriately influence allergies. Delaying the smallest possible ",
         "time step to ensure this happens."
       ],
@@ -4691,7 +4691,7 @@ export default {"allergic_rhinitis":{
           "distribution": 0.15,
           "transition": "End_Diagnosis_Encounter_without_BT",
           "remarks": [
-            "This will just wait until adulthood before ending the ADHD and terminating the module."
+            "This will just wait until adulthood before ending the ADHD and terminating the model."
           ]
         },
         {
@@ -5542,7 +5542,7 @@ export default {"allergic_rhinitis":{
     "136,000 new cases are diagnosed and 51,300 people die from colorectal cancer in the U.S.",
     "The lifetime risk of developing colorectal cancer is 4.7% for men, 4.4% for women.",
     "source: http://www.cancer.org/cancer/colonandrectumcancer/detailedguide/colorectal-cancer-key-statistics",
-    "Some things not modeled in this module: ",
+    "Some things not modeled in this model: ",
     "1. Colorectal cancer in children. Although possible it's highly unlikely. ",
     "2. Diabetes, obesity, and poor diet as risk factors. I could not find any ",
     "   conclusive statistics or reports linking these to an increased incidence ",
@@ -5903,7 +5903,7 @@ export default {"allergic_rhinitis":{
         "======================================================================",
         "When found these polyps are almost always removed. If the polyps are ",
         "large and potentially cancerous a biopsy is then performed. For simplicity ",
-        "all large colorectal adenomas found in this module are also cancerous."
+        "all large colorectal adenomas found in this model are also cancerous."
       ],
       "target_encounter": "Routine_Colonoscopy_Encounter",
       "reason": "colorectal_adenoma",
@@ -6325,7 +6325,7 @@ export default {"allergic_rhinitis":{
       "type": "Simple",
       "remarks": [
         "This state mainly exists to isolate the colonoscopy and diagnosis ",
-        "portion of the module from the portion devoted to cancer treatment.",
+        "portion of the model from the portion devoted to cancer treatment.",
         "======================================================================",
         " COLORECTAL CANCER                                                    ",
         "======================================================================",
@@ -7538,7 +7538,7 @@ export default {"allergic_rhinitis":{
 "congestive_heart_failure":{
   "name": "Congestive Heart Failure",
   "remarks": [
-    "A blank module"
+    "A blank model"
   ],
   "states": {
     "Initial": {
@@ -8584,8 +8584,8 @@ export default {"allergic_rhinitis":{
     "2. 'implant' - requires replacement every 3-4 years ",
     "3. 'injectable' - requires another injection every 3 months ",
     "Each of these contraceptives is initially implanted/injected by the prescribing ",
-    "submodule. Subsequent renewal or removal of these contraceptives is handled ",
-    "by this maintenance module.",
+    "submodel. Subsequent renewal or removal of these contraceptives is handled ",
+    "by this maintenance model.",
     "Contraceptive maintenance automatically cancelled if either: ",
     "1. 'pregnant' == true ",
     "2. 'contraceptive_type' == nil "
@@ -8607,8 +8607,8 @@ export default {"allergic_rhinitis":{
       ]
     },
     "Clear_Contraceptive": {
-      "type": "CallSubmodule",
-      "submodule": "contraceptives/clear_contraceptive",
+      "type": "CallSubmodel",
+      "submodel": "contraceptives/clear_contraceptive",
       "direct_transition": "Contraceptive_Type_Guard"
     },
     "Contraceptive_Type_Guard": {
@@ -8672,7 +8672,7 @@ export default {"allergic_rhinitis":{
         "======================================================================",
         " IUD CONTRACEPTIVE MAINTENANCE                                        ",
         "======================================================================",
-        "Allow module progression if the IUD's lifetime is up (~4 years) ",
+        "Allow model progression if the IUD's lifetime is up (~4 years) ",
         "or if the patient becomes pregnant."
       ],
       "allow": {
@@ -9065,7 +9065,7 @@ export default {"allergic_rhinitis":{
 "contraceptives/clear_contraceptive":{
   "name": "Clear Contraceptive",
   "remarks": [
-    "This submodule ends any active contraceptive medication assigned to the ",
+    "This submodel ends any active contraceptive medication assigned to the ",
     "'contraceptive' attribute and clears the 'contraceptive_type' attribute ",
     "for reassignment."
   ],
@@ -9118,7 +9118,7 @@ export default {"allergic_rhinitis":{
 "contraceptives/female_sterilization":{
   "name": "Female Sterilization",
   "remarks": [
-    "This submodule performs a female sterilization procedure. This procedure ",
+    "This submodel performs a female sterilization procedure. This procedure ",
     "is not reversible."
   ],
   "states": {
@@ -9241,13 +9241,13 @@ export default {"allergic_rhinitis":{
 "contraceptives/implant_contraceptive":{
   "name": "Implant Contraceptive",
   "remarks": [
-    "This submodule prescribes a long-acting, implanted contraceptive if one is ",
+    "This submodel prescribes a long-acting, implanted contraceptive if one is ",
     "available for the current year of the simulation. The first implanted ",
     "contraceptive was available in 1990, marketed as Norplant. Norplant was ",
     "discontinued in 2002 in favor of newer alternatives, but implants remain ",
     "available today.",
     "Implants must be readministered once every 3-4 years. The Contraceptive ",
-    "Maintenance module handles that.",
+    "Maintenance model handles that.",
     "Sources for historical availability: ",
     "http://www.ourbodiesourselves.org/health-info/a-brief-history-of-birth-control/",
     "http://www.pbs.org/wnet/need-to-know/health/a-brief-history-of-the-birth-control-pill/480/"
@@ -9442,12 +9442,12 @@ export default {"allergic_rhinitis":{
 "contraceptives/injectable_contraceptive":{
   "name": "Injectable Contraceptive",
   "remarks": [
-    "This submodule prescribes a long-acting, injectable contraceptive if one is ",
+    "This submodel prescribes a long-acting, injectable contraceptive if one is ",
     "available for the current year of the simulation. The first injectable ",
     "contraceptive was available in 1992, marketed as Depo-Provera. Depo remains ",
     "the only available injectable option in the U.S.",
     "Injectables must be readministered once every 3 months. The Contraceptive ",
-    "Maintenance module handles that.",
+    "Maintenance model handles that.",
     "Sources for historical availability: ",
     "http://www.ourbodiesourselves.org/health-info/a-brief-history-of-birth-control/",
     "http://www.pbs.org/wnet/need-to-know/health/a-brief-history-of-the-birth-control-pill/480/"
@@ -9600,7 +9600,7 @@ export default {"allergic_rhinitis":{
 "contraceptives/intrauterine_device":{
   "name": "Intrauterine Device",
   "remarks": [
-    "This submodule prescribes an intrauterine device (IUD) for contraception.",
+    "This submodel prescribes an intrauterine device (IUD) for contraception.",
     "FDA approval of IUDs in the U.S. was in 1968. Early designs were flexible ",
     "thermoplastic. Copper IUDs were introduced in the 1970's. One IUD in particular ",
     "was problematic - the Dalkon Shield caused infections in 200k women and 10 ",
@@ -9609,7 +9609,7 @@ export default {"allergic_rhinitis":{
     "Modern IUDs are again becoming popular. They are copper or combine low-dose ",
     "hormones with plastic.",
     "IUDs must be removed or replaced every 5-10 years. This is handled by the ",
-    "Contraceptive Maintenance module.",
+    "Contraceptive Maintenance model.",
     "Sources for availability: ",
     "https://www.wired.com/2011/07/ff_iud/",
     "http://kff.org/womens-health-policy/fact-sheet/intrauterine-devices-iuds-access-for-women-in-the-u-s/"
@@ -9932,7 +9932,7 @@ export default {"allergic_rhinitis":{
 "contraceptives/male_sterilization":{
   "name": "Male Sterilization",
   "remarks": [
-    "This submodule performs a male sterilization (vasectomy) procedure."
+    "This submodel performs a male sterilization (vasectomy) procedure."
   ],
   "states": {
     "Initial": {
@@ -10053,7 +10053,7 @@ export default {"allergic_rhinitis":{
 "contraceptives/oral_contraceptive":{
   "name": "Oral Contraceptive",
   "remarks": [
-    "This module prescribes an oral, hormonal contraceptive if one is available ",
+    "This model prescribes an oral, hormonal contraceptive if one is available ",
     "for the current year of the simulation. There are 2 classes of oral contraceptives: ",
     "1. Combination (estrogen, progestin), either monophasic and triphasic ",
     "2. Minipill (progestin-only)",
@@ -10066,7 +10066,7 @@ export default {"allergic_rhinitis":{
     "2. Myocardial Infarction (1.6x) ",
     "3. Ischemic Stroke (1.7x) ",
     "Source: https://www.ncbi.nlm.nih.gov/pubmedhealth/PMH0079002/",
-    "No changes were made to the cardiovascular disease module.",
+    "No changes were made to the cardiovascular disease model.",
     "Minipill (progestin-only) contraceptives are safe for smokers, those at risk of ",
     "heart disease, and new mothers who are breastfeeding. They carry a slightly elevated ",
     "risk of ectopic pregnancy, are less effective than combination pills (91 - 99% effective), ",
@@ -10563,7 +10563,7 @@ export default {"allergic_rhinitis":{
 "contraceptives/patch_contraceptive":{
   "name": "Patch Contraceptive",
   "remarks": [
-    "This module prescribes a hormonal patch if one is available ",
+    "This model prescribes a hormonal patch if one is available ",
     "for the current year of the simulation.",
     "Sources for historical availability: ",
     "http://www.ourbodiesourselves.org/health-info/a-brief-history-of-birth-control/",
@@ -10649,7 +10649,7 @@ export default {"allergic_rhinitis":{
 "contraceptives/ring_contraceptive":{
   "name": "Vaginal Ring Contraceptive",
   "remarks": [
-    "This submodule prescribes a hormonal contraceptive ring if one ",
+    "This submodel prescribes a hormonal contraceptive ring if one ",
     "is available for the current year of the simulation. The ring is ",
     "inserted into the vagina and may be removed at will, or for short ",
     "periods of time during sexual intercourse."
@@ -10734,14 +10734,14 @@ export default {"allergic_rhinitis":{
 "contraceptives":{
   "name": "Contraceptives",
   "remarks": [
-    "This module prescribes many types of contraceptives to all potentially reproductive ",
+    "This model prescribes many types of contraceptives to all potentially reproductive ",
     "age groups. The availablility of different medicines and methods is historically ",
     "accurate by year, based on these articles: ",
     "http://www.ourbodiesourselves.org/health-info/a-brief-history-of-birth-control/",
     "http://www.pbs.org/wnet/need-to-know/health/a-brief-history-of-the-birth-control-pill/480/",
     "Hormonal contraceptives cause a slightly elevated risk of blood clots, heart attack, and ",
     "stroke (1.6x) in females, especially in heavy smokers over the age of 35. No change was ",
-    "made to the existing cardiovascular disease module.",
+    "made to the existing cardiovascular disease model.",
     "While male sterilization is used as a contraceptive method (8%), it's not modeled here. ",
     "Instead, the 8% is folded into the female sterilization incidence. However, 6% of males ",
     "age 30 - 55 are selected for sterilization to create accurate male patient records.",
@@ -10824,8 +10824,8 @@ export default {"allergic_rhinitis":{
       ]
     },
     "Male_Sterilization_Procedure": {
-      "type": "CallSubmodule",
-      "submodule": "contraceptives/male_sterilization",
+      "type": "CallSubmodel",
+      "submodel": "contraceptives/male_sterilization",
       "direct_transition": "Terminal"
     },
     "Female_Contraceptive_Use": {
@@ -11067,8 +11067,8 @@ export default {"allergic_rhinitis":{
       "direct_transition": "Route_To_Guard"
     },
     "Using_Oral_Contraceptive": {
-      "type": "CallSubmodule",
-      "submodule": "contraceptives/oral_contraceptive",
+      "type": "CallSubmodel",
+      "submodel": "contraceptives/oral_contraceptive",
       "direct_transition": "Contraceptive_Prescribed?"
     },
     "Using_Sterilization": {
@@ -11132,22 +11132,22 @@ export default {"allergic_rhinitis":{
       "direct_transition": "Route_To_Guard"
     },
     "Using_Female_Sterilization": {
-      "type": "CallSubmodule",
-      "submodule": "contraceptives/female_sterilization",
+      "type": "CallSubmodel",
+      "submodel": "contraceptives/female_sterilization",
       "direct_transition": "Terminal"
     },
     "Using_Ring": {
-      "type": "CallSubmodule",
-      "submodule": "contraceptives/ring_contraceptive",
+      "type": "CallSubmodel",
+      "submodel": "contraceptives/ring_contraceptive",
       "direct_transition": "Contraceptive_Prescribed?"
     },
     "Using_Patch": {
-      "type": "CallSubmodule",
-      "submodule": "contraceptives/patch_contraceptive",
+      "type": "CallSubmodel",
+      "submodel": "contraceptives/patch_contraceptive",
       "direct_transition": "Contraceptive_Prescribed?"
     },
     "Using_IUD": {
-      "type": "CallSubmodule",
+      "type": "CallSubmodel",
       "remarks": [
         "======================================================================",
         " CONTRACEPTIVES REQUIRING MAINTENANCE                                 ",
@@ -11155,28 +11155,28 @@ export default {"allergic_rhinitis":{
         "IUDs, implants, and injectables require periodic maintenance during a ",
         "given age bracket. IUDs must be replaced every 5-10 years, implants every ",
         "3 years, and injectables every 3 months. Maintenance is handled internally ",
-        "within the submodules.",
-        "These submodules are also 'self guarded', meaning they do not need the ",
+        "within the submodels.",
+        "These submodels are also 'self guarded', meaning they do not need the ",
         "regular age guards to ensure the correct timing for the next age bracket ",
         "(since they do so internally)."
       ],
-      "submodule": "contraceptives/intrauterine_device",
+      "submodel": "contraceptives/intrauterine_device",
       "direct_transition": "Contraceptive_Prescribed?"
     },
     "Using_Implant": {
-      "type": "CallSubmodule",
-      "submodule": "contraceptives/implant_contraceptive",
+      "type": "CallSubmodel",
+      "submodel": "contraceptives/implant_contraceptive",
       "direct_transition": "Contraceptive_Prescribed?"
     },
     "Using_Injectable": {
-      "type": "CallSubmodule",
-      "submodule": "contraceptives/injectable_contraceptive",
+      "type": "CallSubmodel",
+      "submodel": "contraceptives/injectable_contraceptive",
       "direct_transition": "Contraceptive_Prescribed?"
     },
     "Contraceptive_Prescribed?": {
       "type": "Simple",
       "remarks": [
-        "If a contraceptive wasn't prescribed by the submodule (for example, because ",
+        "If a contraceptive wasn't prescribed by the submodel (for example, because ",
         "none was available for the current year of the simulation) both contraceptive ",
         "attributes will be nill. ",
         "Since no contraceptive was prescribed, default to the historically avaialable ",
@@ -11239,12 +11239,12 @@ export default {"allergic_rhinitis":{
       ]
     },
     "Reset_Contraceptive_Use": {
-      "type": "CallSubmodule",
+      "type": "CallSubmodel",
       "remarks": [
         "Prior to setting a new contraceptive, the previous contraceptive ",
         "method is cleared."
       ],
-      "submodule": "contraceptives/clear_contraceptive",
+      "submodel": "contraceptives/clear_contraceptive",
       "conditional_transition": [
         {
           "condition": {
@@ -15222,7 +15222,7 @@ export default {"allergic_rhinitis":{
     "Delay_For_Atopy": {
       "type": "Delay",
       "remarks": [
-        "The Atopy module must be processed before any of the allergy modules so ",
+        "The Atopy model must be processed before any of the allergy models so ",
         "atopy can appropriately influence allergies. Delaying the smallest possible ",
         "time step to ensure this happens."
       ],
@@ -15538,33 +15538,33 @@ export default {"allergic_rhinitis":{
       ]
     },
     "Early_Childhood_AD_Moderate_Observations": {
-      "type": "CallSubmodule",
-      "submodule": "dermatitis/early_moderate_eczema_obs",
+      "type": "CallSubmodel",
+      "submodel": "dermatitis/early_moderate_eczema_obs",
       "direct_transition": "Advise_To_Visit_Allergist"
     },
     "Early_Childhood_AD_Severe_Observations": {
-      "type": "CallSubmodule",
-      "submodule": "dermatitis/early_severe_eczema_obs",
+      "type": "CallSubmodel",
+      "submodel": "dermatitis/early_severe_eczema_obs",
       "direct_transition": "Advise_To_Visit_Allergist"
     },
     "Mid_Childhood_AD_Moderate_Observations": {
-      "type": "CallSubmodule",
-      "submodule": "dermatitis/mid_moderate_eczema_obs",
+      "type": "CallSubmodel",
+      "submodel": "dermatitis/mid_moderate_eczema_obs",
       "direct_transition": "Advise_To_Visit_Allergist"
     },
     "Mid_Childhood_AD_Severe_Observations": {
-      "type": "CallSubmodule",
-      "submodule": "dermatitis/mid_severe_eczema_obs",
+      "type": "CallSubmodel",
+      "submodel": "dermatitis/mid_severe_eczema_obs",
       "direct_transition": "Advise_To_Visit_Allergist"
     },
     "Moderate_Contact_Dermatitis_Observations": {
-      "type": "CallSubmodule",
-      "submodule": "dermatitis/moderate_cd_obs",
+      "type": "CallSubmodel",
+      "submodel": "dermatitis/moderate_cd_obs",
       "direct_transition": "Prescribe_Corticosteroid"
     },
     "Severe_Contact_Dermatitis_Observations": {
-      "type": "CallSubmodule",
-      "submodule": "dermatitis/severe_cd_obs",
+      "type": "CallSubmodel",
+      "submodel": "dermatitis/severe_cd_obs",
       "direct_transition": "Prescribe_Corticosteroid"
     },
     "Prescribe_Corticosteroid": {
@@ -16707,13 +16707,13 @@ export default {"allergic_rhinitis":{
       ]
     },
     "Ear_Infection_Prescribed_Antibiotic": {
-      "type": "CallSubmodule",
-      "submodule": "medications/ear_infection_antibiotic",
+      "type": "CallSubmodel",
+      "submodel": "medications/ear_infection_antibiotic",
       "direct_transition": "Ear_Infection_Prescribed_OTC_Painkiller"
     },
     "Ear_Infection_Prescribed_OTC_Painkiller": {
-      "type": "CallSubmodule",
-      "submodule": "medications/otc_pain_reliever",
+      "type": "CallSubmodel",
+      "submodel": "medications/otc_pain_reliever",
       "direct_transition": "End_Encounter"
     },
     "End_Encounter": {
@@ -16731,15 +16731,15 @@ export default {"allergic_rhinitis":{
     "End_Ear_Infection_Medications": {
       "type": "Simple",
       "remarks": [
-        "For any of the possible medications that could be prescribed in this module ",
+        "For any of the possible medications that could be prescribed in this model ",
         "this state cycles through the attributes and ends the medications until no ",
         "more prescriptions are remaining.",
         "The attributes that this state looks for are: ",
         "1. otc_pain_reliever ",
         "2. antibiotic_prescription ",
-        "Any other medications prescribed in this module and not assigned to one of those ",
-        "three attributes must be ended manually elsewhere in the module, the special ",
-        "exception being 'opioid_prescription' (handled by the Opioid Addiction module)."
+        "Any other medications prescribed in this model and not assigned to one of those ",
+        "three attributes must be ended manually elsewhere in the model, the special ",
+        "exception being 'opioid_prescription' (handled by the Opioid Addiction model)."
       ],
       "conditional_transition": [
         {
@@ -17278,14 +17278,14 @@ export default {"allergic_rhinitis":{
 "female_reproduction":{
   "name": "Female Reproduction",
   "remarks": [
-    "This module models female reproduction from birth to death. Once females ",
-    "reach reproductive age, this module operates on a monthly cycle. Each month, ",
+    "This model models female reproduction from birth to death. Once females ",
+    "reach reproductive age, this model operates on a monthly cycle. Each month, ",
     "a sexually active female has a non-zero chance of becoming pregnant. This ",
     "chance is greatly reduced by taking a contraceptive.",
     "If a female becomes pregnant, the monthly cycles are suspended until the ",
     "pregnancy terminates. The monthly reproductive cycles permanently end once ",
     "a female reaches menopause at age 50.",
-    "This module of course operates on several assumptions: ",
+    "This model of course operates on several assumptions: ",
     "1. All females have regular, monthly reproductive cycles (some don't) ",
     "2. All females reach menopause at age 50 "
   ],
@@ -17374,7 +17374,7 @@ export default {"allergic_rhinitis":{
         "======================================================================",
         "This is where the magic happens. If females are sexually active, there is ",
         "a non-zero chance of becoming pregnant. The 'sexually_active' attribute is ",
-        "set by the 'sexual_activity' module."
+        "set by the 'sexual_activity' model."
       ],
       "conditional_transition": [
         {
@@ -17620,7 +17620,7 @@ export default {"allergic_rhinitis":{
       "type": "SetAttribute",
       "remarks": [
         "When true, the 'pregnant' attribute triggers the start of a cycle in ",
-        "the Pregnancy module."
+        "the Pregnancy model."
       ],
       "attribute": "pregnant",
       "value": true,
@@ -17982,7 +17982,7 @@ export default {"allergic_rhinitis":{
       "assign_to_attribute": "opioid_prescription",
       "reason": "Fibromyalgia",
       "remarks": [
-        "This medication is managed/ended by the opioid_addiction module."
+        "This medication is managed/ended by the opioid_addiction model."
       ],
       "codes": [
         {
@@ -18048,8 +18048,8 @@ export default {"allergic_rhinitis":{
 "food_allergies":{
   "name": "Food Allergies",
   "remarks": [
-    "This module manages the progression of food allergies in a patient's lifetime.",
-    "Food allergies are onset by the 'allergies.json' module."
+    "This model manages the progression of food allergies in a patient's lifetime.",
+    "Food allergies are onset by the 'allergies.json' model."
   ],
   "states": {
     "Initial": {
@@ -18133,12 +18133,12 @@ export default {"allergic_rhinitis":{
       "direct_transition": "Delay_For_PCP_Visit"
     },
     "Severe_Reaction_To_Food": {
-      "type": "CallSubmodule",
+      "type": "CallSubmodel",
       "remarks": [
         "A severe reaction to food prompts an ED visit, followed by a follow-up ",
         "at the PCP, then a referral to an allergist."
       ],
-      "submodule": "allergies/severe_allergic_reaction",
+      "submodel": "allergies/severe_allergic_reaction",
       "direct_transition": "Delay_For_PCP_Visit"
     },
     "Delay_For_PCP_Visit": {
@@ -18258,13 +18258,13 @@ export default {"allergic_rhinitis":{
       ]
     },
     "Potential_To_Outgrow_Allergies": {
-      "type": "CallSubmodule",
+      "type": "CallSubmodel",
       "remarks": [
         "Sensisitivity to milk, egg, soy, and wheat is the easiest to overcome.",
         "However, peanut, treenut, fish, and shellfish allergies persist through ",
-        "adulthood. This logic is handled by a submodule."
+        "adulthood. This logic is handled by a submodel."
       ],
-      "submodule": "allergies/outgrow_food_allergies",
+      "submodel": "allergies/outgrow_food_allergies",
       "conditional_transition": [
         {
           "condition": {
@@ -18933,8 +18933,8 @@ export default {"allergic_rhinitis":{
       ]
     },
     "Prescribe_Opioids": {
-      "type": "CallSubmodule",
-      "submodule": "medications/moderate_opioid_pain_reliever",
+      "type": "CallSubmodel",
+      "submodel": "medications/moderate_opioid_pain_reliever",
       "direct_transition": "Cholecystitis_Encounter_End"
     },
     "LC_Postoperative_Follow-up": {
@@ -19541,8 +19541,8 @@ export default {"allergic_rhinitis":{
       "direct_transition": "Cefotaxime_End"
     },
     "Anesthesia": {
-      "type": "CallSubmodule",
-      "submodule": "surgery/general_anesthesia",
+      "type": "CallSubmodel",
+      "submodel": "surgery/general_anesthesia",
       "direct_transition": "Ready_for_Surgery"
     },
     "ECG": {
@@ -20397,7 +20397,7 @@ export default {"allergic_rhinitis":{
 "hypothyroidism":{
   "name": "Primary atrophic hypothyroidism",
   "remarks": [
-    "A blank module"
+    "A blank model"
   ],
   "states": {
     "Initial": {
@@ -20608,7 +20608,7 @@ export default {"allergic_rhinitis":{
 "injuries":{
   "name": "Injuries",
   "remarks": [
-    "This module waits for an injury to occur then plays out that injury's typical ",
+    "This model waits for an injury to occur then plays out that injury's typical ",
     "progress in a patient's medical record. Some injuries may be both fatal or ",
     "non-fatal.",
     "Incidence is complicated. There are a lot of variables that play into incidence including ",
@@ -20628,8 +20628,8 @@ export default {"allergic_rhinitis":{
     "8.  'sprain'       - a sprained ankle or wrist ",
     "9.  'knee'         - a torn ligament (ACL, MCL, meniscus) ",
     "10. 'shoulder'     - a torn rotator cuff ",
-    "Sources are included throughout the module where supplemental information was needed.",
-    "Every injury pathway in this module assigns a care plan for the patient. This care ",
+    "Sources are included throughout the model where supplemental information was needed.",
+    "Every injury pathway in this model assigns a care plan for the patient. This care ",
     "plan is referenced by the 'injury_careplan' attribute and is ended at the conclusion ",
     "of the injury.",
     "Injury pathways may also prescribe a medication and assign it to one of these attributes: ",
@@ -20639,7 +20639,7 @@ export default {"allergic_rhinitis":{
     "Any medication order with one of these attributes will be automatically ended at the ",
     "conclusion of the injury. Be sure to only assign one medication to each of these ",
     "attributes in a given injury pathway to avoid conflict. Opioid prescriptions will be handled ",
-    "and ended by the Opioid Addiction module."
+    "and ended by the Opioid Addiction model."
   ],
   "states": {
     "Initial": {
@@ -20769,7 +20769,7 @@ export default {"allergic_rhinitis":{
           "remarks": [
             "The GMF's distributed transition will take this transition and automatically adjust the distribution ",
             "out of 1.0 if none of the other transitions are taken, see: ",
-            "https://github.com/synthetichealth/synthea/wiki/Generic-Module-Framework%3A-Transitions#distributed"
+            "https://github.com/synthetichealth/synthea/wiki/Generic-model-Framework%3A-Transitions#distributed"
           ]
         }
       ]
@@ -20836,7 +20836,7 @@ export default {"allergic_rhinitis":{
           "remarks": [
             "The GMF's distributed transition will take this transition and automatically adjust the distribution ",
             "out of 1.0 if none of the other transitions are taken, see: ",
-            "https://github.com/synthetichealth/synthea/wiki/Generic-Module-Framework%3A-Transitions#distributed"
+            "https://github.com/synthetichealth/synthea/wiki/Generic-model-Framework%3A-Transitions#distributed"
           ]
         }
       ]
@@ -20910,7 +20910,7 @@ export default {"allergic_rhinitis":{
               "remarks": [
                 "The GMF's distributed transition will take this transition and automatically adjust the distribution ",
                 "out of 1.0 if none of the other transitions are taken, see: ",
-                "https://github.com/synthetichealth/synthea/wiki/Generic-Module-Framework%3A-Transitions#distributed"
+                "https://github.com/synthetichealth/synthea/wiki/Generic-model-Framework%3A-Transitions#distributed"
               ]
             }
           ]
@@ -20972,7 +20972,7 @@ export default {"allergic_rhinitis":{
               "remarks": [
                 "The GMF's distributed transition will take this transition and automatically adjust the distribution ",
                 "out of 1.0 if none of the other transitions are taken, see: ",
-                "https://github.com/synthetichealth/synthea/wiki/Generic-Module-Framework%3A-Transitions#distributed"
+                "https://github.com/synthetichealth/synthea/wiki/Generic-model-Framework%3A-Transitions#distributed"
               ]
             }
           ]
@@ -21125,8 +21125,8 @@ export default {"allergic_rhinitis":{
       "direct_transition": "Spinal_Injury_Prescribe_Opioid"
     },
     "Spinal_Injury_Prescribe_Opioid": {
-      "type": "CallSubmodule",
-      "submodule": "medications/moderate_opioid_pain_reliever",
+      "type": "CallSubmodel",
+      "submodel": "medications/moderate_opioid_pain_reliever",
       "direct_transition": "End_Spinal_Injury_Encounter"
     },
     "End_Spinal_Injury_Encounter": {
@@ -21265,13 +21265,13 @@ export default {"allergic_rhinitis":{
       ]
     },
     "Gunshot_Wound_Prescribe_Opioid": {
-      "type": "CallSubmodule",
-      "submodule": "medications/moderate_opioid_pain_reliever",
+      "type": "CallSubmodel",
+      "submodel": "medications/moderate_opioid_pain_reliever",
       "direct_transition": "Gunshot_Wound_Prescribe_Non_Opioid"
     },
     "Gunshot_Wound_Prescribe_Non_Opioid": {
-      "type": "CallSubmodule",
-      "submodule": "medications/otc_pain_reliever",
+      "type": "CallSubmodel",
+      "submodel": "medications/otc_pain_reliever",
       "direct_transition": "Gunshot_Wound_CarePlan"
     },
     "Gunshot_Wound_CarePlan": {
@@ -21515,7 +21515,7 @@ export default {"allergic_rhinitis":{
         "Many whiplash injuries do not present themselves immediately and are not ",
         "treated by an emergency department. If they're ever addressed at all they ",
         "are treated in an ambulatory setting by a PCP. For simplicity however, all ",
-        "of the whiplash injuries seen in this module are treated by an ED department."
+        "of the whiplash injuries seen in this model are treated by an ED department."
       ],
       "direct_transition": "ED_Visit_For_Whiplash"
     },
@@ -21544,8 +21544,8 @@ export default {"allergic_rhinitis":{
       "direct_transition": "Whiplash_Injury_Prescribe_Non_Opioid"
     },
     "Whiplash_Injury_Prescribe_Non_Opioid": {
-      "type": "CallSubmodule",
-      "submodule": "medications/otc_pain_reliever",
+      "type": "CallSubmodel",
+      "submodel": "medications/otc_pain_reliever",
       "direct_transition": "Whiplash_CarePlan"
     },
     "Whiplash_CarePlan": {
@@ -22047,13 +22047,13 @@ export default {"allergic_rhinitis":{
       ]
     },
     "Broken_Bone_Injury_Prescribe_Opioid": {
-      "type": "CallSubmodule",
-      "submodule": "medications/moderate_opioid_pain_reliever",
+      "type": "CallSubmodel",
+      "submodel": "medications/moderate_opioid_pain_reliever",
       "direct_transition": "Broken_Bone_Injury_Prescribe_Non_Opioid"
     },
     "Broken_Bone_Injury_Prescribe_Non_Opioid": {
-      "type": "CallSubmodule",
-      "submodule": "medications/otc_pain_reliever",
+      "type": "CallSubmodel",
+      "submodel": "medications/otc_pain_reliever",
       "direct_transition": "Broken_Bone_CarePlan"
     },
     "Broken_Bone_CarePlan": {
@@ -22471,22 +22471,22 @@ export default {"allergic_rhinitis":{
       "direct_transition": "Burn_Injury_Prescribe_Antibiotic"
     },
     "Burn_Injury_Prescribe_Antibiotic": {
-      "type": "CallSubmodule",
+      "type": "CallSubmodel",
       "remarks": [
         "Antibiotics that can be used to treat ear infections are equally ",
         "suitable for treating bacterial tissue infections."
       ],
-      "submodule": "medications/ear_infection_antibiotic",
+      "submodel": "medications/ear_infection_antibiotic",
       "direct_transition": "Burn_Injury_Prescribe_Opioid"
     },
     "Burn_Injury_Prescribe_Opioid": {
-      "type": "CallSubmodule",
-      "submodule": "medications/moderate_opioid_pain_reliever",
+      "type": "CallSubmodel",
+      "submodel": "medications/moderate_opioid_pain_reliever",
       "direct_transition": "Burn_Injury_Prescribe_Non_Opioid"
     },
     "Burn_Injury_Prescribe_Non_Opioid": {
-      "type": "CallSubmodule",
-      "submodule": "medications/otc_pain_reliever",
+      "type": "CallSubmodel",
+      "submodel": "medications/otc_pain_reliever",
       "direct_transition": "End_Burn_Encounter"
     },
     "End_Burn_Encounter": {
@@ -22714,8 +22714,8 @@ export default {"allergic_rhinitis":{
       "direct_transition": "Laceration_Injury_Prescribe_Non_Opioid"
     },
     "Laceration_Injury_Prescribe_Non_Opioid": {
-      "type": "CallSubmodule",
-      "submodule": "medications/otc_pain_reliever",
+      "type": "CallSubmodel",
+      "submodel": "medications/otc_pain_reliever",
       "direct_transition": "End_Laceration_Encounter"
     },
     "End_Laceration_Encounter": {
@@ -22819,8 +22819,8 @@ export default {"allergic_rhinitis":{
       "direct_transition": "Sprain_Prescribe_Non_Opioid"
     },
     "Sprain_Prescribe_Non_Opioid": {
-      "type": "CallSubmodule",
-      "submodule": "medications/otc_pain_reliever",
+      "type": "CallSubmodel",
+      "submodel": "medications/otc_pain_reliever",
       "direct_transition": "End_Sprain_Encounter"
     },
     "End_Sprain_Encounter": {
@@ -23056,13 +23056,13 @@ export default {"allergic_rhinitis":{
       "direct_transition": "Knee_Injury_Prescribe_Opioid"
     },
     "Knee_Injury_Prescribe_Opioid": {
-      "type": "CallSubmodule",
-      "submodule": "medications/moderate_opioid_pain_reliever",
+      "type": "CallSubmodel",
+      "submodel": "medications/moderate_opioid_pain_reliever",
       "direct_transition": "End_Knee_Injury_Encounter_II"
     },
     "Knee_Injury_Prescribe_Non_Opioid": {
-      "type": "CallSubmodule",
-      "submodule": "medications/otc_pain_reliever",
+      "type": "CallSubmodel",
+      "submodel": "medications/otc_pain_reliever",
       "direct_transition": "End_Knee_Injury_Encounter_I"
     },
     "End_Knee_Injury_Encounter_II": {
@@ -23199,13 +23199,13 @@ export default {"allergic_rhinitis":{
       "direct_transition": "Shoulder_Surgery_Prescribe_Opioid"
     },
     "Shoulder_Surgery_Prescribe_Opioid": {
-      "type": "CallSubmodule",
-      "submodule": "medications/moderate_opioid_pain_reliever",
+      "type": "CallSubmodel",
+      "submodel": "medications/moderate_opioid_pain_reliever",
       "direct_transition": "Shoulder_Surgery_Prescribe_Non_Opioid"
     },
     "Shoulder_Surgery_Prescribe_Non_Opioid": {
-      "type": "CallSubmodule",
-      "submodule": "medications/otc_pain_reliever",
+      "type": "CallSubmodel",
+      "submodel": "medications/otc_pain_reliever",
       "direct_transition": "End_Shoulder_Surgery_Encounter"
     },
     "End_Shoulder_Surgery_Encounter": {
@@ -23252,7 +23252,7 @@ export default {"allergic_rhinitis":{
         "This section is not resposible for ending conditions, only resetting ",
         "attributes and ending care plans and medications. This allows chronic ",
         "injuries to continue while short-term injuries should be ended earlier ",
-        "in this module."
+        "in this model."
       ],
       "direct_transition": "End_Injury_CarePlan"
     },
@@ -23264,15 +23264,15 @@ export default {"allergic_rhinitis":{
     "End_Injury_Medications": {
       "type": "Simple",
       "remarks": [
-        "For any of the possible medications that could be prescribed in this module ",
+        "For any of the possible medications that could be prescribed in this model ",
         "this state cycles through the attributes and ends the medications until no ",
         "more prescriptions are remaining.",
         "The attributes that this state looks for are: ",
         "1. otc_pain_reliever ",
         "2. antibiotic_prescription ",
-        "Any other medications prescribed in this module and not assigned to one of those ",
-        "three attributes must be ended manually elsewhere in the module, the special ",
-        "exception being 'opioid_prescription' (handled by the Opioid Addiction module)."
+        "Any other medications prescribed in this model and not assigned to one of those ",
+        "three attributes must be ended manually elsewhere in the model, the special ",
+        "exception being 'opioid_prescription' (handled by the Opioid Addiction model)."
       ],
       "conditional_transition": [
         {
@@ -23496,7 +23496,7 @@ export default {"allergic_rhinitis":{
 "lung_cancer":{
   "name": "Lung Cancer",
   "remarks": [
-    "Most of the data for this module was synthesized from two primary sources:",
+    "Most of the data for this model was synthesized from two primary sources:",
     "1. The comprehensive pages starting at http://www.cancer.org/cancer/lungcancer/index",
     "2. The Cancer Care Ontario Pathway Maps at https://www.cancercare.on.ca/ocs/qpi/dispathmgmt/pathways/lung_cancer_pathway_map/",
     "Some data statistics came from:",
@@ -23523,8 +23523,8 @@ export default {"allergic_rhinitis":{
       ]
     },
     "Lung Cancer Probabilities": {
-      "type": "CallSubmodule",
-      "submodule": "lung_cancer/lung_cancer_probabilities",
+      "type": "CallSubmodel",
+      "submodel": "lung_cancer/lung_cancer_probabilities",
       "distributed_transition": [
         {
           "distribution": {
@@ -26335,7 +26335,7 @@ export default {"allergic_rhinitis":{
 "mTBI":{
   "name": "Veteran mild TBI ",
   "remarks": [
-    "A blank module"
+    "A blank model"
   ],
   "states": {
     "Initial": {
@@ -26417,7 +26417,7 @@ export default {"allergic_rhinitis":{
 "med_rec":{
   "name": "Medication Reconciliation",
   "remarks": [
-    "This module will generate a documentation of current medications procedure at 45% of",
+    "This model will generate a documentation of current medications procedure at 45% of",
     "wellness encounters. Through the Meaningful Use program, ONC is striving for",
     "medication reconciliation at 50% of encounters. This assumes that we are not",
     "at the goal level yet.",
@@ -26460,11 +26460,11 @@ export default {"allergic_rhinitis":{
 "medications/ear_infection_antibiotic":{
   "name": "Ear Infection Antibiotic",
   "remarks": [
-    "This submodule prescribes an antibiotic used to treat ear infections ",
+    "This submodel prescribes an antibiotic used to treat ear infections ",
     "(otitis media). If no medication is available in the current year of ",
     "the simulation then none is prescribed.",
-    "IT IS UP TO THE CALLING MODULE TO END THIS MEDICATION BY ATTRIBUTE.",
-    "All antibiotics prescribed in this module are assigned to the attribute ",
+    "IT IS UP TO THE CALLING model TO END THIS MEDICATION BY ATTRIBUTE.",
+    "All antibiotics prescribed in this model are assigned to the attribute ",
     "'antibiotic_prescription'.",
     "Source for common antibiotics used to treat otitis media: ",
     "http://www.nps.org.au/conditions/ear-nose-mouth-and-throat-disorders/ear-nose-and-throat-infections/ear-infection-middle/for-individuals/medicines-and-treatments",
@@ -26472,7 +26472,7 @@ export default {"allergic_rhinitis":{
     "http://www.accessdata.fda.gov/scripts/cder/daf/",
     "Dosage information came from FDA reference sheets available at: ",
     "https://www.drugs.com/dosage/",
-    "Medications prescribed in this module:     ",
+    "Medications prescribed in this model:     ",
     "1. Penicillin        available after 1945  ",
     "2. Ampicillin        available after 1961  ",
     "3. Doxycycline       available after 1967  ",
@@ -26986,19 +26986,19 @@ export default {"allergic_rhinitis":{
 "medications/moderate_opioid_pain_reliever":{
   "name": "Moderate Opioid Pain Reliever",
   "remarks": [
-    "This submodule prescribes a moderate opioid pain reliever for acute pain. ",
+    "This submodel prescribes a moderate opioid pain reliever for acute pain. ",
     "For example, after a major surgery or injury. Medications prescribed ",
-    "in this module are accurate for the current year of the simulation. ",
+    "in this model are accurate for the current year of the simulation. ",
     "If a patient is not eligible for an opioid pain reliever (for example, ",
     "if they are already taking one, or if they are a young child), none is prescribed.",
-    "All medications prescribed in this module are assigned to the attribute ",
-    "'opioid_prescription'. It is the responsibility of the Opioid Addiction module ",
+    "All medications prescribed in this model are assigned to the attribute ",
+    "'opioid_prescription'. It is the responsibility of the Opioid Addiction model ",
     "to end this medication.",
     "Availability dates for different drugs came from the FDA: ",
     "http://www.accessdata.fda.gov/scripts/cder/daf/",
     "Dosage information came from FDA reference sheets available at: ",
     "https://www.drugs.com/dosage/",
-    "The following medications are prescribed in this module. Most opioids were invented ",
+    "The following medications are prescribed in this model. Most opioids were invented ",
     "during or prior to WWII, but did not become widely available until after the war:",
     "1. Meperidine (Demerol)                      available after 1945      ",
     "2. Hydrocodone/Acetaminophen (Vicondin)      available after 1943      ",
@@ -27160,13 +27160,13 @@ export default {"allergic_rhinitis":{
 "medications/otc_antihistamine":{
   "name": "Over-The-Counter Antihistamine",
   "remarks": [
-    "This submodule correctly prescribes an over-the-counter antihistamine ",
+    "This submodel correctly prescribes an over-the-counter antihistamine ",
     "that has accurate dosage for adults and children and is accurate for the ",
     "current year of the simulation. Medications are not prescribed before they ",
     "were invented, and older medications (e.g. benadryl) are prescribed less ",
     "frequently as alternatives (e.g. claritin) become available.",
-    "IT IS THE RESPONSIBILITY OF THE CALLING MODULE TO END THIS MEDICATION BY ATTRIBUTE.",
-    "All medications prescribed in this module are assigned to the attribute ",
+    "IT IS THE RESPONSIBILITY OF THE CALLING model TO END THIS MEDICATION BY ATTRIBUTE.",
+    "All medications prescribed in this model are assigned to the attribute ",
     "'otc_antihistamine'.",
     "Availability dates for different drugs came from the FDA: ",
     "http://www.accessdata.fda.gov/scripts/cder/daf/",
@@ -27175,7 +27175,7 @@ export default {"allergic_rhinitis":{
     "Although there are now liquid forms of some medications (especially for ",
     "children), it's unclear when those became available and the dosing is too ",
     "complicated to model easily. For simplicity, all OTC antihistamines prescribed ",
-    "in this module are of the oral tablet type.",
+    "in this model are of the oral tablet type.",
     "Historically there has been 3 'generations' of antihistamines: ",
     "Generaton 1 H1 antihistamines: ",
     "1. Diphenhydramine (Benadryl)           available after 1946 ",
@@ -27610,13 +27610,13 @@ export default {"allergic_rhinitis":{
 "medications/otc_pain_reliever":{
   "name": "Over-The-Counter Pain Reliever",
   "remarks": [
-    "This submodule correctly prescribes an over-the-counter pain reliever ",
+    "This submodel correctly prescribes an over-the-counter pain reliever ",
     "that has accurate dosage for adults and children and is accurate for the ",
     "current year of the simulation. Medications are not prescribed before they ",
     "were invented, and older medications (e.g. aspirin) are prescribed less ",
     "frequently as alternatives (e.g. acetaminophen) become available.",
-    "IT IS THE RESPONSIBILITY OF THE CALLING MODULE TO END THIS MEDICATION BY ATTRIBUTE.",
-    "All medications prescribed in this module are assigned to the attribute ",
+    "IT IS THE RESPONSIBILITY OF THE CALLING model TO END THIS MEDICATION BY ATTRIBUTE.",
+    "All medications prescribed in this model are assigned to the attribute ",
     "'otc_pain_reliever'.",
     "Availability dates for different drugs came from the FDA: ",
     "http://www.accessdata.fda.gov/scripts/cder/daf/",
@@ -27625,8 +27625,8 @@ export default {"allergic_rhinitis":{
     "Although there are now liquid forms of some medications (especially for ",
     "children), it's unclear when those became available and the dosing is too ",
     "complicated to model easily. For simplicity, all OTC pain relievers prescribed ",
-    "in this module are of the oral tablet type.",
-    "The following medications may be prescribed by this module:  ",
+    "in this model are of the oral tablet type.",
+    "The following medications may be prescribed by this model:  ",
     "1. Aspirin                              available after 1899 ",
     "2. Acetaminophen (Tylenol)              available after 1950 ",
     "3. Ibuprofen (Motrin, Advil)            available after 1974 ",
@@ -27910,19 +27910,19 @@ export default {"allergic_rhinitis":{
 "medications/strong_opioid_pain_reliever":{
   "name": "Strong Opioid Pain Reliever",
   "remarks": [
-    "This submodule prescribes a strong opioid pain reliever for chronic or ",
+    "This submodel prescribes a strong opioid pain reliever for chronic or ",
     "terminal pain. For example, the late stages of cancer. Medications prescribed ",
-    "in this module are accurate for the current year of the simulation. ",
+    "in this model are accurate for the current year of the simulation. ",
     "If a patient is not eligible for an opioid pain reliever (for example, ",
     "if they are already taking one, or if they are a young child), none is prescribed.",
-    "All medications prescribed in this module are assigned to the attribute ",
-    "'opioid_prescription'. It is the responsibility of the Opioid Addiction module ",
+    "All medications prescribed in this model are assigned to the attribute ",
+    "'opioid_prescription'. It is the responsibility of the Opioid Addiction model ",
     "to end this medication.",
     "Availability dates for different drugs came from the FDA: ",
     "http://www.accessdata.fda.gov/scripts/cder/daf/",
     "Dosage information came from FDA reference sheets available at: ",
     "https://www.drugs.com/dosage/",
-    "The following medications are prescribed in this module. Most opioids were invented ",
+    "The following medications are prescribed in this model. Most opioids were invented ",
     "during or prior to WWII, but did not become widely available until after the war:",
     "1. Methadone (Dolophine)             available after 1947      ",
     "2. Oxycodone (OxyContin)             available after 1920 (est)"
@@ -28059,7 +28059,7 @@ export default {"allergic_rhinitis":{
     "Initial": {
       "type": "Initial",
       "remarks": [
-        "Initial impl == direct translation of ruby module"
+        "Initial impl == direct translation of ruby model"
       ],
       "direct_transition": "Wellness_Encounter"
     },
@@ -33459,10 +33459,10 @@ export default {"allergic_rhinitis":{
     "Since the 1990's prescription rates for opioids have increased exponentially. Today, doctors write ",
     "between 50 and 150 opioid prescriptions per 100 people. see: ",
     "http://www.cdc.gov/drugoverdose/data/prescribing.html",
-    "Currently the injuries module prescribed opioids at a rate of 25 - 30 per 100 people, but that's ",
+    "Currently the injuries model prescribed opioids at a rate of 25 - 30 per 100 people, but that's ",
     "over a whole lifetime. 0-2 prescriptions are written for opioids for each patient after 1990, ",
     "or about 1 / 25 = 0.04 per year. This is small compared to the total opioid prescriptions written ",
-    "each year. This module therefore picks up most of the remaining prescriptions, then evaluates all ",
+    "each year. This model therefore picks up most of the remaining prescriptions, then evaluates all ",
     "addiction rates using a modified model adapted from Project SAMMI: ",
     "http://projectsammi.github.io/",
     "Prior to 1990 we don't model opioid addiction - prescription rates were far lower and the ",
@@ -33507,7 +33507,7 @@ export default {"allergic_rhinitis":{
         "Project SAMMI originally used a 1-day timestep and modeled opioid addiction over the course of ",
         "one year. Our model runs for much longer - several decades, and we use a 1 month timestep. ",
         "I reduced the incidence of new prescriptions by a factor of 4, and reduced misuse by a factor of 10. ",
-        "We need to generate fewer prescriptions since the injuries module regularly prescribes opioids for ",
+        "We need to generate fewer prescriptions since the injuries model regularly prescribes opioids for ",
         "some injuries."
       ],
       "complex_transition": [
@@ -33517,7 +33517,7 @@ export default {"allergic_rhinitis":{
             "attribute": "opioid_prescription",
             "operator": "is not nil",
             "remarks": [
-              "This catches the opioids prescribed by the injuries module."
+              "This catches the opioids prescribed by the injuries model."
             ]
           },
           "distributions": [
@@ -34317,7 +34317,7 @@ export default {"allergic_rhinitis":{
     "Osteoarthritis (OA) is a breakdown of cartilage in the joints. It is a chronic condition ",
     "that only worsens with time. OA is more likely in females (2:1) and the risk of OA increases ",
     "with age. OA also accounts for most of the total joint replacements (knees and hips) in the U.S.",
-    "Joint replacements are handled by the total_joint_replacement module and triggered by the ",
+    "Joint replacements are handled by the total_joint_replacement model and triggered by the ",
     "'joint_replacement' attribute.",
     "Information on treatment, prevalence, and incidence of specific arthritis types from the CDC: ",
     "http://www.cdc.gov/arthritis/basics/types.html",
@@ -34452,7 +34452,7 @@ export default {"allergic_rhinitis":{
       ],
       "remarks": [
         "For knees or hips we can consider joint replacement surgery. However this is not a ",
-        "treatment option for arthritis of the hand. The total_joint_replacement module will ",
+        "treatment option for arthritis of the hand. The total_joint_replacement model will ",
         "not process a joint replacement surgery until the patient is over 50 years of age.",
         "Source for hip and knee replacement prevalence: ",
         "http://www.cdc.gov/arthritis/data_statistics/arthritis-related-stats.htm ",
@@ -34748,7 +34748,7 @@ export default {"allergic_rhinitis":{
 "osteoporosis":{
   "name": "Osteoporosis",
   "remarks": [
-    "This very basic module uses pure prevalence stats to just set osteoporosis on patients based on age/sex",
+    "This very basic model uses pure prevalence stats to just set osteoporosis on patients based on age/sex",
     "https://www.iofbonehealth.org/facts-statistics",
     "In reality osteoporosis is progressive and gets worse over time, it doesn't suddenly onset one day"
   ],
@@ -34986,12 +34986,12 @@ export default {"allergic_rhinitis":{
   "name": "Pregnancy",
   "remarks": [
     "Whenever a female becomes pregnant, the 'pregnant' attribute is set to true ",
-    "by the Female Reproduction module. The likelihood of becoming pregnant is ",
+    "by the Female Reproduction model. The likelihood of becoming pregnant is ",
     "determined by a wide variety of factors including age, sexual activity, ",
     "and contraceptive use.",
-    "Some notable complications NOT modeled in this module:",
+    "Some notable complications NOT modeled in this model:",
     "1. Maternal death (very low incidence in developed countries)",
-    "2. Gestational diabetes (because of the complex interplay with the diabetes module)",
+    "2. Gestational diabetes (because of the complex interplay with the diabetes model)",
     "3. Tobacco, drug, or alcohol use during pregnancy"
   ],
   "states": {
@@ -36428,7 +36428,7 @@ export default {"allergic_rhinitis":{
         "Unless the birth was elected and intentional (in the case of an induced birth) ",
         "births follow the usual distribution of locations, complications, etc.",
         "A small portion of births (2%) happen at home or on the way to the hospital. For simplicity ",
-        "all births in this module happen in a hospital setting. Future versions may add the additional ",
+        "all births in this model happen in a hospital setting. Future versions may add the additional ",
         "complexity of home and BBA births."
       ],
       "direct_transition": "Hospital_Admission_For_Birth"
@@ -36438,8 +36438,8 @@ export default {"allergic_rhinitis":{
       "encounter_class": "emergency",
       "reason": "Become_Pregnant",
       "remarks": [
-        "The birth section of this module is adapted from Jeff Eastman's (https://github.com/jeffeastman) ",
-        "initial birth module contributed to Synthea. All remaining probabilities in this section are ",
+        "The birth section of this model is adapted from Jeff Eastman's (https://github.com/jeffeastman) ",
+        "initial birth model contributed to Synthea. All remaining probabilities in this section are ",
         "Jeff's estimates."
       ],
       "codes": [
@@ -37866,7 +37866,7 @@ export default {"allergic_rhinitis":{
     "In the U.S., suicides occur at a rate of 12.93/100k people. However, suicide attempts occur ",
     "at approximately 12x this rate. The incidence of attempts and completed suicides varies ",
     "greatly depending on race, age, and gender. The following factors influence the likelihood ",
-    "of suicide in this module: ",
+    "of suicide in this model: ",
     "Race   - White males (esp. middle age or older) account for 7/10 suicides ",
     "Gender - Females attempt suicide 3x as often as males, but males complete 3.5x as often ",
     "Age    - In general, the older you get the more likely you are to commit suicide ",
@@ -38136,7 +38136,7 @@ export default {"allergic_rhinitis":{
       "remarks": [
         "It's difficult to find accurate statistics for how many people actually attempt suicide since ",
         "those who attempt suicide often don't seek medical attention afterwards. Therefore, the attempts ",
-        "modeled in this module are considered severe enough to merit medical attention.",
+        "modeled in this model are considered severe enough to merit medical attention.",
         "Males COMPLETE suicide 3.5x as often as females do. Suicides have a 7% completion rate overall."
       ],
       "complex_transition": [
@@ -38534,10 +38534,10 @@ export default {"allergic_rhinitis":{
 "sexual_activity":{
   "name": "Sexual Activity",
   "remarks": [
-    "This module models the sexual activity of males and females from puberty ",
-    "to old age. Most of the incidence in this module is based on a recent study ",
+    "This model models the sexual activity of males and females from puberty ",
+    "to old age. Most of the incidence in this model is based on a recent study ",
     "from Indiana University: http://www.nationalsexstudy.indiana.edu/graph.html",
-    "This module operates on the assumption that these incidences for human sexual ",
+    "This model operates on the assumption that these incidences for human sexual ",
     "activity have remained similar throughout modern history.",
     "No consideration is given to the age, race, socioeconomic status, or marriage ",
     "status of the patient. This complexity could be added."
@@ -40497,7 +40497,7 @@ export default {"allergic_rhinitis":{
 "total_joint_replacement/functional_status_assessments":{
   "name": "Functional Status Assessments",
   "remarks": [
-    "This is a submodule that includes the possible assessments a patient will go through prior to and following either a total knee replacement or a total hip replacement.\n"
+    "This is a submodel that includes the possible assessments a patient will go through prior to and following either a total knee replacement or a total hip replacement.\n"
   ],
   "states": {
     "KOOS_Total_Assessment": {
@@ -41347,9 +41347,9 @@ export default {"allergic_rhinitis":{
 "total_joint_replacement":{
   "name": "Total Joint Replacement",
   "remarks": [
-    "This is not a standalone module. Currently joint replacements are triggered by ",
+    "This is not a standalone model. Currently joint replacements are triggered by ",
     "the 'joint_replacement' attribute set by the osteoarthritis and rheumatoid ",
-    "arthritis modules. Possible values for the 'joint_replacement' attribute are ",
+    "arthritis models. Possible values for the 'joint_replacement' attribute are ",
     "'hip' and 'knee'."
   ],
   "states": {
@@ -41477,8 +41477,8 @@ export default {"allergic_rhinitis":{
       "direct_transition": "Post_Op_Prescribe_Pain_Reliever"
     },
     "Post_Op_Prescribe_Pain_Reliever": {
-      "type": "CallSubmodule",
-      "submodule": "medications/moderate_opioid_pain_reliever",
+      "type": "CallSubmodel",
+      "submodel": "medications/moderate_opioid_pain_reliever",
       "direct_transition": "In_Hospital_Post_Surgery_Recovery"
     },
     "In_Hospital_Post_Surgery_Recovery": {
@@ -41606,8 +41606,8 @@ export default {"allergic_rhinitis":{
       ]
     },
     "Functional_Status_Assessments": {
-      "type": "CallSubmodule",
-      "submodule": "total_joint_replacement/functional_status_assessments",
+      "type": "CallSubmodel",
+      "submodel": "total_joint_replacement/functional_status_assessments",
       "direct_transition": "Pre_Procedure_Encounter_End"
     },
     "Post_Procedure_Encounter": {
@@ -41653,8 +41653,8 @@ export default {"allergic_rhinitis":{
       ]
     },
     "Functional_Status_Assessments_2": {
-      "type": "CallSubmodule",
-      "submodule": "total_joint_replacement/functional_status_assessments",
+      "type": "CallSubmodel",
+      "submodel": "total_joint_replacement/functional_status_assessments",
       "direct_transition": "Post_Procedure_Encounter_End"
     },
     "Post_Procedure_Encounter_End": {
@@ -41679,7 +41679,7 @@ export default {"allergic_rhinitis":{
     "about 75% of those visits to the physician are unique patients. I therefore estimate (0.75 * 8.1M) = 6.08M ",
     "unique patients get UTIs every year, or about 1.9% of the population (out of 320M Americans in 2016).",
     "Several risk factors also increase the likelihood of a UTI including diabetes and obseity. Obesity doubles ",
-    "the risk for a UTI in women. For now these are not represented in this module."
+    "the risk for a UTI in women. For now these are not represented in this model."
   ],
   "states": {
     "Initial": {
@@ -42801,7 +42801,7 @@ export default {"allergic_rhinitis":{
 "veteran_hyperlipidemia":{
   "name": "Veteran Hyperlipidemia",
   "remarks": [
-    "A blank module"
+    "A blank model"
   ],
   "states": {
     "Initial": {
@@ -43642,7 +43642,7 @@ export default {"allergic_rhinitis":{
 "veteran_lung_cancer":{
   "name": "Veteran Lung Cancer",
   "remarks": [
-    "Most of the data for this module was synthesized from two primary sources:",
+    "Most of the data for this model was synthesized from two primary sources:",
     "1. The comprehensive pages starting at http://www.cancer.org/cancer/lungcancer/index",
     "2. The Cancer Care Ontario Pathway Maps at https://www.cancercare.on.ca/ocs/qpi/dispathmgmt/pathways/lung_cancer_pathway_map/",
     "Some data statistics came from:",
@@ -44623,7 +44623,7 @@ export default {"allergic_rhinitis":{
 "veteran_mdd":{
   "name": "Veteran MDD",
   "remarks": [
-    "A blank module"
+    "A blank model"
   ],
   "states": {
     "Initial": {
@@ -45274,8 +45274,8 @@ export default {"allergic_rhinitis":{
       "direct_transition": "Change_Dx_Not_MDD"
     },
     "MDD Chronic Pain Med": {
-      "type": "CallSubmodule",
-      "submodule": "medications/moderate_opioid_pain_reliever",
+      "type": "CallSubmodel",
+      "submodel": "medications/moderate_opioid_pain_reliever",
       "direct_transition": "end_Psych_encounter"
     },
     "age guard": {
@@ -45385,7 +45385,7 @@ export default {"allergic_rhinitis":{
 "veteran_prostate_cancer":{
   "name": "Veteran Prostate Cancer",
   "remarks": [
-    "A blank module"
+    "A blank model"
   ],
   "states": {
     "Initial": {
@@ -46645,7 +46645,7 @@ export default {"allergic_rhinitis":{
 "veteran_ptsd":{
   "name": "Veteran PTSD",
   "remarks": [
-    "Post Traumatic Stress Disorder is one of the top disease conditions (by prevalence), disproportionately affecting veterans.  A majority of the guidelines detailed here in this module "
+    "Post Traumatic Stress Disorder is one of the top disease conditions (by prevalence), disproportionately affecting veterans.  A majority of the guidelines detailed here in this model "
   ],
   "states": {
     "Initial": {
@@ -47693,7 +47693,7 @@ export default {"allergic_rhinitis":{
       "remarks": [
         "It's difficult to find accurate statistics for how many people actually attempt suicide since ",
         "those who attempt suicide often don't seek medical attention afterwards. Therefore, the attempts ",
-        "modeled in this module are considered severe enough to merit medical attention.",
+        "modeled in this model are considered severe enough to merit medical attention.",
         "Males COMPLETE suicide 3.5x as often as females do. Suicides have a 7% completion rate overall."
       ],
       "complex_transition": [
@@ -48096,8 +48096,8 @@ export default {"allergic_rhinitis":{
       "direct_transition": "Attempts_Suicide"
     },
     "MH & SUD Comorbidty Check": {
-      "type": "CallSubmodule",
-      "submodule": "veterans/veteran_suicide_probabilities",
+      "type": "CallSubmodel",
+      "submodel": "veterans/veteran_suicide_probabilities",
       "distributed_transition": [
         {
           "transition": "Comorbidity Check",
@@ -48261,7 +48261,7 @@ export default {"allergic_rhinitis":{
 "veteran_substance_abuse_conditions":{
   "name": "Veteran Substance Abuse Conditions",
   "remarks": [
-    "A blank module"
+    "A blank model"
   ],
   "states": {
     "Initial": {
@@ -48415,7 +48415,7 @@ export default {"allergic_rhinitis":{
 "veteran_substance_abuse_treatment":{
   "name": "Veteran Substance Abuse Treatment",
   "remarks": [
-    "A blank module"
+    "A blank model"
   ],
   "states": {
     "Initial": {
@@ -48766,7 +48766,7 @@ export default {"allergic_rhinitis":{
 "wellness_encounters":{
   "name": "Wellness Encounters",
   "remarks": [
-    "migrated observations from Lifecycle and Metabolic Syndrome ruby modules"
+    "migrated observations from Lifecycle and Metabolic Syndrome ruby models"
   ],
   "states": {
     "Initial": {

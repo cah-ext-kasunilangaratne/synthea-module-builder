@@ -1,17 +1,15 @@
 // @flow
 import React, { Component } from 'react';
-import { RIESelect, RIEInput, RIENumber, RIEToggle, RIETextArea } from 'riek';
+import { RIESelect, RIEInput, RIENumber, RIETextArea } from 'riek';
 import _ from 'lodash';
-
 import type { State, InitialState, TerminalState, SimpleState, GuardState, DelayState, SetAttributeState, CounterState, CallSubmoduleState, EncounterState, EncounterEndState, ConditionOnsetState, ConditionEndState, AllergyOnsetState, AllergyEndState, MedicationOrderState, MedicationEndState, CarePlanStartState, CarePlanEndState, ProcedureState, VitalSignState, ObservationState, MultiObservationState, DiagnosticReportState, ImagingStudyState, SymptomState, DeathState } from '../../types/State';
-
 import { Code, Codes } from './Code';
 import { Goals } from './Goal';
 import { SeriesList } from './ImagingStudyAttributes';
 import ConditionalEditor from './Conditional';
 import Transition from './Transition';
 import { getTemplate } from '../../templates/Templates';
-import { BasicTutorial, EditTutorial } from '../../templates/Tutorial';
+import { EditTutorial } from '../../templates/Tutorial';
 
 
 import './State.css';

@@ -36,10 +36,13 @@ export function getTemplate(path){
     case 'Module':
       typeVar = ModuleTemplates;
       break;
+
+    default:
+      console.log(template);
   }
 
 
-  if(reducedPath.length == 0){
+  if(reducedPath.length === 0){
     return typeVar
   }
 
@@ -581,7 +584,7 @@ const StructureTemplates = {
 const ModuleTemplates = {
   Blank: {
     name: "Untitled",
-    remarks: ["A blank module"],
+    remarks: ["A blank model"],
     states: {
       Initial: {...StateTemplates.Initial, direct_transition: 'Terminal'},
       Terminal: {...StateTemplates.Terminal}

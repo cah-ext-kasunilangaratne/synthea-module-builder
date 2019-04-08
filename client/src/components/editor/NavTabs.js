@@ -5,7 +5,7 @@ import './NavTabs.css';
 
 import type { Module } from './types/Module';
 
-import CancelButton from './cancel-button.png';
+import CancelButton from '../../images/cancel-button.png';
 
 type Props = {
   modules: Module[],

@@ -16,12 +16,18 @@ it('renders load module modal wthout errors', () => {
   import("../../data/modules").then(modules => {
       renderComponent(LoadModule, { modules: examplitis, library: modules.default, visible: false, onHide, push, welcome: false, newModule })
   });
-    // return <LoadModule modules={this.props.modules}
-    //       library={this.props.library}
-    //       visible={this.props.loadModuleVisible}
-    //       onHide={this.props.hideLoadModule}
-    //       push={this.props.push}
-    //       welcome={!this.props.module}
-    //       newModule={this.newModule(Object.keys(this.props.modules))}
-    //       />
+//     // return <LoadModule modules={this.props.modules}
+//     //       library={this.props.library}
+//     //       visible={this.props.loadModuleVisible}
+//     //       onHide={this.props.hideLoadModule}
+//     //       push={this.props.push}
+//     //       welcome={!this.props.module}
+//     //       newModule={this.newModule(Object.keys(this.props.modules))}
+//     //       />
 });
+
+// it('renders without crashing', () => {
+//   const div = document.createElement('div');
+//   ReactDOM.render(<LoadModule />, div);
+//   ReactDOM.unmountComponentAtNode(div);
+// });

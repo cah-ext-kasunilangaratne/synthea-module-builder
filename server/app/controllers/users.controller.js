@@ -30,7 +30,7 @@ exports.create = (req, res) => {
                 password: req.body.password
             });
 
-            // Save Module in the database
+            // SaveModule Module in the database
             user_module.save()
             .then(data => {
                 res.status(201).send({
@@ -67,6 +67,8 @@ exports.authenticate = (req,res) => {
                     }    
                 }
             })
+        } else {
+            res.json({status:"error", message: "Invalid email/password!!!", data:null});
         }
     }) 
     

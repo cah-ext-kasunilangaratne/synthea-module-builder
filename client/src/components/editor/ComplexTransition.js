@@ -1,18 +1,13 @@
 // @flow
 import React, { Component } from 'react';
-import { RIESelect } from 'riek';
 import _ from 'lodash';
-
 import type { ConditionalTransition as ConditionalTransitionType } from '../../types/Transition';
 import { getTemplate } from '../../templates/Templates';
 import ConditionalEditor from './Conditional';
 import DistributedTransitionEditor from './DistributedTransition';
 import DirectTransitionEditor from './DirectTransition';
 import type { State } from '../../types/State';
-
 import './Transition.css';
-
-
 
 type Props = {
   options: State[],

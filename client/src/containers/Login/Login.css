@@ -1,0 +1,72 @@
+@import url('https://fonts.googleapis.com/css?family=Raleway');
+
+.center{
+    font-family: 'verdana';
+    background-color: #fff;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow-y: unset;
+}
+
+.card{
+    border-radius: 15px;
+    padding: 0.8rem;
+}
+
+.card > form{
+    display: flex;
+    flex-direction: column;
+}
+
+.card h1{
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+.form-item{
+    font-family: 'verdana';
+    padding: 5px;
+    margin-bottom: 2rem;
+    height: 60px;
+    width: 30rem;
+    border: 1px solid grey;
+}
+
+.form-submit{
+    font-family: 'verdana';
+    height: 35px;
+    color: #fff;
+    background-color: #1abc9c;
+    border: none;
+    letter-spacing: 0.2rem;
+    transition: 0.3s opacity ease;
+    cursor: pointer;
+}
+.form-submit:hover{
+   opacity: 0.6;
+}
+
+.Login-top {
+    background-color: #fff;
+    height: 75px;
+    border-bottom: 1px solid #aaa;
+ }
+ 
+ .Login-top-title {
+   display: inline-block;
+   font-size: 1.8em;
+   margin: 20px 20px 0 110px;
+ }
+ 
+ .Login-top-logo {
+   position: absolute;
+   left: 10px;
+   top: 20px; 
+   width: 95px;
+   height: 45px;
+ }

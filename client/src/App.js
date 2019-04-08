@@ -1,19 +1,18 @@
 // @flow
 import React from 'react';
 import { Provider } from 'react-redux'
-import { Route, Link, BrowserRouter as Router, Switch } from 'react-router-dom'
+import { Route, BrowserRouter as Router, Switch } from 'react-router-dom'
 import { ConnectedRouter} from 'react-router-redux'
 import createHistory from 'history/createBrowserHistory'
-
 import createAppStore from './store';
-import Editor from './containers/Editor';
-import LogIn from './components/Login/Login'
+import Editor from './containers/Editor/Editor';
+import LogIn from './containers/Login/Login'
 import { openModule } from './actions/router';
-import { ProtectedRoute } from './components/Login/Protected.Route'
+import { ProtectedRoute } from './containers/Login/Protected.Route'
 
-const history = createHistory()
+const history = createHistory();
 
-const store = createAppStore(history)
+const store = createAppStore(history);
 
 const App = () => {
   return (
@@ -35,7 +34,7 @@ const App = () => {
       
       
   );
-}
+};
 
 
 // Intercept location change (hash changes) and send to a custom event
@@ -45,7 +44,7 @@ const dispatchLocationChange = location => {
   if(history.location.hash.charAt(0) === '#'){
     store.dispatch(openModule(history.location.hash.slice(1)));
   }
-}
+};
 
 history.listen(dispatchLocationChange);
 

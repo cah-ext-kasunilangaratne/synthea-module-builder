@@ -1,9 +1,7 @@
 // @flow
 import React, { Component } from 'react';
-import _ from 'lodash';
-
 import './AttributeList.css';
-import CancelButton from './cancel-button.png';
+import CancelButton from '../../images/cancel-button.png';
 
 type Props = {
   states: State[],
@@ -47,8 +45,8 @@ class AttributeList extends Component<Props> {
             <img className="search-clear" src={CancelButton} onClick={this.clearSearch.bind(this)}/>
           </div>
           <div>
-            Note: This currently only displays attributes being written in this module.  It does not include referenced attributes
-            or attributes written in other modules.
+            Note: This currently only displays attributes being written in this model.  It does not include referenced attributes
+            or attributes written in other models.
           </div>
           <table className="table table-sm table-hover">
               <thead className="thead-light">

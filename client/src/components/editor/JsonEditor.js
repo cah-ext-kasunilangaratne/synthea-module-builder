@@ -7,7 +7,6 @@ import 'jsoneditor-react/es/editor.min.css';
 import ace from 'brace';
 import 'brace/mode/json';
 import {generateDOT} from '../../utils/graphviz';
-
 import type { Module } from './types/Module';
 
 type Props = {
@@ -31,8 +30,7 @@ class JsonEditor extends Component<Props> {
     this.clearTimeout = setTimeout(()=>{
 
       try {
-        let dot = generateDOT(module);
-
+        // let dot = generateDOT(module);
         this.props.onChange(module)
 
       } catch (ex) {

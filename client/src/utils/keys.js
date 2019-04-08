@@ -10,7 +10,7 @@ export function findAvailableKey(root, keys){
   let endsInNumber = /_(\d+)$/g;
   let matches = endsInNumber.exec(root);
   if(matches && matches.length > 1){
-    index = parseInt(matches[1]);
+    index = parseInt(matches[1],3);
     root = next = next.replace(matches[0], "");
   }
 

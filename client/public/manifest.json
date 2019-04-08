@@ -1,6 +1,6 @@
 {
-  "short_name": "Module Builder",
-  "name": "Synthea Generic Module Builder",
+  "short_name": "Model Builder",
+  "name": "Proxi Model Builder",
   "icons": [
     {
       "src": "favicon.ico",

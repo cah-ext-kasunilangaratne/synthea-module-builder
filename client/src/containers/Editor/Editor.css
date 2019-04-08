@@ -1,0 +1,427 @@
+
+button {
+  cursor: pointer;
+}
+
+.button-clear {
+  border: none;
+  margin: 0;
+  padding: 0;
+  width: auto;
+  overflow: visible;
+
+  background: transparent;
+
+  /* inherit font & color from ancestor */
+  color: inherit;
+  font: inherit;
+
+  /* Normalize `line-height`. Cannot be changed from `normal` in Firefox 4+. */
+  line-height: normal;
+
+  /* Corrects font smoothing for webkit */
+  -webkit-font-smoothing: inherit;
+  -moz-osx-font-smoothing: inherit;
+
+  /* Corrects inability to style clickable `input` types in iOS */
+  -webkit-appearance: none;
+
+}
+
+.button-clear:focus {
+  outline: none;
+}
+
+.Editor-main {
+  
+}
+
+.Editor-top {
+   background-color: #fff;
+   height: 75px;
+   border-bottom: 1px solid #aaa;
+   
+}
+
+.Editor-top-title {
+  display: inline-block;
+  font-size: 1.8em;
+  margin: 20px 20px 0 110px;
+
+}
+
+.Editor-top-module{
+  display: inline-block;
+  font-size: 1.6em;
+  margin-left: 65px;
+  color: #7f9ad3;
+
+}
+
+.Editor-top-logo {
+  position: absolute;
+  left: 10px;
+  top: 20px; 
+  width: 95px;
+  height: 45px;
+}
+
+.Editor-top button.Editor-top-help{
+  position: absolute;
+  top: 9px;
+  right: 16px;
+  color: #fff1f1;
+  background-color: #28435c;
+  padding: 1px 6px;
+  border-radius: 20px;
+  border: 3px solid #28435c;
+  font-size: 1em;
+
+}
+
+.Editor-top button.Editor-top-logout{
+  position: absolute;
+  top: 9px;
+  right: 56px;
+  color: #fff1f1;
+  background-color: #28315c;
+  padding: 1px 6px;
+  border-radius: 5px;
+  border: 3px solid #28435c;
+  font-size: 1em;
+
+}
+
+.Editor-top h2.user{
+  /* color: red; */
+  position: absolute;
+  top: 13px;
+  right: 156px;
+  font-size: 1em;
+}
+
+
+.Editor-top-open {
+  display:inline-block;
+}
+
+.Editor-top-open button {
+  color: #5190cb;
+  margin: 0 12px;
+  
+
+}
+
+.Editor-top-open button.Editor-top-download {
+  color: #cb7732;
+}
+
+.Editor-top-open button.Editor-top-save {
+  color: #c3173F;
+}
+
+.Editor-loading-logo{
+
+  width: 300px;
+  height: 300px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  margin-top: -100px;
+  margin-left: -100px;
+  opacity: .3;
+}
+
+.Editor .navbar-brand.Editor-title {
+  font-size: 1.5rem;
+}
+
+
+.Editor .navbar {
+  background-color: #54544e;
+  border-bottom: 10px solid #22425e;
+  -webkit-box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.23);
+  -moz-box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.23);
+  box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.23);
+  z-index: 500;
+}
+
+.Editor-fullscreen-name {
+  position: absolute;
+  top: 75px;
+  left: 65px;
+  font-size: 1.25em;
+  text-shadow: 5px 5px 8px rgba(0,0,0,0.23);
+  background-color: inherit;
+  z-index: 200;
+  border: 0;
+  padding: 0;
+}
+
+.Editor-fullscreen-name:focus {
+  outline: 0;
+  
+}
+
+.Editor-action-bar {
+    height: 40px;
+    background-color: #fafafa;
+    position:relative;
+    border-bottom: 1px solid #aaa;
+    /* -webkit-box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.23); */
+    /* -moz-box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.23); */
+    /* box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.23); */
+    
+
+  }
+
+.Editor-graph-buttons button.Editor-action-download {
+  border: 0;
+  background-color: #cb7732;
+  
+}
+
+.Editor-left {
+  background-color: #fff;
+  width: 50px;
+  position: fixed;
+  height: 100%;
+  top: 115px;
+  left: 0px;
+  z-index: 1000;
+  border-right: 1px solid #aaa;
+}
+
+.Editor-left ul{
+  padding: 0;
+  /* margin-top:9px; */
+}
+
+.Editor-left li{
+  list-style: none;
+  text-align:center;
+  background-color: #d8d7d5;
+}
+
+.Editor-left .Editor-left-spacer {
+  background-color: #fff;
+  height: 10px;
+  border-bottom: 1px solid #999;
+  
+}
+
+.Editor-left button {
+  width: 50px;
+  height: 50px;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  background-color:#d8d7d5;
+  border-bottom: 1px solid #999;
+  border-right: 1px solid #999;
+  position: relative;
+}
+
+.Editor-left button:focus {
+  outline: 0;
+}
+
+.Editor-left li.Editor-left-selected button {
+  border-right: 0px;
+  background-color: #fafafa;
+}
+
+.Editor-left li.Editor-left-selected button:hover {
+  background-color: #fff;
+}
+
+.Editor-left li.Editor-left-disabled button {
+  opacity: .1;
+}
+
+.Editor-left li button:hover {
+  background-color: #ccc;
+}
+
+.Editor-left button .Editor-button-count{
+  bottom: 4px;
+  position: absolute;
+  background-color: #333;
+  padding: 1px 5px;
+  border-radius: 10px;
+  font-size: .5em;
+  color: white;
+  right: 2px;
+}
+
+.Editor-left button .Editor-button-count.Editor-button-count-warning{
+  background-color: #b40707;
+}
+
+.Editor-left-fullscreen img{
+  width: 30px;
+  margin-top: -4px;
+}
+
+.Editor-left .Editor-left-fullscreen{
+  border: 0;
+  height: 0;
+  overflow: hidden;
+  margin: 0px;
+  padding: 0px;
+  transition: height .5s;
+}
+
+.Editor-left .Editor-left-fullscreen button{
+  border-right: 0px;
+  background-color: #22425e;
+  height: 30px;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  width: 50px;
+}
+
+.Editor-left .Editor-left-fullscreen button:hover{
+  background-color: #22425e;
+}
+
+.Editor-left .Editor-left-fullscreen img{ 
+  transform: rotate(180deg);
+}
+
+.Editor-left .Editor-left-fullscreen-active{
+  height: 30px;
+  /* transform: rotate(180deg); */
+
+}
+
+.Editor .Editor-module-name {
+  
+  /* width: 500px; */
+  /* height: 100px; */
+  /* position: fixed; */
+  /* top: 100px; */
+  /* left: 0px; */
+  /* z-index: 300; */
+
+
+  margin-top: 60px;
+  background-color: #22425e;
+  color: #eee;
+  font-size: 1.25rem;
+  padding: 2px 0 8px 10px;
+  /* padding-left: 55px; */
+
+}
+
+.Editor .Editor-module-name input {
+  font-size: 1rem;
+  width: 480px;
+}
+
+.Editor-panel {
+  background-color: #fafafa;  
+  position:fixed;
+  height: 100%;
+  left: 50px;
+  z-index: 900;
+  margin: 10px 20px 200px 0;
+  padding: 0;
+  /* -webkit-box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.23); */
+  /* -moz-box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.23); */
+  /* box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.23); */
+  transition-property: left;
+  transition-duration: .5s;
+  transition-timing-function: ease-in-out;
+  border-right: 2px solid #ccc;
+}
+
+.Editor-panel-content {
+
+  margin-top: 90px;
+  padding-top: 0px;
+  top: 90px;
+  padding-bottom: 100px;
+  padding-left: 15px;
+  width: 100%;
+  padding-right: 15px;
+  position: absolute;
+  height: 100%;
+  overflow-y: scroll;
+  top: -100px;
+}
+
+.Editor-panel .Editor-panel-resize {
+  width:16px;
+  height: 100%;
+  position:absolute;
+}
+
+.Editor-panel .Editor-panel-resize:hover {
+  cursor: col-resize;
+  
+}
+
+.Editor-panel-title {
+  font-size: 1.25rem;
+  padding: 5px 0;
+}
+
+.Editor-panel-menu {
+  border: 15px solid rgb(42, 19, 175);
+
+}
+
+.Editor-panel-minimize {
+  position:absolute;
+  top: 10px;
+  right: 2px;
+  padding-top: 0px;
+  z-index: 1000;
+}
+
+.Editor-panel-minimize img{
+  height: 15px;
+  width: 15px;
+  opacity: .5;
+  transition: opacity 1s;
+}
+
+.Editor-panel-minimize img:hover{
+  opacity: 1;
+}
+
+.Editor-graph-buttons {
+  position: absolute;
+  top: 7px;
+  right: 0px;
+  z-index: 1000;
+}
+
+.Editor-graph-buttons button.disabled {
+  opacity: .5;
+}
+
+.Editor-graph-buttons button {
+  padding: 3px 5px;
+  border-radius: 4px;
+  border: 1px solid #999;
+  color: #fff;
+  background-color: #7f9ad3;
+  margin: 0 5px;
+  font-size: .9em;
+}
+
+.Editor-graph-buttons button:focus {
+  outline: none;
+}
+
+.nav-action-button {
+  margin-left: 10px;
+}
+
+.__react_component_tooltip.react-tooltip-customized {
+  z-index: 10000 /* so it is over the navbar */
+}
