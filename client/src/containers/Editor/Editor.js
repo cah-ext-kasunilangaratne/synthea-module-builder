@@ -274,7 +274,6 @@ class Editor extends Component {
   }
 
   saveModule = () => {
-    console.log("SAVE MODEL");
     if(this.props.module){
       let module = _.cloneDeep(this.props.module);
       // We currently save name in the state for convenience
@@ -284,12 +283,8 @@ class Editor extends Component {
           delete s.name;
         }
       })
-
-      console.log(JSON.stringify(module, null, 2))
     }
-
-    console.log("MODEL SAVED");
-  }
+}
 
   renderLoadModule = () => {
     // if (this.props.loadModuleVisible){
